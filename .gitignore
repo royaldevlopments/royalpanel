@@ -1,0 +1,15 @@
+/node_modules
+/public/assets/bundle.*.js
+/public/assets/*.js.map
+/public/assets/auth.*.js
+/public/assets/dashboard.*.js
+/public/assets/server.*.js
+/public/assets/vendors-*
+/public/assets/resources_scripts_*
+/public/assets/*.chunk.*
+/public/assets/manifest.json
+/.build-cache.json
+/.env
+/storage
+/bootstrap/cache/config.php
+.DS_Store
