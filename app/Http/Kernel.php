@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'blueprint/application-api' => [SubstituteBindings::class, AuthenticateApplicationUser::class,],
         'blueprint/client-api' => [SubstituteClientBindings::class, RequireClientApiKey::class,],
 
-        /* Pterodactyl middleware */
+        /* Royal Panel middleware */
         'web' => [
             EncryptCookies::class,
             AddQueuedCookiesToResponse::class,

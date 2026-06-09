@@ -54,7 +54,7 @@
                         <label for="daemon_text" class="control-label">Daemon text <b style="background-color:#17078D;font-size:1rem;padding:2px 7px;border-radius:100px;font-weight:600;">ARIX</b></label>
                         <div>
                             <input type="text" autocomplete="off" name="daemon_text" class="form-control" value="{{ old('daemon_text', $node->daemon_text) }}" />
-                            <p class="text-muted"><small>Change the "[Pterodactyl Daemon]:" text.</small></p>
+                            <p class="text-muted"><small>Change the "Royal Panel:" text.</small></p>
                         </div>
                     </div>
                     <div class="form-group col-xs-12">

@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'styling', 'sideEditor' => false])
 
 @section('title')
-    Arix Styling
+    Royal Styling
 @endsection
 
 @php
@@ -39,7 +39,7 @@
     <form action="{{ route('admin.arix.styling') }}" method="POST" class="content-box">
         <div class="header">
             <p>Styling settings</p>
-            <span class="description-text">Customize the general appears of Arix Theme.</span>
+            <span class="description-text">Customize the general appears of Royal Theme.</span>
         </div>
         
         <x-arix.form-wrapper 

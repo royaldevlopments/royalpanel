@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Http;
 class Arix extends Command
 {
     protected $signature = "arix {action?}";
-    protected $description = "All commands for Arix Theme for Pterodactyl.";
+    protected $description = "All commands for Royal Theme.";
 
     public function handle()
     {

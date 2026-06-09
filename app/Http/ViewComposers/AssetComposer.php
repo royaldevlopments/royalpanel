@@ -22,7 +22,7 @@ class AssetComposer
     {
         $view->with('asset', $this->assetHashService);
         $view->with('siteConfiguration', [
-            'name' => config('app.name') ?? 'Pterodactyl',
+            'name' => config('app.name') ?? 'Royal Panel',
             'arix' => [
                 /* GENERAL */
                 'logo' => $this->settings->get('settings::arix:logo', '/arix/Arix.png'),
@@ -134,8 +134,8 @@ class AssetComposer
 
                 /* META DATA */
                 'meta_color' => $this->settings->get('settings::arix:meta_color', '#4a35cf'),
-                'meta_title' => $this->settings->get('settings::arix:meta_title', 'Pterodactyl Panel'),
-                'meta_description' => $this->settings->get('settings::arix:meta_description', 'Our official Pterodactyl panel'),
+                'meta_title' => $this->settings->get('settings::arix:meta_title', 'Royal Panel'),
+                'meta_description' => $this->settings->get('settings::arix:meta_description', 'Royal Panel'),
                 'meta_image' => $this->settings->get('settings::arix:meta_image', '/arix/meta-tags.png'),
                 'meta_favicon' => $this->settings->get('settings::arix:meta_favicon', '/arix/Arix.png'),
 

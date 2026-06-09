@@ -1,14 +1,14 @@
 @extends('layouts.arix', ['navbar' => 'colors', 'sideEditor' => true, 'extraWide' => true])
 
 @section('title')
-    Arix Colors
+    Royal Colors
 @endsection
 
 @section('content')
     <form action="{{ route('admin.arix.colors') }}" method="POST">
         <div class="header">
             <p>Color settings</p>
-            <span class="description-text">Utilize the Arix theme color picker to apply your color scheme effortlessly!</span>
+            <span class="description-text">Utilize the Royal theme color picker to apply your color scheme effortlessly!</span>
         </div>
         <div>
             <p class="subtitle">Color presets</p>

@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'layout', 'sideEditor' => true])
 
 @section('title')
-    Arix Layout
+    Royal Layout
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <form action="{{ route('admin.arix.layout') }}" method="POST">
         <div class="header">
             <p>General layout settings</p>
-            <span class="description-text">Change the general layout settings of Arix Theme.</span>
+            <span class="description-text">Change the general layout settings of Royal Theme.</span>
         </div>
         <div>
             <p class="subtitle">General Layout</p>
@@ -70,7 +70,7 @@
         
         <div class="header">
             <p>Login layout settings</p>
-            <span class="description-text">Change the layout settings of the auth pages of Arix Theme.</span>
+            <span class="description-text">Change the layout settings of the auth pages of Royal Theme.</span>
         </div>
         <div>
             <p class="subtitle">Login layout</p>

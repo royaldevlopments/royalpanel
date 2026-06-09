@@ -1,19 +1,19 @@
 @extends('layouts.arix', ['navbar' => 'advanced', 'sideEditor' => false])
 
 @section('title')
-    Arix Advanced
+    Royal Advanced
 @endsection
 
 @section('content')
     <form action="{{ route('admin.arix.advanced') }}" method="POST" class="content-box">
         <div class="header">
             <p>Advanced settings</p>
-            <span class="description-text">Change Arix advanced settings.</span>
+            <span class="description-text">Change Royal advanced settings.</span>
         </div>
 
         <x-arix.form-wrapper 
             title="Customize Arix" 
-            description="Change Arix advanced settings."
+            description="Change Royal advanced settings."
         >
             <x-arix.input-field 
                 id="arix:copyright" 
@@ -132,14 +132,14 @@
         </div>
     </form>
     <div class="header">
-        <p>Arix Presets</p>
+        <p>Royal Presets</p>
         <span class="description-text">Import and export presets.</span>
     </div>
     <form action="{{ route('admin.arix.advanced.preset') }}" method="POST" id="arix-preset-form" style="margin-top:40px;">
             {!! csrf_field() !!}
         <x-arix.form-wrapper 
-            title="Import / Export Arix Preset"
-            description="Export or import Arix advanced settings presets."
+            title="Import / Export Royal Preset"
+            description="Export or import Royal advanced settings presets."
         >
             <p>Keep in mind: although we try to keep our products safe with input sanitization, importing presets may still break your installation. Only use presets from people you trust or from official sources (such as BuiltByBit or Arix.gg).</p>
 

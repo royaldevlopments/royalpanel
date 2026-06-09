@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'social', 'sideEditor' => false])
 
 @section('title')
-    Arix Social
+    Royal Social
 @endsection
 
 @php
@@ -19,7 +19,7 @@
         </div>
         <x-arix.form-wrapper 
             title="Social Media Configuration" 
-            description="Configure social media links and settings for the Arix panel."
+            description="Configure social media links and settings for the Royal panel."
         >
             <x-arix.switch 
                 id="arix:socialButtons"
@@ -105,7 +105,7 @@
         </x-arix.form-wrapper>
         <x-arix.form-wrapper 
             title="Discord Box Configuration" 
-            description="Configure the Discord box settings for the Arix panel."
+            description="Configure the Discord box settings for the Royal panel."
         >
             <x-arix.option-picture
                 id="arix:discordBox" 

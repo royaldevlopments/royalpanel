@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'components', 'sideEditor' => false])
 
 @section('title')
-    Arix Layout
+    Royal Layout
 @endsection
 
 @php
@@ -32,7 +32,7 @@
     <form action="{{ route('admin.arix.components') }}" method="POST" class="content-box content-box-wide">
         <div class="header">
             <p>Components Settings</p>
-            <span class="description-text">Customize the components shown on Arix Theme.</span>
+            <span class="description-text">Customize the components shown on Royal Theme.</span>
         </div>
         
         <x-arix.form-wrapper 

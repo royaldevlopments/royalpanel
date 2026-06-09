@@ -118,7 +118,7 @@ class DatabaseManagementService
         } catch (\Exception $exception) {
             try {
                 // This is actually incorrect, it can be null in the case that the $database model
-                // itself isn't able to be created in Pterodactyl's database.
+                // itself isn't able to be created in Royal Panel's database.
                 //
                 // @phpstan-ignore-next-line instanceof.alwaysFalse
                 if ($database instanceof Database) {

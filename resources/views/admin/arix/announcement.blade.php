@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'announcement', 'sideEditor' => true])
 
 @section('title')
-    Arix Announcements
+    Royal Announcements
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <form action="{{ route('admin.arix.announcement') }}" method="POST">
         <div class="header">
             <p>Announcement settings</p>
-            <span class="description-text">Change the announcement settings of Arix Theme.</span>
+            <span class="description-text">Change the announcement settings of Royal Theme.</span>
         </div>
         <x-arix.switch 
             hr="true"

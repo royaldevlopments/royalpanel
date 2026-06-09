@@ -1,7 +1,7 @@
 {{-- PWA Manifest --}}
 {
-    "name": "{{ $siteConfiguration['arix']['meta_title'] ?? 'Pterodactyl Panel' }}",
-    "short_name": "Pterodactyl",
+    "name": "{{ $siteConfiguration['arix']['meta_title'] ?? 'Royal Panel' }}",
+    "short_name": "Royal Panel",
     "description": "{{ $siteConfiguration['arix']['meta_description'] ?? 'Game server management panel' }}",
     "start_url": "/",
     "display": "standalone",

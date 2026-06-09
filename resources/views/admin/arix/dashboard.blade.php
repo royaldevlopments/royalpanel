@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'components', 'sideEditor' => true])
 
 @section('title')
-    Arix Dashboard
+    Royal Dashboard
 @endsection
 
 @section('content')

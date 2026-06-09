@@ -1,7 +1,7 @@
 @extends('layouts.arix', ['navbar' => 'mail', 'sideEditor' => false])
 
 @section('title')
-    Arix Mail
+    Royal Mail
 @endsection
 
 @section('content')

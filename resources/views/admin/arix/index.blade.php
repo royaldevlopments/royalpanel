@@ -1,14 +1,14 @@
 @extends('layouts.arix', ['navbar' => 'index', 'sideEditor' => true])
 
 @section('title')
-    Arix Theme
+    Royal Theme
 @endsection
 
 @section('content')
     <form action="{{ route('admin.arix') }}" method="POST">
         <div class="header">
-            <p>General settings</p>
-            <span class="description-text">Change the general settings of Arix Theme.</span>
+            <p>General Settings</p>
+            <span class="description-text">Change the general settings of Royal Theme.</span>
         </div>
         <x-arix.input-field 
             id="arix:logo" 

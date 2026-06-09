@@ -30,7 +30,7 @@ class TelemetryCollectionService
     }
 
     /**
-     * Collects telemetry data and sends it to the Pterodactyl Telemetry Service.
+     * Collects telemetry data and sends it to the Royal Panel Telemetry Service.
      */
     public function __invoke(): void
     {

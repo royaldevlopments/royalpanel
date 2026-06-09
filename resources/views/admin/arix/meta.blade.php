@@ -1,14 +1,14 @@
 @extends('layouts.arix', ['navbar' => 'meta', 'sideEditor' => true])
 
 @section('title')
-    Arix Meta data
+    Royal Meta data
 @endsection
 
 @section('content')
     <form action="{{ route('admin.arix.meta') }}" method="POST">
         <div class="header">
             <p>Meta Data settings</p>
-            <span class="description-text">Change the meta data settings of Arix Theme.</span>
+            <span class="description-text">Change the meta data settings of Royal Theme.</span>
         </div>
         <x-arix.input-field 
             id="arix:meta_favicon" 

@@ -21,8 +21,8 @@ class ArixMetaController extends Controller
     {
         return $this->view->make('admin.arix.meta', [
             'meta_color' => $this->settings->get('settings::arix:meta_color', '#4a35cf'),
-            'meta_title' => $this->settings->get('settings::arix:meta_title', 'Pterodactyl Panel'),
-            'meta_description' => $this->settings->get('settings::arix:meta_description', 'Our official Pterodactyl panel'),
+            'meta_title' => $this->settings->get('settings::arix:meta_title', 'Royal Panel'),
+            'meta_description' => $this->settings->get('settings::arix:meta_description', 'Royal Panel'),
             'meta_image' => $this->settings->get('settings::arix:meta_image', '/arix/meta-tags.png'),
             'meta_favicon' => $this->settings->get('settings::arix:meta_favicon', '/arix/Arix.png'),
         ]);

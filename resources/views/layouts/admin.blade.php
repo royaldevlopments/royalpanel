@@ -146,7 +146,7 @@
                         </li>
                         <li class="arix">
                             <a href="{{ route('admin.arix')}}">
-                                <i data-lucide="wand-2"></i><span>Arix Theme</span>
+                                <i data-lucide="wand-2"></i><span>Royal Theme</span>
                             </a>
                         </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.api') ?: 'active' }}">
