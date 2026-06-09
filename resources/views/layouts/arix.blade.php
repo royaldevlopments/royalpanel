@@ -42,7 +42,7 @@
         <nav>
             <div>
                 <a href="{{ route('index') }}" class="logo">
-                    <img src="/arix/Arix.png" class="logo" alt="Arix Logo"/>
+                    <img src="/arix/Arix.png" class="logo" alt="Royal Logo"/>
                     Arix Editor v{{ config('app.arix') }}
                 </a>
             </div>
@@ -166,7 +166,7 @@
                         </div>
                     @else
                         <div class="iframe-container">
-                            <iframe src="/" width="100%" title="Arix Live Preview" id="iframe"></iframe> 
+                            <iframe src="/" width="100%" title="Royal Live Preview" id="iframe"></iframe> 
                         </div>
                     @endif
                 </div>

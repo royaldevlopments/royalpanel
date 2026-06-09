@@ -111,8 +111,8 @@ return [
 
         /* META DATA */
         'meta_color' => '#4a35cf',
-        'meta_title' => 'Pterodactyl Panel',
-        'meta_description' => 'Our official Pterodactyl panel',
+        'meta_title' => 'Royal Panel',
+        'meta_description' => 'Our official Royal Panel',
         'meta_image' => '/arix/meta-tags.png',
         'meta_favicon' => '/arix/Arix.png',
 

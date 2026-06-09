@@ -79,7 +79,7 @@ const ClientDropdown = ({ sideBar }: Dropdown) => {
                 {rootAdmin && (
                     <>
                     <DropdownLinkRow href="/admin/arix" className="bg-arix !text-white">
-                        <ColorSwatchIcon className="w-5 !text-white" /> Arix Editor
+                        <ColorSwatchIcon className="w-5 !text-white" /> Theme Editor
                     </DropdownLinkRow>
                     <DropdownLinkRow href="/admin">
                         <CogIcon className="w-5" /> {t`admin-area`}

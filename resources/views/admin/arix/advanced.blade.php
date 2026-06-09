@@ -12,7 +12,7 @@
         </div>
 
         <x-arix.form-wrapper 
-            title="Customize Arix" 
+            title="Customize Royal Theme" 
             description="Change Royal advanced settings."
         >
             <x-arix.input-field 

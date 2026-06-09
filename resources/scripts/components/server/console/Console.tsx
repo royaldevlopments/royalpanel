@@ -143,7 +143,7 @@ export default ({ fullConsole }: Props) => {
             (prelude ? TERMINAL_PRELUDE : '') +
             line
                 .replace('container@pterodactyl~ ', TERMINAL_PRELUDE)
-                .replace('[Pterodactyl Daemon]:', TERMINAL_DAEMON)
+                .replace('[Royal Daemon]:', TERMINAL_DAEMON)
                 .replace(/(?:\r\n|\r|\n)$/im, '') +
             '\u001b[0m'
         );
