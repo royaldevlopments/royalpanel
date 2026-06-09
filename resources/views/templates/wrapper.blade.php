@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{{ config('app.name', 'Pterodactyl') }}</title>
+        <title>{{ config('app.name', 'Royal Panel') }}</title>
 
         @section('meta')
             <meta charset="utf-8">
@@ -33,7 +33,7 @@
             <link rel="manifest" href="/manifest.json">
             <meta name="apple-mobile-web-app-capable" content="yes">
             <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-            <meta name="apple-mobile-web-app-title" content="{{ config('app.name', 'Pterodactyl') }}">
+            <meta name="apple-mobile-web-app-title" content="{{ config('app.name', 'Royal Panel') }}">
             <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
 
             <!-- meta data -->
