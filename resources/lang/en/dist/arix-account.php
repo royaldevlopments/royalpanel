@@ -102,4 +102,11 @@ return [
         'alert' => 'These codes will not be shown again.',
         'doneButton' => 'Done',
     ],
+    'profile' => [
+        'update-profile' => 'Update Profile',
+        'first-name' => 'First Name',
+        'last-name' => 'Last Name',
+        'username' => 'Username',
+        'updated-success' => 'Your profile has been updated.',
+    ],
 ];

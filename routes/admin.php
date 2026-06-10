@@ -271,3 +271,49 @@ Route::group(['prefix' => 'nests'], function () {
     Route::delete('/egg/{egg:id}', [Admin\Nests\EggController::class, 'destroy']);
     Route::delete('/egg/{egg:id}/variables/{variable:id}', [Admin\Nests\EggVariableController::class, 'destroy']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Security Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/security
+|
+*/
+Route::group(['prefix' => 'security'], function () {
+    Route::get('/', [Admin\SecurityController::class, 'index'])->name('admin.security.index');
+    Route::get('/cloudflare', [Admin\SecurityController::class, 'cloudflare'])->name('admin.security.cloudflare');
+    Route::get('/rate-limiting', [Admin\SecurityController::class, 'rateLimiting'])->name('admin.security.rate_limiting');
+    Route::get('/ip-management', [Admin\SecurityController::class, 'ipManagement'])->name('admin.security.ip_management');
+    Route::get('/detection', [Admin\SecurityController::class, 'detection'])->name('admin.security.detection');
+    Route::get('/honeypot', [Admin\SecurityController::class, 'honeypot'])->name('admin.security.honeypot');
+    Route::get('/origin-protection', [Admin\SecurityController::class, 'originProtection'])->name('admin.security.origin_protection');
+    Route::get('/server-protection', [Admin\SecurityController::class, 'serverProtection'])->name('admin.security.server_protection');
+
+    Route::post('/save', [Admin\SecurityController::class, 'saveSettings'])->name('admin.security.save');
+    Route::post('/unblock/{ip}', [Admin\SecurityController::class, 'unblockIp'])->name('admin.security.unblock');
+    Route::post('/enable-orange-cloud', [Admin\SecurityController::class, 'enableOrangeCloud'])->name('admin.security.orange_cloud');
+    Route::post('/install-cf-iptables', [Admin\SecurityController::class, 'installCfOnlyIptables'])->name('admin.security.cf_iptables');
+    Route::post('/block-direct-ip', [Admin\SecurityController::class, 'blockDirectIp'])->name('admin.security.block_direct_ip');
+    Route::post('/install-real-ip', [Admin\SecurityController::class, 'installRealIpConfig'])->name('admin.security.real_ip');
+    Route::post('/ssl-strict', [Admin\SecurityController::class, 'enableFullSslStrict'])->name('admin.security.ssl_strict');
+    Route::post('/under-attack/on', [Admin\SecurityController::class, 'enableUnderAttackMode'])->name('admin.security.under_attack_on');
+    Route::post('/under-attack/off', [Admin\SecurityController::class, 'disableUnderAttackMode'])->name('admin.security.under_attack_off');
+    Route::post('/bot-fight/on', [Admin\SecurityController::class, 'enableBotFightMode'])->name('admin.security.bot_fight_on');
+    Route::post('/lockdown/on', [Admin\SecurityController::class, 'enableLockdown'])->name('admin.security.lockdown_on');
+    Route::post('/lockdown/off', [Admin\SecurityController::class, 'disableLockdown'])->name('admin.security.lockdown_off');
+    Route::post('/ovh-level', [Admin\SecurityController::class, 'enableOvhLevel'])->name('admin.security.ovh_level');
+    Route::post('/kernel-tune', [Admin\SecurityController::class, 'enableKernelTuning'])->name('admin.security.kernel_tune');
+    Route::post('/flush-iptables', [Admin\SecurityController::class, 'flushIptablesRules'])->name('admin.security.flush_iptables');
+    Route::post('/stealth/on', [Admin\SecurityController::class, 'enableStealthMode'])->name('admin.security.stealth_on');
+    Route::post('/stealth/off', [Admin\SecurityController::class, 'disableStealthMode'])->name('admin.security.stealth_off');
+    Route::post('/auto-response/on', [Admin\SecurityController::class, 'enableAutoResponse'])->name('admin.security.auto_response_on');
+    Route::post('/auto-response/off', [Admin\SecurityController::class, 'disableAutoResponse'])->name('admin.security.auto_response_off');
+    Route::post('/cleanup', [Admin\SecurityController::class, 'runCleanup'])->name('admin.security.cleanup');
+    Route::get("/blackhole", [Admin\SecurityController::class, "blackhole"])->name("admin.security.blackhole");
+    Route::post("/blackhole/enable", [Admin\SecurityController::class, "enableBlackhole"])->name("admin.security.blackhole.enable");
+    Route::post("/blackhole/disable", [Admin\SecurityController::class, "disableBlackhole"])->name("admin.security.blackhole.disable");
+    Route::get("/shield", [Admin\SecurityController::class, "shield"])->name("admin.security.shield");
+    Route::post("/shield/arm", [Admin\SecurityController::class, "armShield"])->name("admin.security.shield.arm");
+    Route::post("/shield/disarm", [Admin\SecurityController::class, "disarmShield"])->name("admin.security.shield.disarm");
+});

@@ -28,6 +28,17 @@
             {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+            <style>
+                .panel-card { background:#1e1e32; border:1px solid #2a2a3e; border-radius:12px; margin-bottom:20px; overflow:hidden; }
+                .panel-card-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:#2a2a3e; border-bottom:1px solid #333; }
+                .panel-card-title { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:#e2e8f0; margin:0; }
+                .panel-card-body { padding:16px 20px; font-size:13px; color:#94a3b8; }
+                .badge-pill { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+                .badge-success { background:#22c55e; color:#fff; }
+                .badge-warning { background:#f59e0b; color:#fff; }
+                .page-header { margin:0 0 20px 0; border-bottom:1px solid #2a2a3e; padding-bottom:12px; }
+                .page-header h1 { margin:0; font-size:22px; font-weight:600; color:#e2e8f0; display:flex; align-items:center; gap:10px; }
+            </style>
 
             <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -144,14 +155,31 @@
                                 <i data-lucide="settings"></i> <span>Settings</span>
                             </a>
                         </li>
-                        <li class="arix">
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.arix') ?: 'active' }}">
                             <a href="{{ route('admin.arix')}}">
-                                <i data-lucide="wand-2"></i><span>Royal Theme</span>
+                                <i data-lucide="wand-2"></i><span>Royal Editor</span>
                             </a>
                         </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.api') ?: 'active' }}">
                             <a href="{{ route('admin.api.index')}}">
                                 <i data-lucide="webhook"></i> <span>Application API</span>
+                            </a>
+                        </li>
+                        <li class="header">SECURITY</li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security') ?: 'active' }}">
+                            <a href="{{ route('admin.security.index') }}">
+                                <i data-lucide="shield-check"></i> <span>Security Center</span>                        </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security.shield') ?: 'active' }}">
+                            <a href="{{ route('admin.security.shield') }}">
+                                <i data-lucide="shield"></i> <span>Codenest Shield</span>
+                            </a>
+                        </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security.blackhole') ?: 'active' }}">
+                            <a href="{{ route('admin.security.blackhole') }}">
+                                <i data-lucide="radio"></i> <span>Blackhole Protection</span>
+                            </a>
+                        </li>
+                        <li
                             </a>
                         </li>
                         <li class="header">MANAGEMENT</li>
