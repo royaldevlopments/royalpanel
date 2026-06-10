@@ -35,22 +35,12 @@
         </div>
     </div>
     <div class="col-xs-12">
-        <div class="box
-            @if($version->isLatestArix())
-                box-success
-            @else
-                box-danger
-            @endif
-        ">
+        <div class="box box-success">
             <div class="box-header with-border">
                 <h3 class="box-title">Theme Information</h3>
             </div>
             <div class="box-body">
-                @if ($version->isLatestArix())
-                    You are running Arix Theme version <code>{{ config('app.arix') }}</code>. Your theme is up-to-date!
-                @else
-                    Your theme is <strong>not up-to-date!</strong> The latest version is <a href="https://builtbybit.com/resources/arix-theme-latest-pterodactyl.36705/updates" target="_blank"><code>{{ $version->getArix() }}</code></a> and you are currently running version <code>{{ config('app.arix') }}</code>.
-                @endif
+                You are running Royal Theme version <code>{{ config('app.arix') }}</code>.
             </div>
         </div>
     </div>
@@ -60,11 +50,11 @@
         <a href="{{ $version->getDiscord() }}"><button class="btn btn-warning" style="width:100%;"><i class="fa fa-fw fa-support"></i> Get Help <small>(via Discord)</small></button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://pterodactyl.io"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Documentation</button></a>
+        <a href="https://github.com/royaldevlopments/royalpanel"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-link"></i> Documentation</button></a>
     </div>
     <div class="clearfix visible-xs-block">&nbsp;</div>
     <div class="col-xs-6 col-sm-3 text-center">
-        <a href="https://github.com/pterodactyl/panel"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-support"></i> Github</button></a>
+        <a href="https://github.com/royaldevlopments/royalpanel"><button class="btn btn-primary" style="width:100%;"><i class="fa fa-fw fa-support"></i> Github</button></a>
     </div>
     <div class="col-xs-6 col-sm-3 text-center">
         <a href="{{ $version->getDonations() }}"><button class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</button></a>

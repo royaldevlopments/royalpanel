@@ -38,7 +38,7 @@
                         <label for="container_text" class="control-label">Container text <b style="background-color:#17078D;font-size:1rem;padding:2px 7px;border-radius:100px;font-weight:600;">ARIX</b></label>
                         <div>
                             <input type="text" autocomplete="off" name="container_text" class="form-control" value="{{ old('container_text' ) }}" />
-                            <p class="text-muted"><small>Change the "container@pterodactyl~" text.</small></p>
+                            <p class="text-muted"><small>Change the "container@royalpanel~" text.</small></p>
                         </div>
                     </div>
                     <div class="form-group">
@@ -117,7 +117,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="pDaemonBase" class="form-label">Daemon Server File Directory</label>
-                            <input type="text" name="daemonBase" id="pDaemonBase" class="form-control" value="/var/lib/pterodactyl/volumes" />
+                            <input type="text" name="daemonBase" id="pDaemonBase" class="form-control" value="/var/lib/royalpanel/volumes" />
                             <p class="text-muted small">Enter the directory where server files should be stored. <strong>If you use OVH you should check your partition scheme. You may need to use <code>/home/daemon-data</code> to have enough space.</strong></p>
                         </div>
                         <div class="form-group col-md-6">

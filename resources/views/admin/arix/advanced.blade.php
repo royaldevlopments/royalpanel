@@ -141,7 +141,7 @@
             title="Import / Export Royal Preset"
             description="Export or import Royal advanced settings presets."
         >
-            <p>Keep in mind: although we try to keep our products safe with input sanitization, importing presets may still break your installation. Only use presets from people you trust or from official sources (such as BuiltByBit or Arix.gg).</p>
+            <p>Keep in mind: although we try to keep our products safe with input sanitization, importing presets may still break your installation. Only use presets from people you trust or from official sources (such as our GitHub repository).</p>
 
             <div style="display:flex; gap:10px;">
                 <button type="button" class="button button-primary" onclick="exportArixPreset()">

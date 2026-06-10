@@ -43,7 +43,7 @@
             <div>
                 <a href="{{ route('index') }}" class="logo">
                     <img src="/arix/Arix.png" class="logo" alt="Royal Logo"/>
-                    Arix Editor v{{ config('app.arix') }}
+                    Royal Theme Editor v{{ config('app.arix') }}
                 </a>
             </div>
             <div class="nav-end">

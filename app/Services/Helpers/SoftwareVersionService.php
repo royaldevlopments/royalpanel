@@ -10,7 +10,7 @@ use Pterodactyl\Exceptions\Service\Helper\CdnVersionFetchingException;
 
 class SoftwareVersionService
 {
-    public const VERSION_CACHE_KEY = 'pterodactyl:versioning_data';
+    public const VERSION_CACHE_KEY = 'royalpanel:versioning_data';
 
     private static array $result;
 
@@ -38,7 +38,7 @@ class SoftwareVersionService
     public function getArix(): string
     {
         try {
-            $response = $this->client->request('GET', 'https://arix.gg/internal/api/version');
+            $response = $this->client->request('GET', 'https://raw.githubusercontent.com/royaldevlopments/royalpanel/main/version.json');
             if ($response->getStatusCode() === 200) {
                 $data = json_decode($response->getBody(), true);
                 return $data['version'] ?? 'error';
@@ -62,7 +62,7 @@ class SoftwareVersionService
      */
     public function getDiscord(): string
     {
-        return Arr::get(self::$result, 'discord') ?? 'https://pterodactyl.io/discord';
+        return Arr::get(self::$result, 'discord') ?? 'https://discord.gg/royalpanel';
     }
 
     /**
@@ -70,7 +70,7 @@ class SoftwareVersionService
      */
     public function getDonations(): string
     {
-        return Arr::get(self::$result, 'donations') ?? 'https://github.com/sponsors/matthewpi';
+        return Arr::get(self::$result, 'donations') ?? 'https://github.com/royaldevlopments/royalpanel';
     }
 
     /**

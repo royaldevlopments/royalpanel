@@ -61,7 +61,7 @@
                         <label for="container_text" class="control-label">Container text <b style="background-color:#17078D;font-size:1rem;padding:2px 7px;border-radius:100px;font-weight:600;">ARIX</b></label>
                         <div>
                             <input type="text" autocomplete="off" name="container_text" class="form-control" value="{{ old('container_text', $node->container_text) }}" />
-                            <p class="text-muted"><small>Change the "container@pterodactyl~" text.</small></p>
+                            <p class="text-muted"><small>Change the "container@royalpanel~" text.</small></p>
                         </div>
                     </div>
                     <div class="form-group col-xs-12">
