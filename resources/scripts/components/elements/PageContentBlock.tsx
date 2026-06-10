@@ -31,32 +31,15 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                 </ContentContainer>
                 <ContentContainer css={tw`mb-4`}>
                     <p css={tw`text-center text-neutral-300 text-xs`}>
-                        <a
-                            rel={'noopener nofollow noreferrer'}
-                            href={'https://pterodactyl.io'}
-                            target={'_blank'}
-                            css={tw`no-underline text-neutral-300 hover:text-neutral-100`}
-                        >
-                            Pterodactyl&reg;
-                        </a>
-                        &nbsp;&copy; 2015 - {new Date().getFullYear()}
+                        Royal Panel &copy; 2015 - {new Date().getFullYear()}
                     </p>
                     <p css={tw`text-center text-neutral-300 text-xs`}>
-                        {copyright == 'Designed by Weijers.one' ?
-                            <>
-                            Designed by
-                            <span className="px-1 py-[.35rem] font-semibold bg-gray-600 rounded scale-75 inline-block">W.1</span>
-                            <a
-                                rel={'noopener nofollow noreferrer'}
-                                href={'https://arix.gg'}
-                                target={'_blank'}
-                                css={tw`no-underline text-neutral-300 hover:text-neutral-100`}
-                            >
-                                Weijers.one
-                            </a>
-                            </>
-                        : <Markdown>{copyright}</Markdown>
-                        }
+                        Designed by <a
+                            rel={'noopener nofollow noreferrer'}
+                            href={'https://github.com/royaldevlopments'}
+                            target={'_blank'}
+                            css={tw`no-underline text-neutral-300 hover:text-neutral-100 font-semibold`}
+                        >Royal Devlopments</a>
                     </p>
                 </ContentContainer>
             </div>
