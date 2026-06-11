@@ -46,6 +46,12 @@ class SecurityController extends Controller
         ]);
     }
 
+    public function cloudflareStatus(): \Illuminate\Http\JsonResponse
+    {
+        $cfStatus = $this->cloudflare->getSettings();
+        return response()->json($cfStatus);
+    }
+
     public function rateLimiting(): View
     {
         $config = config('security.rate_limiting');

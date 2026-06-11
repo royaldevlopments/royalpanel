@@ -183,6 +183,34 @@ class CloudflareService
         return $this->request('GET', "/zones/{$this->zoneId}/settings/ssl");
     }
 
+    public function getSettings(): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        $settings = [];
+        $endpoints = [
+            'ssl' => '/settings/ssl',
+            'security_level' => '/settings/security_level',
+            'browser_check' => '/settings/browser_check',
+            'challenge_ttl' => '/settings/challenge_ttl',
+            'always_use_https' => '/settings/always_use_https',
+            'min_tls_version' => '/settings/min_tls_version',
+            'opportunistic_encryption' => '/settings/opportunistic_encryption',
+            'ip_geolocation' => '/settings/ip_geolocation',
+            'privacy_pass' => '/settings/privacy_pass',
+        ];
+        foreach ($endpoints as $key => $path) {
+            $resp = $this->request('GET', "/zones/{$this->zoneId}{$path}");
+            if ($resp['success'] ?? false) {
+                $settings[$key] = $resp['result']['result']['value'] ?? null;
+            }
+        }
+        $botResp = $this->request('GET', "/zones/{$this->zoneId}/bot_management");
+        if ($botResp['success'] ?? false) {
+            $settings['bot_fight_mode'] = $botResp['result']['result']['fight_mode'] ?? null;
+        }
+        return ['success' => true, 'settings' => $settings];
+    }
+
     public function getDnsRecords(string $type = null): array
     {
         if (!$this->enabled()) return $this->notConfigured();
