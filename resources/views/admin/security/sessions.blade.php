@@ -12,14 +12,13 @@
             </div>
             <div class="box-body">
                 <table class="table table-hover">
-                    <thead><tr><th>User</th><th>IP</th><th>Created</th><th>Last Activity</th><th>Action</th></tr></thead>
+                    <thead><tr><th>User</th><th>IP</th><th>Last Activity</th><th>Action</th></tr></thead>
                     <tbody>
                         @forelse($sessions ?? [] as $session)
                             <tr>
                                 <td>{{ $session->user_email ?? 'N/A' }}</td>
-                                <td>{{ $session->ip }}</td>
-                                <td>{{ $session->created_at }}</td>
-                                <td>{{ $session->last_activity ?? 'N/A' }}</td>
+                                <td>{{ $session->ip_address ?? $session->ip }}</td>
+                                <td>{{ $session->last_activity ? date('Y-m-d H:i:s', $session->last_activity) : 'N/A' }}</td>
                                 <td>
                                     <form action="{{ route('admin.security.sessions.terminate', $session->id) }}" method="POST" style="display:inline">
                                         @csrf
@@ -28,7 +27,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="5">No active sessions.</td></tr>
+                            <tr><td colspan="4">No active sessions.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

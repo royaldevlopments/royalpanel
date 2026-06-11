@@ -12,18 +12,17 @@
             </div>
             <div class="box-body">
                 <table class="table table-hover">
-                    <thead><tr><th>User</th><th>IP</th><th>Country</th><th>Status</th><th>Timestamp</th></tr></thead>
+                    <thead><tr><th>IP</th><th>Route</th><th>Status</th><th>Timestamp</th></tr></thead>
                     <tbody>
                         @forelse($logins ?? [] as $login)
                             <tr>
-                                <td>{{ $login->user_email ?? 'N/A' }}</td>
                                 <td>{{ $login->ip }}</td>
-                                <td>{{ $login->country ?? 'N/A' }}</td>
-                                <td><span class="label label-{{ $login->event_type === 'auth:login' ? 'success' : 'danger' }}">{{ $login->event_type === 'auth:login' ? 'Success' : 'Failed' }}</span></td>
-                                <td>{{ $login->timestamp }}</td>
+                                <td>{{ $login->route ?? 'N/A' }}</td>
+                                <td><span class="label label-{{ $login->blocked ? 'danger' : 'success' }}">{{ $login->blocked ? 'Blocked' : 'Allowed' }}</span></td>
+                                <td>{{ $login->logged_at }}</td>
                             </tr>
                         @empty
-                            <tr><td colspan="5">No login events recorded.</td></tr>
+                            <tr><td colspan="4">No login events recorded.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

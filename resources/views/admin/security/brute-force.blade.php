@@ -46,10 +46,10 @@
             <div class="box-header"><h3 class="box-title">Recent Failed Login Attempts</h3></div>
             <div class="box-body">
                 <table class="table table-hover">
-                    <thead><tr><th>IP</th><th>Email</th><th>Timestamp</th></tr></thead>
+                    <thead><tr><th>IP</th><th>Route</th><th>Timestamp</th></tr></thead>
                     <tbody>
                         @forelse($failedAttempts ?? [] as $attempt)
-                            <tr><td>{{ $attempt->ip }}</td><td>{{ $attempt->email ?? 'N/A' }}</td><td>{{ $attempt->timestamp }}</td></tr>
+                            <tr><td>{{ $attempt->ip }}</td><td>{{ $attempt->route ?? 'N/A' }}</td><td>{{ $attempt->logged_at }}</td></tr>
                         @empty
                             <tr><td colspan="3">No failed attempts recorded.</td></tr>
                         @endforelse

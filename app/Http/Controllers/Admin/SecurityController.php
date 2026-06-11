@@ -490,12 +490,7 @@ class SecurityController extends Controller
 
     public function loginHistory(): View
     {
-        $logins = DB::table('security_rate_logs')
-            ->leftJoin('users', 'security_rate_logs.user_id', '=', 'users.id')
-            ->select('security_rate_logs.ip', 'security_rate_logs.user_id', 'security_rate_logs.created_at as timestamp', 'users.email as user_email', DB::raw("CASE WHEN security_rate_logs.blocked = 1 THEN 'auth:failed' ELSE 'auth:login' END as event_type"))
-            ->orderByDesc('security_rate_logs.created_at')
-            ->limit(200)
-            ->get();
+        $logins = DB::table('security_rate_logs')->select('ip', 'route', 'blocked', 'logged_at')->orderByDesc('logged_at')->limit(200)->get();
         return view('admin.security.login-history', compact('logins'));
     }
 
