@@ -57,15 +57,25 @@ class SecurityController extends Controller
         $dns = $this->cloudflare->getDnsRecordsWithProxy();
         return response()->json($dns);
     }
-
     public function cloudflareToggleDns(Request $request): \Illuminate\Http\JsonResponse
     {
-        $recordId = $request->input('record_id');
-        $proxied = (bool) $request->input('proxied');
+        $recordId = $request->input("record_id");
+        $proxied = (bool) $request->input("proxied");
         $result = $this->cloudflare->toggleDnsProxy($recordId, $proxied);
         return response()->json($result);
     }
 
+    public function cloudflareWaf(): \Illuminate\Http\JsonResponse
+    {
+        $waf = $this->cloudflare->getWafRules();
+        return response()->json($waf);
+    }
+
+    public function cloudflareRate(): \Illuminate\Http\JsonResponse
+    {
+        $rate = $this->cloudflare->getRateLimits();
+        return response()->json($rate);
+    }
     public function cloudflareSetSetting(Request $request): \Illuminate\Http\JsonResponse
     {
         $setting = $request->input('setting');

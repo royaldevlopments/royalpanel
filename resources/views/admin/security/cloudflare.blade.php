@@ -96,7 +96,7 @@ $(function() {
     function updateSetting(setting, value, cb) {
         $.post('{{ route("admin.security.cloudflare.set_setting") }}', { _token:'{{ csrf_token() }}', setting:setting, value:value })
             .done(function(r) { if (r.success) { if (cb) cb(); else loadAll(); } else showMsg(r.error||'Failed','error'); })
-            .fail(function(x) { showMsg(x.responseJSON?.(error)||'Request failed','error'); });
+            .fail(function() { showMsg('Request failed','error'); });
     }
 
     function loadAll() {
@@ -107,6 +107,8 @@ $(function() {
             renderSecurity(s); renderSsl(s); renderPerformance(s);
         });
         $.get('{{ route("admin.security.cloudflare.dns") }}').done(function(r) { renderDns(r); });
+        $.get('{{ route("admin.security.cloudflare.waf") }}').done(function(r) { renderWaf(r); });
+        $.get('{{ route("admin.security.cloudflare.rate") }}').done(function(r) { renderRate(r); });
     }
 
     function renderSecurity(s) {
@@ -182,6 +184,38 @@ $(function() {
                 .done(function(r2) { if (r2.success) { row.find('.dns-status').text(proxied?'Proxied':'DNS Only').removeClass('on off').addClass(proxied?'on':'off'); } else showMsg(r2.error||'Failed','error'); })
                 .fail(function() { showMsg('Toggle failed','error'); });
         });
+    }
+
+    function renderWaf(r) {
+        if (!r.success || !r.rulesets) { $('#tab-waf').html('<span class="text-muted">No WAF rulesets found or API error.</span>'); return; }
+        var h = '';
+        $.each(r.rulesets, function(i, rs) {
+            var rules = rs.rules || [];
+            h += '<div style="padding:8px 0;font-weight:700;border-bottom:1px solid #ddd">' + (rs.name || 'Unknown') + '</div>';
+            if (!rules.length) { h += '<div class="waf-row text-muted">No rules in this ruleset</div>'; }
+            $.each(rules, function(j, rule) {
+                var action = rule.action || 'N/A';
+                var desc = rule.description || rule.expression || '-';
+                h += '<div class="waf-row"><strong>' + action + '</strong> ' + desc + '</div>';
+            });
+        });
+        if (!h) h = '<span class="text-muted">No WAF rulesets found.</span>';
+        $('#tab-waf').html(h);
+    }
+
+    function renderRate(r) {
+        if (!r.success || !r.rules) { $('#tab-rate').html('<span class="text-muted">No rate limiting rules found or API error.</span>'); return; }
+        var h = '';
+        $.each(r.rules, function(i, rule) {
+            var desc = rule.description || '-';
+            var threshold = rule.threshold || '-';
+            var period = rule.period || '-';
+            var action = rule.action || '-';
+            var disabled = rule.disabled ? '<span class="cf-badge off">Disabled</span>' : '<span class="cf-badge on">Active</span>';
+            h += '<div class="rate-row"><div><strong>' + desc + '</strong></div><div class="text-muted" style="font-size:12px">Threshold: ' + threshold + ' | Period: ' + period + ' | Action: ' + action + ' ' + disabled + '</div></div>';
+        });
+        if (!h) h = '<span class="text-muted">No rate limiting rules found.</span>';
+        $('#tab-rate').html(h);
     }
 
     function bindEvents() {
