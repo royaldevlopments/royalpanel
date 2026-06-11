@@ -289,6 +289,13 @@ Route::group(['prefix' => 'security'], function () {
     Route::get('/cloudflare/waf', [Admin\SecurityController::class, 'cloudflareWaf'])->name('admin.security.cloudflare.waf');
     Route::get('/cloudflare/rate', [Admin\SecurityController::class, 'cloudflareRate'])->name('admin.security.cloudflare.rate');
     Route::post('/cloudflare/set-setting', [Admin\SecurityController::class, 'cloudflareSetSetting'])->name('admin.security.cloudflare.set_setting');
+    Route::post('/cloudflare/dns/create', [Admin\SecurityController::class, 'cloudflareDnsCreate'])->name('admin.security.cloudflare.dns.create');
+    Route::post('/cloudflare/dns/{id}', [Admin\SecurityController::class, 'cloudflareDnsUpdate'])->name('admin.security.cloudflare.dns.update');
+    Route::delete('/cloudflare/dns/{id}', [Admin\SecurityController::class, 'cloudflareDnsDelete'])->name('admin.security.cloudflare.dns.delete');
+    Route::post('/cloudflare/waf/create', [Admin\SecurityController::class, 'cloudflareWafCreate'])->name('admin.security.cloudflare.waf.create');
+    Route::delete('/cloudflare/waf/{id}', [Admin\SecurityController::class, 'cloudflareWafDelete'])->name('admin.security.cloudflare.waf.delete');
+    Route::post('/cloudflare/rate/create', [Admin\SecurityController::class, 'cloudflareRateCreate'])->name('admin.security.cloudflare.rate.create');
+    Route::delete('/cloudflare/rate/{id}', [Admin\SecurityController::class, 'cloudflareRateDelete'])->name('admin.security.cloudflare.rate.delete');
     Route::get('/rate-limiting', [Admin\SecurityController::class, 'rateLimiting'])->name('admin.security.rate_limiting');
     Route::get('/ip-management', [Admin\SecurityController::class, 'ipManagement'])->name('admin.security.ip_management');
     Route::get('/detection', [Admin\SecurityController::class, 'detection'])->name('admin.security.detection');

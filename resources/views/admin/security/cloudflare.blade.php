@@ -168,16 +168,60 @@ $(function() {
         });
     }
 
+    function renderDnsModal(title, record) {
+        var isEdit = record && record.id;
+        var id = isEdit ? record.id : '';
+        var name = isEdit ? record.name : '';
+        var type = isEdit ? record.type : 'A';
+        var content = isEdit ? record.content : '';
+        var ttl = isEdit ? (record.ttl === 1 ? '1' : record.ttl) : '1';
+        var proxied = isEdit ? record.proxied : false;
+        var h = '<div class="modal fade" id="dnsModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="dnsForm"><input type="hidden" name="id" value="'+id+'">';
+        h += '<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">'+title+'</h4></div>';
+        h += '<div class="modal-body"><div class="form-group"><label>Name</label><input type="text" name="name" class="form-control" value="'+name+'" placeholder="sub.domain.com"></div>';
+        h += '<div class="form-group"><label>Type</label><select name="type" class="form-control"><option value="A" '+(type=='A'?'selected':'')+'>A</option><option value="AAAA" '+(type=='AAAA'?'selected':'')+'>AAAA</option><option value="CNAME" '+(type=='CNAME'?'selected':'')+'>CNAME</option><option value="MX" '+(type=='MX'?'selected':'')+'>MX</option><option value="TXT" '+(type=='TXT'?'selected':'')+'>TXT</option><option value="SRV" '+(type=='SRV'?'selected':'')+'>SRV</option></select></div>';
+        h += '<div class="form-group"><label>Content / Value</label><input type="text" name="content" class="form-control" value="'+content+'" placeholder="IP address or target"></div>';
+        h += '<div class="row"><div class="col-md-6"><div class="form-group"><label>TTL</label><select name="ttl" class="form-control"><option value="1" '+(ttl=='1'?'selected':'')+'>Auto</option><option value="60" '+(ttl==60?'selected':'')+'>1 min</option><option value="300" '+(ttl==300?'selected':'')+'>5 min</option><option value="3600" '+(ttl==3600?'selected':'')+'>1 hour</option><option value="86400" '+(ttl==86400?'selected':'')+'>1 day</option></select></div></div>';
+        h += '<div class="col-md-6"><div class="form-group"><label>Proxy</label><div class="checkbox"><label><input type="checkbox" name="proxied" value="1" '+(proxied?'checked':'')+'> Cloudflare Proxy (orange cloud)</label></div></div></div></div>';
+        h += '</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">'+(isEdit?'Update':'Create')+' Record</button></div></form></div></div></div>';
+        if ($('#dnsModal').length) $('#dnsModal').remove();
+        $('body').append(h);
+        $('#dnsModal').modal('show');
+        $('#dnsForm').off('submit').on('submit', function(e) {
+            e.preventDefault();
+            var fd = $(this).serializeArray(), data = {};
+            $.each(fd, function(i, f) { data[f.name] = f.value; });
+            data.proxied = data.proxied ? true : false;
+            var url = isEdit ? '{{ route("admin.security.cloudflare.dns.update", "") }}/' + id : '{{ route("admin.security.cloudflare.dns.create") }}';
+            $.post(url, $.extend(data, { _token: '{{ csrf_token() }}' }))
+                .done(function(r2) { if (r2.success) { $('#dnsModal').modal('hide'); loadAll(); showMsg('DNS record '+(isEdit?'updated':'created')+' successfully','success'); } else showMsg(r2.error||'Failed','error'); })
+                .fail(function(x) { showMsg(x.responseJSON?.error||'Request failed','error'); });
+        });
+    }
+
     function renderDns(r) {
         if (!r.success) { $('#tab-dns').html('<span class="text-danger">Failed to fetch DNS records.</span>'); return; }
         var records = r.records || [];
         if (!records.length) { $('#tab-dns').html('<span class="text-muted">No DNS records found.</span>'); return; }
-        var h = '<div class="row" style="font-weight:700;padding:8px 15px;border-bottom:2px solid #ddd"><div class="col-md-3">Name</div><div class="col-md-2">Type</div><div class="col-md-3">Content</div><div class="col-md-2">Proxy</div><div class="col-md-2">TTL</div></div>';
+        var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addDnsBtn"><i class="fa fa-plus"></i> Add Record</button></div>';
+        h += '<div class="row" style="font-weight:700;padding:8px 15px;border-bottom:2px solid #ddd"><div class="col-md-3">Name</div><div class="col-md-2">Type</div><div class="col-md-3">Content</div><div class="col-md-2">Proxy</div><div class="col-md-2">Actions</div></div>';
         $.each(records, function(i, rec) {
             var proxied = rec.proxied;
-            h += '<div class="row" style="padding:8px 15px;border-bottom:1px solid #eee;font-size:13px"><div class="col-md-3">'+rec.name+'</div><div class="col-md-2">'+rec.type+'</div><div class="col-md-3" style="word-break:break-all">'+rec.content+'</div><div class="col-md-2"><label class="cf-switch"><input type="checkbox" class="dns-proxy-toggle" data-id="'+rec.id+'" '+(proxied?'checked':'')+'><span class="cf-slider" style="'+(proxied?'background:#5cb85c':'background:#ccc')+'"></span></label> <span class="cf-badge '+(proxied?'on':'off')+' dns-status">'+(proxied?'Proxied':'DNS Only')+'</span></div><div class="col-md-2">'+(rec.ttl===1?'Auto':rec.ttl+'s')+'</div></div>';
+            h += '<div class="row" style="padding:8px 15px;border-bottom:1px solid #eee;font-size:13px"><div class="col-md-3">'+rec.name+'</div><div class="col-md-2">'+rec.type+'</div><div class="col-md-3" style="word-break:break-all">'+rec.content+'</div><div class="col-md-2"><label class="cf-switch"><input type="checkbox" class="dns-proxy-toggle" data-id="'+rec.id+'" '+(proxied?'checked':'')+'><span class="cf-slider" style="'+(proxied?'background:#5cb85c':'background:#ccc')+'"></span></label> <span class="cf-badge '+(proxied?'on':'off')+' dns-status">'+(proxied?'Proxied':'DNS Only')+'</span></div><div class="col-md-2"><button class="btn btn-xs btn-info dns-edit" data-record=\''+JSON.stringify(rec).replace(/'/g, '&apos;')+'\'><i class="fa fa-pencil"></i></button> <button class="btn btn-xs btn-danger dns-delete" data-id="'+rec.id+'"><i class="fa fa-trash"></i></button></div></div>';
         });
         $('#tab-dns').html(h);
+        $('#addDnsBtn').on('click', function() { renderDnsModal('Add DNS Record', null); });
+        $('.dns-edit').on('click', function() {
+            try { var rec = JSON.parse($(this).data('record')); renderDnsModal('Edit DNS Record', rec); } catch(e) { showMsg('Error parsing record','error'); }
+        });
+        $('.dns-delete').on('click', function() {
+            var id = $(this).data('id'), btn = $(this);
+            if (!confirm('Delete this DNS record?')) return;
+            btn.prop('disabled', true);
+            $.ajax({ url: '{{ route("admin.security.cloudflare.dns.delete", "") }}/' + id, method: 'DELETE', data: { _token: '{{ csrf_token() }}' } })
+                .done(function(r2) { if (r2.success) { loadAll(); showMsg('DNS record deleted','success'); } else showMsg(r2.error||'Failed','error'); })
+                .fail(function(x) { showMsg(x.responseJSON?.error||'Delete failed','error'); btn.prop('disabled', false); });
+        });
         $('.dns-proxy-toggle').on('change', function() {
             var id = $(this).data('id'), proxied = $(this).is(':checked'), row = $(this).closest('.row');
             $.post('{{ route("admin.security.cloudflare.dns.toggle") }}', { _token:'{{ csrf_token() }}', record_id:id, proxied:proxied })
@@ -188,10 +232,10 @@ $(function() {
 
     function renderWaf(r) {
         if (!r.success || !r.rulesets) { $('#tab-waf').html('<span class="text-muted">No WAF rulesets found or API error.</span>'); return; }
-        var h = '';
+        var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addWafBtn"><i class="fa fa-plus"></i> Add Custom Rule</button></div>';
         $.each(r.rulesets, function(i, rs) {
             var rules = rs.rules || [];
-            h += '<div style="padding:8px 0;font-weight:700;border-bottom:1px solid #ddd">' + (rs.name || 'Unknown') + '</div>';
+            h += '<div style="padding:8px 0;font-weight:700;border-bottom:1px solid #ddd;margin-top:8px">' + (rs.name || 'Unknown') + ' <small class="text-muted">(' + rs.kind + ')</small></div>';
             if (!rules.length) { h += '<div class="waf-row text-muted">No rules in this ruleset</div>'; }
             $.each(rules, function(j, rule) {
                 var action = rule.action || 'N/A';
@@ -201,24 +245,67 @@ $(function() {
         });
         if (!h) h = '<span class="text-muted">No WAF rulesets found.</span>';
         $('#tab-waf').html(h);
+        $('#addWafBtn').on('click', function() {
+            var e = '<div class="modal fade" id="wafModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="wafForm"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Custom WAF Rule</h4></div><div class="modal-body">';
+            e += '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Adding WAF rules requires <strong>Rulesets:Edit</strong> permission on your Cloudflare API token.</div>';
+            e += '<div class="form-group"><label>Description</label><input type="text" name="description" class="form-control" placeholder="e.g. Block admin paths"></div>';
+            e += '<div class="form-group"><label>Expression</label><textarea name="expression" class="form-control" rows="2" placeholder=\'(http.request.uri.path contains "/wp-admin")\'></textarea><small class="text-muted">Cloudflare expression syntax</small></div>';
+            e += '<div class="form-group"><label>Action</label><select name="action" class="form-control"><option value="block">Block</option><option value="challenge">Challenge (CAPTCHA)</option><option value="js_challenge">JS Challenge</option><option value="allow">Allow</option><option value="log">Log</option></select></div>';
+            e += '</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Add Rule</button></div></form></div></div></div>';
+            if ($('#wafModal').length) $('#wafModal').remove();
+            $('body').append(e); $('#wafModal').modal('show');
+            $('#wafForm').off('submit').on('submit', function(ev) {
+                ev.preventDefault();
+                var data = { _token: '{{ csrf_token() }}', description: $('[name=description]').val(), expression: $('[name=expression]').val(), action: $('[name=action]').val() };
+                $.post('{{ route("admin.security.cloudflare.waf.create") }}', data)
+                    .done(function(r2) { if (r2.success) { $('#wafModal').modal('hide'); loadAll(); showMsg('WAF rule added','success'); } else showMsg(r2.error||'Failed','error'); })
+                    .fail(function(x) { showMsg(x.responseJSON?.error||'Request failed','error'); });
+            });
+        });
     }
 
     function renderRate(r) {
         if (!r.success || !r.rules) { $('#tab-rate').html('<span class="text-muted">No rate limiting rules found or API error.</span>'); return; }
-        var h = '';
+        var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addRateBtn"><i class="fa fa-plus"></i> Add Rate Limit</button></div>';
         $.each(r.rules, function(i, rule) {
             var desc = rule.description || '-';
             var threshold = rule.threshold || '-';
             var period = rule.period || '-';
-            var action = rule.action || '-';
+            var action = rule.action?.mode || rule.action || '-';
             var disabled = rule.disabled ? '<span class="cf-badge off">Disabled</span>' : '<span class="cf-badge on">Active</span>';
-            h += '<div class="rate-row"><div><strong>' + desc + '</strong></div><div class="text-muted" style="font-size:12px">Threshold: ' + threshold + ' | Period: ' + period + ' | Action: ' + action + ' ' + disabled + '</div></div>';
+            h += '<div class="rate-row"><div style="display:flex;justify-content:space-between"><div><strong>' + desc + '</strong></div><div><button class="btn btn-xs btn-danger rate-delete" data-id="'+rule.id+'"><i class="fa fa-trash"></i></button></div></div><div class="text-muted" style="font-size:12px">Threshold: ' + threshold + ' | Period: ' + period + 's | Action: ' + action + ' ' + disabled + '</div></div>';
         });
         if (!h) h = '<span class="text-muted">No rate limiting rules found.</span>';
         $('#tab-rate').html(h);
+        $('#addRateBtn').on('click', function() {
+            var e = '<div class="modal fade" id="rateModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="rateForm"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Rate Limiting Rule</h4></div><div class="modal-body">';
+            e += '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Rate limiting may require <strong>WAF:Rate Limiting:Edit</strong> permission on your API token.</div>';
+            e += '<div class="form-group"><label>URL Pattern</label><input type="text" name="pattern" class="form-control" value="*" placeholder="e.g. /api/*"></div>';
+            e += '<div class="row"><div class="col-md-6"><div class="form-group"><label>Max Requests</label><input type="number" name="max_requests" class="form-control" value="100" min="1"></div></div>';
+            e += '<div class="col-md-6"><div class="form-group"><label>Period (seconds)</label><input type="number" name="period" class="form-control" value="60" min="1"></div></div></div>';
+            e += '<div class="form-group"><label>Action</label><select name="action" class="form-control"><option value="block">Block</option><option value="challenge">Challenge (CAPTCHA)</option><option value="js_challenge">JS Challenge</option><option value="managed_challenge">Managed Challenge</option><option value="log">Log Only</option></select></div>';
+            e += '</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button><button type="submit" class="btn btn-primary">Add Rule</button></div></form></div></div></div>';
+            if ($('#rateModal').length) $('#rateModal').remove();
+            $('body').append(e); $('#rateModal').modal('show');
+            $('#rateForm').off('submit').on('submit', function(ev) {
+                ev.preventDefault();
+                var data = { _token: '{{ csrf_token() }}', pattern: $('[name=pattern]').val(), max_requests: $('[name=max_requests]').val(), period: $('[name=period]').val(), action: $('[name=action]').val() };
+                $.post('{{ route("admin.security.cloudflare.rate.create") }}', data)
+                    .done(function(r2) { if (r2.success) { $('#rateModal').modal('hide'); loadAll(); showMsg('Rate limit added','success'); } else showMsg(r2.error||'Failed','error'); })
+                    .fail(function(x) { showMsg(x.responseJSON?.error||'Request failed','error'); });
+            });
+        });
+        $('.rate-delete').on('click', function() {
+            var id = $(this).data('id'), btn = $(this);
+            if (!confirm('Delete this rate limiting rule?')) return;
+            btn.prop('disabled', true);
+            $.ajax({ url: '{{ route("admin.security.cloudflare.rate.delete", "") }}/' + id, method: 'DELETE', data: { _token: '{{ csrf_token() }}' } })
+                .done(function(r2) { if (r2.success) { loadAll(); showMsg('Rate limit deleted','success'); } else showMsg(r2.error||'Failed','error'); })
+                .fail(function(x) { showMsg(x.responseJSON?.error||'Delete failed','error'); btn.prop('disabled', false); });
+        });
     }
 
-    function bindEvents() {
+    function bindEvents() {    function bindEvents() {
         $('.cf-toggle').off('change').on('change', function() {
             var setting = $(this).data('setting'), state = $(this).is(':checked');
             $(this).prop('disabled', true);

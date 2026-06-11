@@ -112,11 +112,39 @@ class CloudflareService
     public function setRateLimitingRule(string $pattern, int $maxRequests, int $period, string $action): array
     {
         if (!$this->enabled()) return $this->notConfigured();
-        return $this->request('POST', "/zones/{$this->zoneId}/rate_limits", [
+        // Try old rate limit API first, fall back to new ruleset-based API
+        $result = $this->request('POST', "/zones/{$this->zoneId}/rate_limits", [
             'description' => "Rate limit: {$pattern}",
             'match' => ['request' => ['url' => $pattern]],
             'threshold' => $maxRequests, 'period' => $period,
             'action' => ['mode' => $action, 'timeout' => 60],
+        ]);
+        if ($result['success'] ?? false) return $result;
+        // If old API is in maintenance mode, try new ruleset-based rate limiting API
+        $errors = $result['result']['errors'] ?? [];
+        $isMaintenance = false;
+        foreach ($errors as $e) {
+            if (isset($e['code']) && in_array($e['code'], [10037, 10042])) { $isMaintenance = true; break; }
+        }
+        if (!$isMaintenance) return $result;
+        // New rate limiting via rulesets
+        $escaped = str_replace(['\\', '"'], ['\\\\', '\\"'], $pattern);
+        $expression = '(http.request.uri.path ~ "' . $escaped . '")';
+        return $this->request('POST', "/zones/{$this->zoneId}/rulesets/phases/http_ratelimit/entrypoint", [
+            'description' => "Rate limit: {$pattern}",
+            'kind' => 'zone', 'phase' => 'http_ratelimit',
+            'rules' => [[
+                'description' => "Rate limit: {$pattern}",
+                'expression' => $expression,
+                'action' => $action,
+                'ratelimit' => [
+                    'characteristics' => ['cf.client.ip'],
+                    'period' => $period,
+                    'requests_per_period' => $maxRequests,
+                    'requests_to_origin' => false,
+                    'mitigation_timeout' => 60,
+                ],
+            ]],
         ]);
     }
 
@@ -318,7 +346,56 @@ class CloudflareService
         return ['success' => true, 'records' => $records];
     }
 
-    public function toggleDnsProxy(string $recordId, bool $proxied): array
+    public function createDnsRecord(string $name, string $type, string $content, int $ttl = 1, bool $proxied = false): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('POST', "/zones/{$this->zoneId}/dns_records", [
+            'name' => $name, 'type' => $type, 'content' => $content,
+            'ttl' => $ttl, 'proxied' => $proxied,
+        ]);
+    }
+
+    public function updateDnsRecord(string $recordId, array $data): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/dns_records/{$recordId}", $data);
+    }
+
+    public function deleteDnsRecord(string $recordId): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('DELETE', "/zones/{$this->zoneId}/dns_records/{$recordId}");
+    }
+
+    public function deleteRateLimit(string $ruleId): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('DELETE', "/zones/{$this->zoneId}/rate_limits/{$ruleId}");
+    }
+
+    public function deleteWafRule(string $ruleId, string $rulesetId): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('DELETE', "/zones/{$this->zoneId}/rulesets/{$rulesetId}/rules/{$ruleId}");
+    }
+
+    public function getCustomRuleset(): ?string
+    {
+        if (!$this->enabled()) return null;
+        $resp = $this->request('GET', "/zones/{$this->zoneId}/rulesets/phases/http_request_firewall_custom/entrypoint");
+        if (!($resp['success'] ?? false)) return null;
+        return $resp['result']['result']['id'] ?? null;
+    }
+
+    public function addRuleToCustomRuleset(string $rulesetId, string $expression, string $action, string $description): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('POST', "/zones/{$this->zoneId}/rulesets/{$rulesetId}/rules", [
+            'description' => $description, 'expression' => $expression, 'action' => $action, 'enabled' => true,
+        ]);
+    }
+
+        public function toggleDnsProxy(string $recordId, bool $proxied): array
     {
         if (!$this->enabled()) return $this->notConfigured();
         return $this->request('PATCH', "/zones/{$this->zoneId}/dns_records/{$recordId}", ['proxied' => $proxied]);

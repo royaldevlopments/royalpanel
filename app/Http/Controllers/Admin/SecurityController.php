@@ -76,7 +76,81 @@ class SecurityController extends Controller
         $rate = $this->cloudflare->getRateLimits();
         return response()->json($rate);
     }
-    public function cloudflareSetSetting(Request $request): \Illuminate\Http\JsonResponse
+    public function cloudflareDnsCreate(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->cloudflare->createDnsRecord(
+            $request->input('name'),
+            $request->input('type'),
+            $request->input('content'),
+            (int) $request->input('ttl', 1),
+            (bool) $request->input('proxied', false)
+        );
+        return response()->json($result);
+    }
+
+    public function cloudflareDnsUpdate(Request $request, string $id): \Illuminate\Http\JsonResponse
+    {
+        $data = array_filter($request->only(['name', 'type', 'content', 'ttl', 'proxied']));
+        if (isset($data['ttl'])) $data['ttl'] = (int) $data['ttl'];
+        if (isset($data['proxied'])) $data['proxied'] = (bool) $data['proxied'];
+        $result = $this->cloudflare->updateDnsRecord($id, $data);
+        return response()->json($result);
+    }
+
+    public function cloudflareDnsDelete(string $id): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->cloudflare->deleteDnsRecord($id);
+        return response()->json($result);
+    }
+
+    public function cloudflareWafCreate(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $rulesetId = $this->cloudflare->getCustomRuleset();
+        if (!$rulesetId) {
+            $result = $this->cloudflare->addWafRule(
+                $request->input("expression"),
+                $request->input("action"),
+                $request->input("description")
+            );
+            return response()->json($result);
+        }
+        $result = $this->cloudflare->addRuleToCustomRuleset(
+            $rulesetId,
+            $request->input("expression"),
+            $request->input("action"),
+            $request->input("description")
+        );
+        return response()->json($result);
+    }
+
+    public function cloudflareWafDelete(string $id): \Illuminate\Http\JsonResponse
+    {
+        $rulesetId = $this->cloudflare->getCustomRuleset();
+        if (!$rulesetId) {
+            return response()->json(['success' => false, 'error' => 'No custom ruleset found'], 404);
+        }
+        $result = $this->cloudflare->deleteWafRule($id, $rulesetId);
+        return response()->json($result);
+    }
+
+    public function cloudflareRateCreate(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->cloudflare->setRateLimitingRule(
+            $request->input('pattern'),
+            (int) $request->input('max_requests'),
+            (int) $request->input('period'),
+            $request->input('action', 'block')
+        );
+        return response()->json($result);
+    }
+
+    public function cloudflareRateDelete(string $id): \Illuminate\Http\JsonResponse
+    {
+        $result = $this->cloudflare->deleteRateLimit($id);
+        return response()->json($result);
+    }
+
+        public function cloudflareSetSetting(Request $request): \Illuminate\Http\JsonResponse
     {
         $setting = $request->input('setting');
         $value = $request->input('value');
