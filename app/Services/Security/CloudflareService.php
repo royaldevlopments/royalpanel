@@ -203,9 +203,11 @@ class CloudflareService
             'rocket_loader' => '/settings/rocket_loader',
             'minify' => '/settings/minify',
         ];
+        $atLeastOne = false;
         foreach ($endpoints as $key => $path) {
             $resp = $this->request('GET', "/zones/{$this->zoneId}{$path}");
             if ($resp['success'] ?? false) {
+                $atLeastOne = true;
                 $val = $resp['result']['result']['value'] ?? null;
                 if ($key === 'minify' && is_array($val)) {
                     $settings['minify_js'] = $val['js'] ?? 'off';
@@ -218,9 +220,10 @@ class CloudflareService
         }
         $botResp = $this->request('GET', "/zones/{$this->zoneId}/bot_management");
         if ($botResp['success'] ?? false) {
+            $atLeastOne = true;
             $settings['bot_fight_mode'] = $botResp['result']['result']['fight_mode'] ?? null;
         }
-        return ['success' => true, 'settings' => $settings];
+        return ['success' => $atLeastOne, 'settings' => $settings];
     }
 
     public function getDnsRecords(string $type = null): array
