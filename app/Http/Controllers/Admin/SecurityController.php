@@ -395,9 +395,9 @@ class SecurityController extends Controller
     public function bruteForce(): View
     {
         $failedAttempts = DB::table('security_rate_logs')
-            ->select('ip', 'email', 'created_at as timestamp')
+            ->select('ip', 'route', 'logged_at')
             ->where('blocked', true)
-            ->orderByDesc('created_at')
+            ->orderByDesc('logged_at')
             ->limit(100)
             ->get();
         return view('admin.security.brute-force', compact('failedAttempts'));
@@ -448,7 +448,7 @@ class SecurityController extends Controller
     {
         $sessions = DB::table('sessions')
             ->leftJoin('users', 'sessions.user_id', '=', 'users.id')
-            ->select('sessions.id', 'sessions.ip_address as ip', 'sessions.created_at', 'sessions.last_activity', 'users.email as user_email')
+            ->select('sessions.id', 'sessions.ip_address', 'sessions.last_activity', 'users.email as user_email')
             ->orderByDesc('sessions.last_activity')
             ->limit(200)
             ->get();
