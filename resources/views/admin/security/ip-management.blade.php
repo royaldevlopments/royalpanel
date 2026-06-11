@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($blockedIps as $block)
+                        @forelse($blockedIps ?? [] as $block)
                             <tr>
                                 <td>{{ $block->ip }}</td>
                                 <td>{{ $block->reason }}</td>
