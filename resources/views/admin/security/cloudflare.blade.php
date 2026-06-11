@@ -105,10 +105,10 @@ $(function() {
             if (!r.success) return;
             var s = r.settings || {};
             renderSecurity(s); renderSsl(s); renderPerformance(s);
-        });
-        $.get('{{ route("admin.security.cloudflare.dns") }}').done(function(r) { renderDns(r); });
-        $.get('{{ route("admin.security.cloudflare.waf") }}').done(function(r) { renderWaf(r); });
-        $.get('{{ route("admin.security.cloudflare.rate") }}').done(function(r) { renderRate(r); });
+        }).fail(function() { $('#tab-security').html('<span class="text-danger">Failed to load settings</span>'); });
+        $.get('{{ route("admin.security.cloudflare.dns") }}').done(function(r) { renderDns(r); }).fail(function() { $('#tab-dns').html('<span class="text-danger">Failed to load DNS records</span>'); });
+        $.get('{{ route("admin.security.cloudflare.waf") }}').done(function(r) { renderWaf(r); }).fail(function() { $('#tab-waf').html('<span class="text-danger">Failed to load WAF rules</span>'); });
+        $.get('{{ route("admin.security.cloudflare.rate") }}').done(function(r) { renderRate(r); }).fail(function() { $('#tab-rate').html('<span class="text-danger">Failed to load rate limits</span>'); });
     }
 
     function renderSecurity(s) {
@@ -305,7 +305,7 @@ $(function() {
         });
     }
 
-    function bindEvents() {    function bindEvents() {
+    function bindEvents() {
         $('.cf-toggle').off('change').on('change', function() {
             var setting = $(this).data('setting'), state = $(this).is(':checked');
             $(this).prop('disabled', true);
