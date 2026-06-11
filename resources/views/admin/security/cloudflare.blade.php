@@ -54,12 +54,12 @@
         <li><a href="#tab-rate" data-toggle="tab">Rate Limiting</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="tab-security"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
-        <div class="tab-pane" id="tab-ssl"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
-        <div class="tab-pane" id="tab-performance"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
-        <div class="tab-pane" id="tab-dns"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
-        <div class="tab-pane" id="tab-waf"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
-        <div class="tab-pane" id="tab-rate"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div>
+        <div class="tab-pane active" id="tab-security"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
+        <div class="tab-pane" id="tab-ssl"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
+        <div class="tab-pane" id="tab-performance"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
+        <div class="tab-pane" id="tab-dns"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
+        <div class="tab-pane" id="tab-waf"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
+        <div class="tab-pane" id="tab-rate"><div class="box box-default box-solid"><div class="box-body"><div class="cf-loading text-center" style="padding:40px"><i class="fa fa-spinner fa-spin fa-2x"></i></div></div></div></div>
     </div>
 </div>
 
@@ -105,10 +105,10 @@ $(function() {
             if (!r.success) return;
             var s = r.settings || {};
             renderSecurity(s); renderSsl(s); renderPerformance(s);
-        }).fail(function() { $('#tab-security').html('<span class="text-danger">Failed to load settings</span>'); });
-        $.get('{{ route("admin.security.cloudflare.dns") }}').done(function(r) { renderDns(r); }).fail(function() { $('#tab-dns').html('<span class="text-danger">Failed to load DNS records</span>'); });
-        $.get('{{ route("admin.security.cloudflare.waf") }}').done(function(r) { renderWaf(r); }).fail(function() { $('#tab-waf').html('<span class="text-danger">Failed to load WAF rules</span>'); });
-        $.get('{{ route("admin.security.cloudflare.rate") }}').done(function(r) { renderRate(r); }).fail(function() { $('#tab-rate').html('<span class="text-danger">Failed to load rate limits</span>'); });
+        }).fail(function() { $('#tab-security .box-body').html('<span class="text-danger">Failed to load settings</span>'); });
+        $.get('{{ route("admin.security.cloudflare.dns") }}').done(function(r) { renderDns(r); }).fail(function() { $('#tab-dns .box-body').html('<span class="text-danger">Failed to load DNS records</span>'); });
+        $.get('{{ route("admin.security.cloudflare.waf") }}').done(function(r) { renderWaf(r); }).fail(function() { $('#tab-waf .box-body').html('<span class="text-danger">Failed to load WAF rules</span>'); });
+        $.get('{{ route("admin.security.cloudflare.rate") }}').done(function(r) { renderRate(r); }).fail(function() { $('#tab-rate .box-body').html('<span class="text-danger">Failed to load rate limits</span>'); });
     }
 
     function renderSecurity(s) {
@@ -137,7 +137,7 @@ $(function() {
                 h += '<div class="cf-row"><div class="cf-label"><i class="fa '+it.i+' '+it.c+'"></i><div><strong>'+it.l+'</strong><small>'+it.d+'</small></div></div><div><input type="number" class="form-control cf-text" data-setting="'+it.k+'" value="'+(val||'')+'" style="width:100px;display:inline">'+(it.suffix||'')+'</div></div>';
             }
         });
-        $('#tab-security').html(h);
+        $('#tab-security .box-body').html(h);
         bindEvents();
     }
 
@@ -147,7 +147,7 @@ $(function() {
         h += '<div class="cf-row"><div class="cf-label"><i class="fa fa-shield text-green"></i><div><strong>Minimum TLS Version</strong><small>1.0 / 1.1 / 1.2 / 1.3</small></div></div><select class="form-control cf-select cf-dropdown" data-setting="min_tls_version"><option value="1.0" '+(s.min_tls_version=='1.0'?'selected':'')+'>TLS 1.0</option><option value="1.1" '+(s.min_tls_version=='1.1'?'selected':'')+'>TLS 1.1</option><option value="1.2" '+(s.min_tls_version=='1.2'?'selected':'')+'>TLS 1.2</option><option value="1.3" '+(s.min_tls_version=='1.3'?'selected':'')+'>TLS 1.3</option></select></div>';
         h += '<div class="cf-row"><div class="cf-label"><i class="fa fa-link text-green"></i><div><strong>Always Use HTTPS</strong><small>Redirect all HTTP to HTTPS</small></div></div>' + (s.always_use_https?'<span class="cf-badge on">ON</span>':'<span class="cf-badge off">OFF</span>')+' <label class="cf-switch"><input type="checkbox" class="cf-toggle" data-setting="always_use_https" '+(s.always_use_https=='on'?'checked':'')+'><span class="cf-slider"></span></label></div>';
         h += '<div class="cf-row"><div class="cf-label"><i class="fa fa-shield text-green"></i><div><strong>Opportunistic Encryption</strong><small>Encrypt between CF and origin</small></div></div>' + (s.opportunistic_encryption?'<span class="cf-badge on">ON</span>':'<span class="cf-badge off">OFF</span>')+' <label class="cf-switch"><input type="checkbox" class="cf-toggle" data-setting="opportunistic_encryption" '+(s.opportunistic_encryption=='on'?'checked':'')+'><span class="cf-slider"></span></label></div>';
-        $('#tab-ssl').html(h);
+        $('#tab-ssl .box-body').html(h);
         bindEvents();
     }
 
@@ -159,7 +159,7 @@ $(function() {
         h += '<div class="cf-row"><div class="cf-label"><i class="fa fa-rocket text-warning"></i><div><strong>Rocket Loader</strong><small>Async JS loading for faster pages</small></div></div>' + (s.rocket_loader=='on'?'<span class="cf-badge on">ON</span>':'<span class="cf-badge off">OFF</span>')+' <label class="cf-switch"><input type="checkbox" class="cf-toggle" data-setting="rocket_loader" '+(s.rocket_loader=='on'?'checked':'')+'><span class="cf-slider"></span></label></div>';
         var mJs = s.minify_js=='on', mCss = s.minify_css=='on', mHtml = s.minify_html=='on';
         h += '<div class="cf-row"><div class="cf-label"><i class="fa fa-compress text-primary"></i><div><strong>Auto Minify</strong><small>Minify JS / CSS / HTML</small></div></div><div><label style="font-weight:400;margin:0 10px 0 0"><input type="checkbox" class="cf-minify" data-ext="js" '+(mJs?'checked':'')+'> JS</label><label style="font-weight:400;margin:0 10px 0 0"><input type="checkbox" class="cf-minify" data-ext="css" '+(mCss?'checked':'')+'> CSS</label><label style="font-weight:400;margin:0"><input type="checkbox" class="cf-minify" data-ext="html" '+(mHtml?'checked':'')+'> HTML</label></div></div>';
-        $('#tab-performance').html(h);
+        $('#tab-performance .box-body').html(h);
         bindEvents();
         $('.cf-minify').on('change', function() {
             var exts = [];
@@ -200,16 +200,16 @@ $(function() {
     }
 
     function renderDns(r) {
-        if (!r.success) { $('#tab-dns').html('<span class="text-danger">Failed to fetch DNS records.</span>'); return; }
+        if (!r.success) { $('#tab-dns .box-body').html('<span class="text-danger">Failed to fetch DNS records.</span>'); return; }
         var records = r.records || [];
-        if (!records.length) { $('#tab-dns').html('<span class="text-muted">No DNS records found.</span>'); return; }
+        if (!records.length) { $('#tab-dns .box-body').html('<span class="text-muted">No DNS records found.</span>'); return; }
         var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addDnsBtn"><i class="fa fa-plus"></i> Add Record</button></div>';
         h += '<div class="row" style="font-weight:700;padding:8px 15px;border-bottom:2px solid #ddd"><div class="col-md-3">Name</div><div class="col-md-2">Type</div><div class="col-md-3">Content</div><div class="col-md-2">Proxy</div><div class="col-md-2">Actions</div></div>';
         $.each(records, function(i, rec) {
             var proxied = rec.proxied;
             h += '<div class="row" style="padding:8px 15px;border-bottom:1px solid #eee;font-size:13px"><div class="col-md-3">'+rec.name+'</div><div class="col-md-2">'+rec.type+'</div><div class="col-md-3" style="word-break:break-all">'+rec.content+'</div><div class="col-md-2"><label class="cf-switch"><input type="checkbox" class="dns-proxy-toggle" data-id="'+rec.id+'" '+(proxied?'checked':'')+'><span class="cf-slider" style="'+(proxied?'background:#5cb85c':'background:#ccc')+'"></span></label> <span class="cf-badge '+(proxied?'on':'off')+' dns-status">'+(proxied?'Proxied':'DNS Only')+'</span></div><div class="col-md-2"><button class="btn btn-xs btn-info dns-edit" data-record=\''+JSON.stringify(rec).replace(/'/g, '&apos;')+'\'><i class="fa fa-pencil"></i></button> <button class="btn btn-xs btn-danger dns-delete" data-id="'+rec.id+'"><i class="fa fa-trash"></i></button></div></div>';
         });
-        $('#tab-dns').html(h);
+        $('#tab-dns .box-body').html(h);
         $('#addDnsBtn').on('click', function() { renderDnsModal('Add DNS Record', null); });
         $('.dns-edit').on('click', function() {
             try { var rec = JSON.parse($(this).data('record')); renderDnsModal('Edit DNS Record', rec); } catch(e) { showMsg('Error parsing record','error'); }
@@ -231,7 +231,7 @@ $(function() {
     }
 
     function renderWaf(r) {
-        if (!r.success || !r.rulesets) { $('#tab-waf').html('<span class="text-muted">No WAF rulesets found or API error.</span>'); return; }
+        if (!r.success || !r.rulesets) { $('#tab-waf .box-body').html('<span class="text-muted">No WAF rulesets found or API error.</span>'); return; }
         var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addWafBtn"><i class="fa fa-plus"></i> Add Custom Rule</button></div>';
         $.each(r.rulesets, function(i, rs) {
             var rules = rs.rules || [];
@@ -244,7 +244,7 @@ $(function() {
             });
         });
         if (!h) h = '<span class="text-muted">No WAF rulesets found.</span>';
-        $('#tab-waf').html(h);
+        $('#tab-waf .box-body').html(h);
         $('#addWafBtn').on('click', function() {
             var e = '<div class="modal fade" id="wafModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="wafForm"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Custom WAF Rule</h4></div><div class="modal-body">';
             e += '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Adding WAF rules requires <strong>Rulesets:Edit</strong> permission on your Cloudflare API token.</div>';
@@ -265,7 +265,7 @@ $(function() {
     }
 
     function renderRate(r) {
-        if (!r.success || !r.rules) { $('#tab-rate').html('<span class="text-muted">No rate limiting rules found or API error.</span>'); return; }
+        if (!r.success || !r.rules) { $('#tab-rate .box-body').html('<span class="text-muted">No rate limiting rules found or API error.</span>'); return; }
         var h = '<div style="margin-bottom:10px"><button class="btn btn-sm btn-success" id="addRateBtn"><i class="fa fa-plus"></i> Add Rate Limit</button></div>';
         $.each(r.rules, function(i, rule) {
             var desc = rule.description || '-';
@@ -276,7 +276,7 @@ $(function() {
             h += '<div class="rate-row"><div style="display:flex;justify-content:space-between"><div><strong>' + desc + '</strong></div><div><button class="btn btn-xs btn-danger rate-delete" data-id="'+rule.id+'"><i class="fa fa-trash"></i></button></div></div><div class="text-muted" style="font-size:12px">Threshold: ' + threshold + ' | Period: ' + period + 's | Action: ' + action + ' ' + disabled + '</div></div>';
         });
         if (!h) h = '<span class="text-muted">No rate limiting rules found.</span>';
-        $('#tab-rate').html(h);
+        $('#tab-rate .box-body').html(h);
         $('#addRateBtn').on('click', function() {
             var e = '<div class="modal fade" id="rateModal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><form id="rateForm"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title">Add Rate Limiting Rule</h4></div><div class="modal-body">';
             e += '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Rate limiting may require <strong>WAF:Rate Limiting:Edit</strong> permission on your API token.</div>';
