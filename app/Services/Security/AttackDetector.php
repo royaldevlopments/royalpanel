@@ -53,8 +53,9 @@ class AttackDetector
     public function incrementIpRequestCount(string $ip): void
     {
         $key = "security:requests:{$ip}";
-        Cache::increment($key);
-        Cache::expire($key, 60);
+        $count = (int) Cache::get($key, 0);
+        $count++;
+        Cache::put($key, $count, now()->addSeconds(60));
     }
 
     private function getIpRequestCount(string $ip): int
