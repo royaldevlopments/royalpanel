@@ -73,6 +73,32 @@ return [
         'cooldown_minutes' => 30,
     ],
 
+    'brute_force' => [
+        'enabled' => true,
+        'max_attempts' => 10,
+        'lockout_duration' => 60,
+    ],
+
+    'two_factor' => [
+        'enforce_level' => 'none',
+        'grace_period' => 7,
+    ],
+
+    'waf' => [
+        'enabled' => false,
+        'block_sqli' => true,
+        'block_xss' => true,
+        'block_path_traversal' => true,
+    ],
+
+    'fail2ban' => [
+        'enabled' => false,
+        'max_retries' => 5,
+        'find_time' => 600,
+        'ban_time' => 3600,
+        'log_path' => '',
+    ],
+
     'monitoring' => [
         'log_attacks' => true,
         'log_blocks' => true,

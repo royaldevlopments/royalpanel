@@ -32,6 +32,23 @@ use Pterodactyl\Services\Security\BlackholeProtectionService;
         'security:ip_blocking:auto_ban:max_failed_attempts',
         'security:ip_blocking:auto_ban:ban_duration_minutes',
         'security:ip_blocking:country_block:enabled',
+        'security:ip_blocking:country_block:mode',
+        'security:ip_blocking:country_block:blocked_countries',
+        'security:ip_blocking:country_block:allowed_countries',
+        'security:brute_force:enabled',
+        'security:brute_force:max_attempts',
+        'security:brute_force:lockout_duration',
+        'security:two_factor:enforce_level',
+        'security:two_factor:grace_period',
+        'security:waf:enabled',
+        'security:waf:block_sqli',
+        'security:waf:block_xss',
+        'security:waf:block_path_traversal',
+        'security:fail2ban:enabled',
+        'security:fail2ban:max_retries',
+        'security:fail2ban:find_time',
+        'security:fail2ban:ban_time',
+        'security:fail2ban:log_path',
         'security:attack_detection:enabled',
         'security:attack_detection:threshold:requests_per_ip_per_minute',
         'security:attack_detection:threshold:concurrent_connections_per_ip',
@@ -111,9 +128,16 @@ use Pterodactyl\Services\Security\BlackholeProtectionService;
             $configKey = str_replace(':', '.', $key);
             $value = $values[$dbKey] ?? config(str_replace('security:', 'security.', $configKey));
 
-            switch (strtolower((string) $value)) {
-                case 'true': $value = true; break;
-                case 'false': $value = false; break;
+            if (is_string($value)) {
+                $decoded = json_decode($value, true);
+                if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    $value = $decoded;
+                } else {
+                    switch (strtolower($value)) {
+                        case 'true': $value = true; break;
+                        case 'false': $value = false; break;
+                    }
+                }
             }
 
             data_set($map, $configKey, $value);
