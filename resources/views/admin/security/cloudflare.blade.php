@@ -64,6 +64,10 @@
 </div>
 
 <style>
+.nav-tabs-custom { background: transparent; box-shadow: none; margin-bottom:0; }
+.nav-tabs-custom > .tab-content { background: transparent; border: none; padding: 0; }
+.nav-tabs-custom > .nav-tabs { border-bottom: 1px solid #d2d6de; }
+.nav-tabs-custom > .nav-tabs > li.active { border-top-color: #3c8dbc; }
 .cf-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee; }
 .cf-row:last-child { border-bottom:none; }
 .cf-row .cf-label { display:flex; align-items:center; gap:8px; }
