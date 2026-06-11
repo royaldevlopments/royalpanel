@@ -79,17 +79,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <form action="{{ route('admin.security.auto_response_on') }}" method="POST" style="display:inline">@csrf<button type="submit" class="btn btn-success btn-sm">Enable Auto Response</button></form>
-                            <form action="{{ route('admin.security.auto_response_off') }}" method="POST" style="display:inline">@csrf<button type="submit" class="btn btn-default btn-sm">Disable Auto Response</button></form>
-                        </div>
-                    </div>
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Save Settings</button>
                 </div>
             </form>
+            <div class="row">
+                <div class="col-xs-12">
+                    <form action="{{ route('admin.security.auto_response_on') }}" method="POST" style="display:inline">@csrf<button type="submit" class="btn btn-success btn-sm">Enable Auto Response</button></form>
+                    <form action="{{ route('admin.security.auto_response_off') }}" method="POST" style="display:inline">@csrf<button type="submit" class="btn btn-default btn-sm">Disable Auto Response</button></form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
