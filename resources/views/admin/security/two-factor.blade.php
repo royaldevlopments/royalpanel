@@ -7,7 +7,6 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Two-Factor Authentication Enforcement</h3>
                 <div class="box-tools">
-                    <a href="{{ route('admin.security.index') }}" class="btn btn-sm btn-default">Back</a>
                 </div>
             </div>
             <form action="{{ route('admin.security.two_factor.save') }}" method="POST">

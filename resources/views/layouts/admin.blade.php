@@ -208,11 +208,6 @@
                                 <i data-lucide="users"></i> <span>Session Manager</span>
                             </a>
                         </li>
-                        <li class="{{ request()->is('admin/security/ip-reputation*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.security.ip_reputation') }}">
-                                <i data-lucide="search"></i> <span>IP Reputation Checker</span>
-                            </a>
-                        </li>
                         <li class="{{ request()->is('admin/security/login-history*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.login_history') }}">
                                 <i data-lucide="clock"></i> <span>Login History</span>

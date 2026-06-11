@@ -284,6 +284,9 @@ Route::group(['prefix' => 'security'], function () {
     Route::get('/', [Admin\SecurityController::class, 'index'])->name('admin.security.index');
     Route::get('/cloudflare', [Admin\SecurityController::class, 'cloudflare'])->name('admin.security.cloudflare');
     Route::get('/cloudflare/status', [Admin\SecurityController::class, 'cloudflareStatus'])->name('admin.security.cloudflare.status');
+    Route::get('/cloudflare/dns', [Admin\SecurityController::class, 'cloudflareDns'])->name('admin.security.cloudflare.dns');
+    Route::post('/cloudflare/dns/toggle', [Admin\SecurityController::class, 'cloudflareToggleDns'])->name('admin.security.cloudflare.dns.toggle');
+    Route::post('/cloudflare/set-setting', [Admin\SecurityController::class, 'cloudflareSetSetting'])->name('admin.security.cloudflare.set_setting');
     Route::get('/rate-limiting', [Admin\SecurityController::class, 'rateLimiting'])->name('admin.security.rate_limiting');
     Route::get('/ip-management', [Admin\SecurityController::class, 'ipManagement'])->name('admin.security.ip_management');
     Route::get('/detection', [Admin\SecurityController::class, 'detection'])->name('admin.security.detection');

@@ -7,7 +7,6 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Fail2Ban Integration</h3>
                 <div class="box-tools">
-                    <a href="{{ route('admin.security.index') }}" class="btn btn-sm btn-default">Back</a>
                 </div>
             </div>
             <form action="{{ route('admin.security.fail2ban.save') }}" method="POST">

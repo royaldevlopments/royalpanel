@@ -52,6 +52,59 @@ class SecurityController extends Controller
         return response()->json($cfStatus);
     }
 
+    public function cloudflareDns(): \Illuminate\Http\JsonResponse
+    {
+        $dns = $this->cloudflare->getDnsRecordsWithProxy();
+        return response()->json($dns);
+    }
+
+    public function cloudflareToggleDns(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $recordId = $request->input('record_id');
+        $proxied = (bool) $request->input('proxied');
+        $result = $this->cloudflare->toggleDnsProxy($recordId, $proxied);
+        return response()->json($result);
+    }
+
+    public function cloudflareSetSetting(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $setting = $request->input('setting');
+        $value = $request->input('value');
+        $method = match ($setting) {
+            'development_mode' => 'setDevelopmentMode',
+            'cache_level' => 'setCacheLevel',
+            'always_online' => 'setAlwaysOnline',
+            'rocket_loader' => 'setRocketLoader',
+            'security_level' => 'setSecurityLevel',
+            'ssl' => 'setSsl',
+            'min_tls_version' => 'setMinimumTlsVersion',
+            'always_use_https' => 'setAlwaysUseHttps',
+            'opportunistic_encryption' => 'setOpportunisticEncryption',
+            'browser_check' => 'setBrowserIntegrityCheck',
+            'ip_geolocation' => 'setIpGeolocation',
+            'privacy_pass' => 'setPrivacyPass',
+            'under_attack' => $request->input('value') ? 'setUnderAttackMode' : null,
+            'bot_fight' => 'setBotFightMode',
+            'auto_minify' => 'setAutoMinify',
+            default => null,
+        };
+        if (!$method) {
+            return response()->json(['success' => false, 'error' => 'Unknown setting'], 400);
+        }
+        if ($setting === 'under_attack') {
+            $result = $this->cloudflare->$method((bool) $request->input('value'));
+        } elseif ($setting === 'auto_minify') {
+            $extensions = $request->input('extensions', []);
+            $result = $this->cloudflare->$method($extensions);
+        } elseif ($setting === 'ssl' || $setting === 'cache_level' || $setting === 'security_level' || $setting === 'min_tls_version') {
+            $result = $this->cloudflare->$method($value);
+        } else {
+            $boolVal = $value === 'on' || $value === 'true' || $value === true;
+            $result = $this->cloudflare->$method($boolVal);
+        }
+        return response()->json($result);
+    }
+
     public function rateLimiting(): View
     {
         $config = config('security.rate_limiting');

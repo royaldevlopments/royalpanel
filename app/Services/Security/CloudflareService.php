@@ -197,11 +197,23 @@ class CloudflareService
             'opportunistic_encryption' => '/settings/opportunistic_encryption',
             'ip_geolocation' => '/settings/ip_geolocation',
             'privacy_pass' => '/settings/privacy_pass',
+            'development_mode' => '/settings/development_mode',
+            'cache_level' => '/settings/cache_level',
+            'always_online' => '/settings/always_online',
+            'rocket_loader' => '/settings/rocket_loader',
+            'minify' => '/settings/minify',
         ];
         foreach ($endpoints as $key => $path) {
             $resp = $this->request('GET', "/zones/{$this->zoneId}{$path}");
             if ($resp['success'] ?? false) {
-                $settings[$key] = $resp['result']['result']['value'] ?? null;
+                $val = $resp['result']['result']['value'] ?? null;
+                if ($key === 'minify' && is_array($val)) {
+                    $settings['minify_js'] = $val['js'] ?? 'off';
+                    $settings['minify_css'] = $val['css'] ?? 'off';
+                    $settings['minify_html'] = $val['html'] ?? 'off';
+                } else {
+                    $settings[$key] = $val;
+                }
             }
         }
         $botResp = $this->request('GET', "/zones/{$this->zoneId}/bot_management");
@@ -258,6 +270,71 @@ class CloudflareService
             Log::error("Cloudflare API exception: " . $e->getMessage());
             return ['success' => false, 'error' => $e->getMessage()];
         }
+    }
+
+    public function setDevelopmentMode(bool $enabled): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/settings/development_mode", ['value' => $enabled ? 'on' : 'off']);
+    }
+
+    public function setCacheLevel(string $level): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/settings/cache_level", ['value' => $level]);
+    }
+
+    public function setAlwaysOnline(bool $enabled): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/settings/always_online", ['value' => $enabled ? 'on' : 'off']);
+    }
+
+    public function setRocketLoader(bool $enabled): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/settings/rocket_loader", ['value' => $enabled ? 'on' : 'off']);
+    }
+
+    public function setAutoMinify(array $extensions): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        $value = ['js' => in_array('js', $extensions) ? 'on' : 'off', 'css' => in_array('css', $extensions) ? 'on' : 'off', 'html' => in_array('html', $extensions) ? 'on' : 'off'];
+        return $this->request('PATCH', "/zones/{$this->zoneId}/settings/minify", ['value' => $value]);
+    }
+
+    public function getDnsRecordsWithProxy(): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        $resp = $this->request('GET', "/zones/{$this->zoneId}/dns_records?per_page=100");
+        if (!($resp['success'] ?? false)) return $resp;
+        $records = [];
+        foreach ($resp['result']['result'] ?? [] as $r) {
+            $records[] = ['id' => $r['id'], 'name' => $r['name'], 'type' => $r['type'], 'content' => $r['content'], 'proxied' => $r['proxied'] ?? false, 'ttl' => $r['ttl'] ?? 1];
+        }
+        return ['success' => true, 'records' => $records];
+    }
+
+    public function toggleDnsProxy(string $recordId, bool $proxied): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        return $this->request('PATCH', "/zones/{$this->zoneId}/dns_records/{$recordId}", ['proxied' => $proxied]);
+    }
+
+    public function getWafRules(): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        $resp = $this->request('GET', "/zones/{$this->zoneId}/rulesets");
+        if (!($resp['success'] ?? false)) return $resp;
+        return ['success' => true, 'rulesets' => $resp['result']['result'] ?? []];
+    }
+
+    public function getRateLimits(): array
+    {
+        if (!$this->enabled()) return $this->notConfigured();
+        $resp = $this->request('GET', "/zones/{$this->zoneId}/rate_limits?per_page=50");
+        if (!($resp['success'] ?? false)) return $resp;
+        return ['success' => true, 'rules' => $resp['result']['result'] ?? []];
     }
 
     private function notConfigured(): array

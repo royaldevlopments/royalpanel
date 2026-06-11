@@ -7,7 +7,6 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Web Application Firewall Rules</h3>
                 <div class="box-tools">
-                    <a href="{{ route('admin.security.index') }}" class="btn btn-sm btn-default">Back</a>
                 </div>
             </div>
             <form action="{{ route('admin.security.waf.save') }}" method="POST">
