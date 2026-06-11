@@ -140,7 +140,7 @@ class SecurityController extends Controller
         $prefix = 'security:';
         foreach ($settings as $key => $value) {
             config(["security.{$key}" => $value]);
-            $settingKey = $prefix . str_replace(':', '.', $key);
+            $settingKey = $prefix . $key;
             DB::table('settings')->updateOrInsert(
                 ['key' => 'settings::' . $settingKey],
                 ['value' => is_bool($value) ? ($value ? 'true' : 'false') : $value]
