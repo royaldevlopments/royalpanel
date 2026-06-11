@@ -8,7 +8,7 @@
     <h1>Blackhole Protection<small>Null-route server IPs under attack at the network level</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.security') }}">Security</a></li>
+        <li><a href="{{ route('admin.security.index') }}">Security</a></li>
         <li class="active">Blackhole Protection</li>
     </ol>
 @endsection

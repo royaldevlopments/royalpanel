@@ -150,71 +150,123 @@
                                 <i data-lucide="home"></i> <span>Overview</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.settings') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.settings') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings')}}">
                                 <i data-lucide="settings"></i> <span>Settings</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.arix') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.arix') ? 'active' : '' }}">
                             <a href="{{ route('admin.arix')}}">
                                 <i data-lucide="wand-2"></i><span>Royal Editor</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.api') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.api') ? 'active' : '' }}">
                             <a href="{{ route('admin.api.index')}}">
                                 <i data-lucide="webhook"></i> <span>Application API</span>
                             </a>
                         </li>
                         <li class="header">SECURITY</li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security') ?: 'active' }}">
+                        <li class="{{ request()->is('admin/security*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.index') }}">
-                                <i data-lucide="shield-check"></i> <span>Security Center</span>                        </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security.shield') ?: 'active' }}">
+                                <i data-lucide="shield-check"></i> <span>Security Center</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/shield*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.shield') }}">
                                 <i data-lucide="shield"></i> <span>Codenest Shield</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.security.blackhole') ?: 'active' }}">
+                        <li class="{{ request()->is('admin/security/blackhole*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.blackhole') }}">
                                 <i data-lucide="radio"></i> <span>Blackhole Protection</span>
                             </a>
                         </li>
-                        <li
+                        <li class="header">THREAT MANAGEMENT</li>
+                        <li class="{{ request()->is('admin/security/geoip*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.geoip') }}">
+                                <i data-lucide="globe"></i> <span>Country Blocking</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/brute-force*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.brute_force') }}">
+                                <i data-lucide="lock"></i> <span>Brute Force Protection</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/file-integrity*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.file_integrity') }}">
+                                <i data-lucide="file-text"></i> <span>File Integrity Monitor</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/two-factor*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.two_factor') }}">
+                                <i data-lucide="smartphone"></i> <span>2FA Enforcement</span>
+                            </a>
+                        </li>
+                        <li class="header">MONITORING</li>
+                        <li class="{{ request()->is('admin/security/sessions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.sessions') }}">
+                                <i data-lucide="users"></i> <span>Session Manager</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/ip-reputation*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.ip_reputation') }}">
+                                <i data-lucide="search"></i> <span>IP Reputation Checker</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/login-history*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.login_history') }}">
+                                <i data-lucide="clock"></i> <span>Login History</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/scanner*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.scanner') }}">
+                                <i data-lucide="activity"></i> <span>Security Scanner</span>
+                            </a>
+                        </li>
+                        <li class="header">ADVANCED</li>
+                        <li class="{{ request()->is('admin/security/waf*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.waf') }}">
+                                <i data-lucide="filter"></i> <span>WAF Rules</span>
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('admin/security/fail2ban*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.security.fail2ban') }}">
+                                <i data-lucide="terminal"></i> <span>Fail2Ban Integration</span>
                             </a>
                         </li>
                         <li class="header">MANAGEMENT</li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.databases') ? 'active' : '' }}">
                             <a href="{{ route('admin.databases') }}">
                                 <i data-lucide="database"></i> <span>Databases</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.locations') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.locations') ? 'active' : '' }}">
                             <a href="{{ route('admin.locations') }}">
                                 <i data-lucide="globe-2"></i> <span>Locations</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nodes') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.nodes') ? 'active' : '' }}">
                             <a href="{{ route('admin.nodes') }}">
                                 <i data-lucide="server"></i> <span>Nodes</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.servers') ? 'active' : '' }}">
                             <a href="{{ route('admin.servers') }}">
                                 <i data-lucide="terminal-square"></i> <span>Servers</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.users') ? 'active' : '' }}">
                             <a href="{{ route('admin.users') }}">
                                 <i data-lucide="users"></i> <span>Users</span>
                             </a>
                         </li>
                         <li class="header">SERVICE MANAGEMENT</li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.mounts') ? 'active' : '' }}">
                             <a href="{{ route('admin.mounts') }}">
                                 <i data-lucide="folder"></i> <span>Mounts</span>
                             </a>
                         </li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.nests') ?: 'active' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.nests') ? 'active' : '' }}">
                             <a href="{{ route('admin.nests') }}">
                                 <i data-lucide="layout-grid"></i> <span>Nests</span>
                             </a>

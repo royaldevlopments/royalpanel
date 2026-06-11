@@ -14,36 +14,27 @@ use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
 
 class CommandController extends ClientApiController
 {
-    /**
-     * CommandController constructor.
-     */
     public function __construct(private DaemonCommandRepository $repository)
     {
         parent::__construct();
     }
 
-    /**
-     * Send a command to a running server.
-     *
-     * @throws DaemonConnectionException
-     */
     public function index(SendCommandRequest $request, Server $server): Response
     {
+        if ($server->isMaintenanceMode()) {
+            throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException(
+                'Server is in maintenance mode. Commands are disabled.'
+            );
+        }
+
         try {
             $this->repository->setServer($server)->send($request->input('command'));
         } catch (DaemonConnectionException $exception) {
             $previous = $exception->getPrevious();
-
-            if ($previous instanceof BadResponseException) {
-                if ($previous->getResponse()->getStatusCode() === Response::HTTP_BAD_GATEWAY) {
-                    throw new HttpException(Response::HTTP_BAD_GATEWAY, 'Server must be online in order to send commands.', $exception);
-                }
-            }
-
-            throw $exception;
+            throw $previous instanceof HttpException ? $previous : $exception;
         }
 
-        Activity::event('server:console.command')->property('command', $request->input('command'))->log();
+        Activity::event('server:command')->log();
 
         return $this->returnNoContent();
     }

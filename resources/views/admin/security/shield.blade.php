@@ -8,7 +8,7 @@
     <h1>Codenest Shield<small>Unified security protection suite</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li><a href="{{ route('admin.security') }}">Security</a></li>
+        <li><a href="{{ route('admin.security.index') }}">Security</a></li>
         <li class="active">Codenest Shield</li>
     </ol>
 @endsection
@@ -150,7 +150,7 @@
             </div>
             <div class="box-footer">
                 <a href="{{ route('admin.security.detection') }}" class="btn btn-sm btn-primary">View Full Logs</a>
-                <a href="{{ route('admin.security.ipmanagement') }}" class="btn btn-sm btn-default">Manage Blocked IPs</a>
+                <a href="{{ route('admin.security.ip_management') }}" class="btn btn-sm btn-default">Manage Blocked IPs</a>
             </div>
         </div>
     </div>

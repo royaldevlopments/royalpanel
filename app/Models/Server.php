@@ -124,6 +124,7 @@ class Server extends Model implements Identifiable
     public const STATUS_REINSTALL_FAILED = 'reinstall_failed';
     public const STATUS_SUSPENDED = 'suspended';
     public const STATUS_RESTORING_BACKUP = 'restoring_backup';
+    public const STATUS_MAINTENANCE = 'maintenance';
 
     /**
      * The table associated with the model.
@@ -214,12 +215,18 @@ class Server extends Model implements Identifiable
     {
         return $this->status !== self::STATUS_INSTALLING && $this->status !== self::STATUS_INSTALL_FAILED;
     }
-
     public function isSuspended(): bool
     {
         return $this->status === self::STATUS_SUSPENDED;
     }
 
+    public function isMaintenanceMode(): bool
+    {
+        return $this->status === self::STATUS_MAINTENANCE;
+    }
+
+    /**
+     * Gets the user who owns the server.
     /**
      * Gets the user who owns the server.
      *

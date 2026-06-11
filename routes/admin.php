@@ -316,4 +316,24 @@ Route::group(['prefix' => 'security'], function () {
     Route::get("/shield", [Admin\SecurityController::class, "shield"])->name("admin.security.shield");
     Route::post("/shield/arm", [Admin\SecurityController::class, "armShield"])->name("admin.security.shield.arm");
     Route::post("/shield/disarm", [Admin\SecurityController::class, "disarmShield"])->name("admin.security.shield.disarm");
+
+    Route::get("/geoip", [AdminSecurityController::class, "geoip"])->name("admin.security.geoip");
+    Route::post("/geoip/save", [AdminSecurityController::class, "saveGeoip"])->name("admin.security.geoip.save");
+    Route::get("/brute-force", [AdminSecurityController::class, "bruteForce"])->name("admin.security.brute_force");
+    Route::post("/brute-force/save", [AdminSecurityController::class, "saveBruteForce"])->name("admin.security.brute_force.save");
+    Route::get("/file-integrity", [AdminSecurityController::class, "fileIntegrity"])->name("admin.security.file_integrity");
+    Route::post("/file-integrity/scan", [AdminSecurityController::class, "runFileIntegrityScan"])->name("admin.security.file_integrity.scan");
+    Route::get("/two-factor", [AdminSecurityController::class, "twoFactor"])->name("admin.security.two_factor");
+    Route::post("/two-factor/save", [AdminSecurityController::class, "saveTwoFactor"])->name("admin.security.two_factor.save");
+    Route::get("/sessions", [AdminSecurityController::class, "sessions"])->name("admin.security.sessions");
+    Route::post("/sessions/terminate/{sessionId}", [AdminSecurityController::class, "terminateSession"])->name("admin.security.sessions.terminate");
+    Route::get("/ip-reputation", [AdminSecurityController::class, "ipReputation"])->name("admin.security.ip_reputation");
+    Route::post("/ip-reputation/check", [AdminSecurityController::class, "checkIpReputation"])->name("admin.security.ip_reputation.check");
+    Route::get("/login-history", [AdminSecurityController::class, "loginHistory"])->name("admin.security.login_history");
+    Route::get("/scanner", [AdminSecurityController::class, "scanner"])->name("admin.security.scanner");
+    Route::post("/scanner/run", [AdminSecurityController::class, "runScanner"])->name("admin.security.scanner.run");
+    Route::get("/waf", [AdminSecurityController::class, "waf"])->name("admin.security.waf");
+    Route::post("/waf/save", [AdminSecurityController::class, "saveWaf"])->name("admin.security.waf.save");
+    Route::get("/fail2ban", [AdminSecurityController::class, "fail2ban"])->name("admin.security.fail2ban");
+    Route::post("/fail2ban/save", [AdminSecurityController::class, "saveFail2ban"])->name("admin.security.fail2ban.save");
 });

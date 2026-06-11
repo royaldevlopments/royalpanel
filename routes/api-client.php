@@ -152,5 +152,8 @@ Route::group([
         Route::post('/rename', [Client\Servers\SettingsController::class, 'rename']);
         Route::post('/reinstall', [Client\Servers\SettingsController::class, 'reinstall']);
         Route::put('/docker-image', [Client\Servers\SettingsController::class, 'dockerImage']);
+        Route::post('/maintenance', [Client\Servers\SettingsController::class, 'maintenance']);
+        Route::get('/discord-webhook', [Client\Servers\SettingsController::class, 'getDiscordWebhook']);
+        Route::post('/discord-webhook', [Client\Servers\SettingsController::class, 'setDiscordWebhook']);
     });
 });
