@@ -22,7 +22,7 @@
             {!! Theme::css('vendor/select2/select2.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/bootstrap/bootstrap.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/adminlte/admin.min.css?t={cache-version}') !!}
-            {!! Theme::css('vendor/adminlte/colors/skin-purple.min.css?t={cache-version}') !!}
+            {!! Theme::css('vendor/adminlte/colors/skin-blue-light.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
             {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
@@ -89,28 +89,28 @@
             }
 
             :root {
-                --primary: #605ca8;
-                --primary-border: #7b73c9;
+                --primary: #3c8dbc;
+                --primary-border: #4a9fd4;
 
-                --text: #e8e8e8;
-                --text-secondary: #b8b8c8;
+                --text: #333333;
+                --text-secondary: #666666;
 
-                --box: #2d2d3d;
-                --box-header: #2d2d3d;
+                --box: #ffffff;
+                --box-header: #f5f5f5;
                 
-                --active-border: #7b73c9;
-                --active: #3d3a6b;
+                --active-border: #3c8dbc;
+                --active: #eef5f9;
 
-                --input: #2d2d3d;
-                --input-border: #4a4a5a;
+                --input: #ffffff;
+                --input-border: #d2d6de;
 
-                --sidebar: #222d32;
+                --sidebar: #f4f5f7;
 
-                --background: #1a1a2e;
+                --background: #ecf0f5;
             }
         </style>
     </head>
-    <body class="hold-transition skin-purple fixed sidebar-mini">
+    <body class="hold-transition skin-blue-light fixed sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
