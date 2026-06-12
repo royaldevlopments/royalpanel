@@ -22,7 +22,7 @@
             {!! Theme::css('vendor/select2/select2.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/bootstrap/bootstrap.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/adminlte/admin.min.css?t={cache-version}') !!}
-            {!! Theme::css('vendor/adminlte/colors/skin-blue.min.css?t={cache-version}') !!}
+            {!! Theme::css('vendor/adminlte/colors/skin-purple.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
             {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
@@ -89,28 +89,28 @@
             }
 
             :root {
-                --primary: {{ $siteConfiguration['arix']['primary'] }};
-                --primary-border: color-mix(in srgb, var(--primary) 75%, white 25%);
+                --primary: #605ca8;
+                --primary-border: #7b73c9;
 
-                --text: {{ $siteConfiguration['arix']['gray200'] }};
-                --text-secondary: {{ $siteConfiguration['arix']['gray300'] }};
+                --text: #e8e8e8;
+                --text-secondary: #b8b8c8;
 
-                --box: {{ $siteConfiguration['arix']['gray700'] }};
-                --box-header: {{ $siteConfiguration['arix']['gray700'] }};
+                --box: #2d2d3d;
+                --box-header: #2d2d3d;
                 
-                --active-border: {{ $siteConfiguration['arix']['gray500'] }};
-                --active: {{ $siteConfiguration['arix']['gray600'] }};
+                --active-border: #7b73c9;
+                --active: #3d3a6b;
 
-                --input: {{ $siteConfiguration['arix']['gray600'] }};
-                --input-border: {{ $siteConfiguration['arix']['gray500'] }};
+                --input: #2d2d3d;
+                --input-border: #4a4a5a;
 
-                --sidebar: {{ $siteConfiguration['arix']['gray700'] }};
+                --sidebar: #222d32;
 
-                --background: {{ $siteConfiguration['arix']['gray800'] }};
+                --background: #1a1a2e;
             }
         </style>
     </head>
-    <body class="hold-transition skin-blue fixed sidebar-mini">
+    <body class="hold-transition skin-purple fixed sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
@@ -155,7 +155,7 @@
                                 <i data-lucide="settings"></i> <span>Settings</span>
                             </a>
                         </li>
-                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.arix') ? 'active' : '' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.arix')}}">
                                 <i data-lucide="wand-2"></i><span>Royal Editor</span>
                             </a>
