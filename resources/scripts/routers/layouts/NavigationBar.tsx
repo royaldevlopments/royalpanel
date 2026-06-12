@@ -11,8 +11,8 @@ import ServerSelector from '@/components/elements/ServerSelector';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 
 import { 
-    HiOutlineUserCircle, HiOutlineServer, HiOutlineSupport,
-    HiUserCircle, HiServer, HiSupport
+    HiOutlineUserCircle, HiOutlineServer, HiOutlineSupport, HiOutlineShieldCheck,
+    HiUserCircle, HiServer, HiSupport, HiShieldCheck
  } from "react-icons/hi";
 import { LuCircleUser, LuServer, LuLifeBuoy } from "react-icons/lu";
 import {
@@ -90,6 +90,7 @@ export default ({ children }: Props) => {
     const discord = useStoreState((state: ApplicationStore) => state.settings.data!.arix.discord);
     const support = useStoreState((state: ApplicationStore) => state.settings.data!.arix.support);
     const icon = useStoreState((state: ApplicationStore) => state.settings.data!.arix.icon);
+    const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
 
     const darkMode = localStorage.getItem('darkMode') === 'true';
 
@@ -208,6 +209,12 @@ export default ({ children }: Props) => {
                         }
                         {t`account`}
                     </NavLink>
+                    {rootAdmin && (
+                    <a href={'/admin'}>
+                        <HiOutlineShieldCheck className={'text-gray-300 duration-300 w-5'} />
+                        <span>Admin</span>
+                    </a>
+                    )}
                 </div>
                 {children}
             </MobileLinks>

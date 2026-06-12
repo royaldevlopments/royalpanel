@@ -3,8 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { 
-    HiOutlineUserCircle, HiOutlineServer,
-    HiUserCircle, HiServer
+    HiOutlineUserCircle, HiOutlineServer, HiOutlineShieldCheck,
+    HiUserCircle, HiServer, HiShieldCheck
  } from "react-icons/hi";
 import { LuCircleUser, LuServer } from "react-icons/lu";
 import {
@@ -24,6 +24,7 @@ interface Props {
 const SideBar = ({ children, type }: Props) => {
     const { t } = useTranslation('arix/navigation');
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+    const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const layout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.layout);
     const logo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logo);
@@ -124,6 +125,12 @@ const SideBar = ({ children, type }: Props) => {
                     }
                     {t('account')}
                 </NavLink>
+                {rootAdmin && (
+                <a href={'/admin'} className={'flex px-5 py-2 gap-x-2 items-center'}>
+                    <HiOutlineShieldCheck className={'text-lg text-gray-300'} />
+                    <span>Admin</span>
+                </a>
+                )}
             </NavigationLinks>}
             <hr className={'border-b border-gray-500 mx-5'}/>
         </div>

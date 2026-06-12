@@ -22,7 +22,7 @@
             {!! Theme::css('vendor/select2/select2.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/bootstrap/bootstrap.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/adminlte/admin.min.css?t={cache-version}') !!}
-            {!! Theme::css('vendor/adminlte/colors/skin-blue-light.min.css?t={cache-version}') !!}
+            {!! Theme::css('vendor/adminlte/colors/skin-blue.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
             {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
@@ -88,29 +88,29 @@
                 }
             }
 
-            :root {
-                --primary: #3c8dbc;
-                --primary-border: #4a9fd4;
+                        :root {
+                --primary: #4a7c9e;
+                --primary-border: #5a8fae;
 
-                --text: #333333;
-                --text-secondary: #666666;
+                --text: #e0e0e0;
+                --text-secondary: #a0a0b0;
 
-                --box: #ffffff;
-                --box-header: #f5f5f5;
+                --box: #2b2b3a;
+                --box-header: #2b2b3a;
                 
-                --active-border: #3c8dbc;
-                --active: #eef5f9;
+                --active-border: #4a7c9e;
+                --active: #1e3a4a;
 
-                --input: #ffffff;
-                --input-border: #d2d6de;
+                --input: #2b2b3a;
+                --input-border: #3a3a4a;
 
-                --sidebar: #f4f5f7;
+                --sidebar: #1a1a28;
 
-                --background: #ecf0f5;
+                --background: #1a2332;
             }
         </style>
     </head>
-    <body class="hold-transition skin-blue-light fixed sidebar-mini">
+    <body class="hold-transition skin-blue fixed sidebar-mini">
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
@@ -147,123 +147,123 @@
                         <li class="header">BASIC ADMINISTRATION</li>
                         <li class="{{ Route::currentRouteName() !== 'admin.index' ?: 'active' }}">
                             <a href="{{ route('admin.index') }}">
-                                <i data-lucide="home"></i> <span>Overview</span>
+                                <i data-lucide="gauge"></i> <span>Overview</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.settings') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings')}}">
-                                <i data-lucide="settings"></i> <span>Settings</span>
+                                <i data-lucide="cog"></i> <span>Settings</span>
                             </a>
                         </li>
-                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.index') ? 'active' : '' }}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.arix') ? 'active' : '' }}">
                             <a href="{{ route('admin.arix')}}">
-                                <i data-lucide="wand-2"></i><span>Royal Editor</span>
+                                <i data-lucide="palette"></i><span>Royal Editor</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.api') ? 'active' : '' }}">
                             <a href="{{ route('admin.api.index')}}">
-                                <i data-lucide="webhook"></i> <span>Application API</span>
+                                <i data-lucide="key"></i> <span>Application API</span>
                             </a>
                         </li>
                         <li class="header">SECURITY</li>
-                        <li class="{{ request()->is('admin/security*') ? 'active' : '' }}">
+                        <li class="{{ request()->routeIs('admin.security.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.index') }}">
-                                <i data-lucide="shield-check"></i> <span>Security Center</span>
+                                <i data-lucide="shield"></i> <span>Security Center</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/shield*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.shield') }}">
-                                <i data-lucide="shield"></i> <span>Codenest Shield</span>
+                                <i data-lucide="octagon"></i> <span>Codenest Shield</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/blackhole*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.blackhole') }}">
-                                <i data-lucide="radio"></i> <span>Blackhole Protection</span>
+                                <i data-lucide="radar"></i> <span>Blackhole Protection</span>
                             </a>
                         </li>
                         <li class="header">THREAT MANAGEMENT</li>
                         <li class="{{ request()->is('admin/security/geoip*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.geoip') }}">
-                                <i data-lucide="globe"></i> <span>Country Blocking</span>
+                                <i data-lucide="earth-lock"></i> <span>Country Blocking</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/brute-force*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.brute_force') }}">
-                                <i data-lucide="lock"></i> <span>Brute Force Protection</span>
+                                <i data-lucide="shield-off"></i> <span>Brute Force Protection</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/file-integrity*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.file_integrity') }}">
-                                <i data-lucide="file-text"></i> <span>File Integrity Monitor</span>
+                                <i data-lucide="file-check"></i> <span>File Integrity Monitor</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/two-factor*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.two_factor') }}">
-                                <i data-lucide="smartphone"></i> <span>2FA Enforcement</span>
+                                <i data-lucide="fingerprint"></i> <span>2FA Enforcement</span>
                             </a>
                         </li>
                         <li class="header">MONITORING</li>
                         <li class="{{ request()->is('admin/security/sessions*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.sessions') }}">
-                                <i data-lucide="users"></i> <span>Session Manager</span>
+                                <i data-lucide="user-check"></i> <span>Session Manager</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/login-history*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.login_history') }}">
-                                <i data-lucide="clock"></i> <span>Login History</span>
+                                <i data-lucide="history"></i> <span>Login History</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/scanner*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.scanner') }}">
-                                <i data-lucide="activity"></i> <span>Security Scanner</span>
+                                <i data-lucide="scan-eye"></i> <span>Security Scanner</span>
                             </a>
                         </li>
                         <li class="header">ADVANCED</li>
                         <li class="{{ request()->is('admin/security/waf*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.waf') }}">
-                                <i data-lucide="filter"></i> <span>WAF Rules</span>
+                                <i data-lucide="shield-alert"></i> <span>WAF Rules</span>
                             </a>
                         </li>
                         <li class="{{ request()->is('admin/security/fail2ban*') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.fail2ban') }}">
-                                <i data-lucide="terminal"></i> <span>Fail2Ban Integration</span>
+                                <i data-lucide="ban"></i> <span>Fail2Ban Integration</span>
                             </a>
                         </li>
                         <li class="header">MANAGEMENT</li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.databases') ? 'active' : '' }}">
                             <a href="{{ route('admin.databases') }}">
-                                <i data-lucide="database"></i> <span>Databases</span>
+                                <i data-lucide="hard-drive"></i> <span>Databases</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.locations') ? 'active' : '' }}">
                             <a href="{{ route('admin.locations') }}">
-                                <i data-lucide="globe-2"></i> <span>Locations</span>
+                                <i data-lucide="map-pin"></i> <span>Locations</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.nodes') ? 'active' : '' }}">
                             <a href="{{ route('admin.nodes') }}">
-                                <i data-lucide="server"></i> <span>Nodes</span>
+                                <i data-lucide="cpu"></i> <span>Nodes</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.servers') ? 'active' : '' }}">
                             <a href="{{ route('admin.servers') }}">
-                                <i data-lucide="terminal-square"></i> <span>Servers</span>
+                                <i data-lucide="monitor"></i> <span>Servers</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.users') ? 'active' : '' }}">
                             <a href="{{ route('admin.users') }}">
-                                <i data-lucide="users"></i> <span>Users</span>
+                                <i data-lucide="user-circle"></i> <span>Users</span>
                             </a>
                         </li>
                         <li class="header">SERVICE MANAGEMENT</li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.mounts') ? 'active' : '' }}">
                             <a href="{{ route('admin.mounts') }}">
-                                <i data-lucide="folder"></i> <span>Mounts</span>
+                                <i data-lucide="briefcase"></i> <span>Mounts</span>
                             </a>
                         </li>
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.nests') ? 'active' : '' }}">
                             <a href="{{ route('admin.nests') }}">
-                                <i data-lucide="layout-grid"></i> <span>Nests</span>
+                                <i data-lucide="layers"></i> <span>Nests</span>
                             </a>
                         </li>
                     </ul>
@@ -361,3 +361,29 @@
         @show
     </body>
 </html>
+
+            .main-sidebar, .left-side {
+                background-color: #1a1a28 !important;
+            }
+            .sidebar-menu > li.header {
+                color: #d0e4f0 !important;
+            }
+            .sidebar-menu > li > a {
+                color: #e0e8f0 !important;
+            }
+            .sidebar-menu > li > a:hover {
+                background: rgba(0,0,0,0.1) !important;
+            }
+            .sidebar-menu > li.active > a {
+                background: rgba(0,0,0,0.15) !important;
+                border-left-color: #fff !important;
+            }
+            .skin-blue .sidebar a {
+                color: #e0e8f0;
+            }
+            .skin-blue .treeview-menu > li > a {
+                color: #c8d8e8;
+            }
+            .skin-blue .treeview-menu > li.active > a {
+                color: #fff;
+            }
