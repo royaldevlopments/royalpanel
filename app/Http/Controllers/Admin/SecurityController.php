@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin;
+namespace RoyalPanel\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Services\Security\CloudflareService;
-use Pterodactyl\Services\Security\IpBlockService;
-use Pterodactyl\Services\Security\AttackDetector;
-use Pterodactyl\Services\Security\HoneypotService;
-use Pterodactyl\Services\Security\AutoAttackResponseService;
-use Pterodactyl\Services\Security\OriginProtectionService;
-use Pterodactyl\Services\Security\ServerProtectionService;
-use Pterodactyl\Services\Security\BlackholeProtectionService;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Services\Security\CloudflareService;
+use RoyalPanel\Services\Security\IpBlockService;
+use RoyalPanel\Services\Security\AttackDetector;
+use RoyalPanel\Services\Security\HoneypotService;
+use RoyalPanel\Services\Security\AutoAttackResponseService;
+use RoyalPanel\Services\Security\OriginProtectionService;
+use RoyalPanel\Services\Security\ServerProtectionService;
+use RoyalPanel\Services\Security\BlackholeProtectionService;
+use RoyalPanel\Contracts\Repository\SettingsRepositoryInterface;
 
 class SecurityController extends Controller
 {
@@ -559,7 +559,7 @@ class SecurityController extends Controller
 
     public function fileIntegrity(): View
     {
-        $service = app(\Pterodactyl\Services\Security\FileIntegrityService::class);
+        $service = app(\RoyalPanel\Services\Security\FileIntegrityService::class);
         $results = $service->getResults();
         $stats = $service->getStats();
         return view('admin.security.file-integrity', compact('results', 'stats'));
@@ -567,7 +567,7 @@ class SecurityController extends Controller
 
     public function runFileIntegrityScan(): \Illuminate\Http\RedirectResponse
     {
-        $service = app(\Pterodactyl\Services\Security\FileIntegrityService::class);
+        $service = app(\RoyalPanel\Services\Security\FileIntegrityService::class);
         $service->scan();
         return redirect()->back()->with('success', 'File integrity scan completed.');
     }

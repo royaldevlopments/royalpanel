@@ -34,8 +34,8 @@ const shouldDisplayRoute = (route: any, nestId?: number, eggId?: number): boolea
     return hasNestMatch || hasEggMatch || hasNoRestrictions;
 };
 
-const useArixSettings = () => {
-    const { dashboardPage, icon } = useStoreState((state: ApplicationStore) => state.settings.data!.arix);
+const useRoyalSettings = () => {
+    const { dashboardPage, icon } = useStoreState((state: ApplicationStore) => state.settings.data!.royal);
     const isDashboardDisabled = String(dashboardPage) === 'false';
     return { isDashboardDisabled, icon };
 };
@@ -64,8 +64,8 @@ const renderIcon = (route: any, iconType: string) => {
 };
 
 const NavItem = ({ route }: { route: any }) => {
-    const { t } = useTranslation('arix/navigation');
-    const { isDashboardDisabled, icon } = useArixSettings();
+    const { t } = useTranslation('royal/navigation');
+    const { isDashboardDisabled, icon } = useRoyalSettings();
     const { nestId, eggId } = useServerIds();
     const buildPath = usePathBuilder();
 
@@ -87,7 +87,7 @@ const NavItem = ({ route }: { route: any }) => {
 };
 
 const NavItemWrapper = ({ route }: { route: any }) => {
-    const { isDashboardDisabled } = useArixSettings();
+    const { isDashboardDisabled } = useRoyalSettings();
     
     if (route.path === '/' && isDashboardDisabled) return null;
 
@@ -128,7 +128,7 @@ const NavigationSection = ({ label, routes }: { label: string; routes: any[] }) 
 };
 
 export const SubNavigationLinks = () => {
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
 
     return (
         <>
@@ -140,7 +140,7 @@ export const SubNavigationLinks = () => {
 };
 
 export const Navigation = () => {
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
 
     return (
         <>
@@ -153,7 +153,7 @@ export const Navigation = () => {
 
 export const ComponentLoader = () => {
     const location = useLocation();
-    const { isDashboardDisabled } = useArixSettings();
+    const { isDashboardDisabled } = useRoyalSettings();
     const { nestId, eggId } = useServerIds();
     const buildPath = usePathBuilder();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Services\Locations;
+namespace RoyalPanel\Services\Locations;
 
-use Pterodactyl\Models\Location;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
+use RoyalPanel\Models\Location;
+use RoyalPanel\Contracts\Repository\LocationRepositoryInterface;
 
 class LocationCreationService
 {
@@ -17,7 +17,7 @@ class LocationCreationService
     /**
      * Create a new location.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
      */
     public function handle(array $data): Location
     {

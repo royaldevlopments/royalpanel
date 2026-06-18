@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Extensions;
+namespace RoyalPanel\Extensions;
 
 use Illuminate\Support\Arr;
 use Hashids\Hashids as VendorHashids;
-use Pterodactyl\Contracts\Extensions\HashidsInterface;
+use RoyalPanel\Contracts\Extensions\HashidsInterface;
 
 class Hashids extends VendorHashids implements HashidsInterface
 {

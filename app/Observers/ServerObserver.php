@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Observers;
+namespace RoyalPanel\Observers;
 
-use Pterodactyl\Events;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Events;
+use RoyalPanel\Models\Server;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class ServerObserver

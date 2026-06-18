@@ -51,7 +51,7 @@ interface FileDropdownMenuProps {
 }
 
 const FileDropdownMenu = ({ file, path, onRefresh }: FileDropdownMenuProps) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const onClickRef = useRef<DropdownMenu>(null);
     const [showSpinner, setShowSpinner] = useState(false);
     const [modal, setModal] = useState<ModalType | null>(null);
@@ -61,7 +61,7 @@ const FileDropdownMenu = ({ file, path, onRefresh }: FileDropdownMenuProps) => {
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearAndAddHttpError, clearFlashes } = useFlash();
 
-    useEventListener(`pterodactyl:files:ctx:${file.key}`, (e: CustomEvent) => {
+    useEventListener(`royalpanel:files:ctx:${file.key}`, (e: CustomEvent) => {
         if(path === '/') {
             setDirectory(dirname(path) || '/');
         }

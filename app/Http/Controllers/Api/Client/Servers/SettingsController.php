@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Client\Servers;
+namespace RoyalPanel\Http\Controllers\Api\Client\Servers;
 
 use Illuminate\Http\Response;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Server;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Facades\Activity;
-use Pterodactyl\Repositories\Eloquent\ServerRepository;
-use Pterodactyl\Services\Servers\ReinstallServerService;
-use Pterodactyl\Http\Controllers\Api\Client\ClientApiController;
+use RoyalPanel\Facades\Activity;
+use RoyalPanel\Repositories\Eloquent\ServerRepository;
+use RoyalPanel\Services\Servers\ReinstallServerService;
+use RoyalPanel\Http\Controllers\Api\Client\ClientApiController;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Settings\RenameServerRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Settings\SetDockerImageRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Settings\ReinstallServerRequest;
-use Pterodactyl\Models\ServerDiscordWebhook;
-use Pterodactyl\Services\Discord\DiscordWebhookService;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Settings\RenameServerRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Settings\SetDockerImageRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Settings\ReinstallServerRequest;
+use RoyalPanel\Models\ServerDiscordWebhook;
+use RoyalPanel\Services\Discord\DiscordWebhookService;
 
 class SettingsController extends ClientApiController
 {

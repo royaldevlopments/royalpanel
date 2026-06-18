@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Repositories\Eloquent;
+namespace RoyalPanel\Repositories\Eloquent;
 
-use Pterodactyl\Models\Setting;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use RoyalPanel\Models\Setting;
+use RoyalPanel\Contracts\Repository\SettingsRepositoryInterface;
 
 class SettingsRepository extends EloquentRepository implements SettingsRepositoryInterface
 {
@@ -22,7 +22,7 @@ class SettingsRepository extends EloquentRepository implements SettingsRepositor
     /**
      * Store a new persistent setting in the database.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
      */
     public function set(string $key, ?string $value = null)
     {

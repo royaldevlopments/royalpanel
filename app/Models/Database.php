@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Pterodactyl\Contracts\Extensions\HashidsInterface;
+use RoyalPanel\Contracts\Extensions\HashidsInterface;
 
 /**
  * @property int $id
@@ -95,7 +95,7 @@ class Database extends Model
     /**
      * Gets the host database server associated with a database.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\DatabaseHost, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\DatabaseHost, $this>
      */
     public function host(): BelongsTo
     {
@@ -105,7 +105,7 @@ class Database extends Model
     /**
      * Gets the server associated with a database.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\Server, $this>
      */
     public function server(): BelongsTo
     {

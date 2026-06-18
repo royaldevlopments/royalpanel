@@ -6,7 +6,7 @@ return [
     |--------------------------------------------------------------------------
     | Application Version
     |--------------------------------------------------------------------------
-    | This value is set when creating a Pterodactyl release. You should not
+    | This value is set when creating a RoyalPanel release. You should not
     | change this value if you are not maintaining your own internal versions.
     */
 
@@ -14,13 +14,13 @@ return [
     
     /*
     |--------------------------------------------------------------------------
-    | Arix Theme Version
+    | Royal Theme Version
     |--------------------------------------------------------------------------
-    | This value is set when creating an Arix Theme release. You should not
+    | This value is set when creating an Royal Theme release. You should not
     | change this value if you are not maintaining your own internal versions.
     */
 
-    'arix' => '2.0.7',
+    'royal' => '2.0.7',
 
     /*
     |--------------------------------------------------------------------------
@@ -200,17 +200,17 @@ return [
         /*
          * Application Service Providers...
          */
-        Pterodactyl\Providers\ActivityLogServiceProvider::class,
-        Pterodactyl\Providers\AppServiceProvider::class,
-        Pterodactyl\Providers\AuthServiceProvider::class,
-        Pterodactyl\Providers\BackupsServiceProvider::class,
-        Pterodactyl\Providers\BladeServiceProvider::class,
-        Pterodactyl\Providers\EventServiceProvider::class,
-        Pterodactyl\Providers\HashidsServiceProvider::class,
-        Pterodactyl\Providers\RouteServiceProvider::class,
-        Pterodactyl\Providers\RepositoryServiceProvider::class,
-        Pterodactyl\Providers\ViewComposerServiceProvider::class,
-        Pterodactyl\Providers\SecurityServiceProvider::class,
+        RoyalPanel\Providers\ActivityLogServiceProvider::class,
+        RoyalPanel\Providers\AppServiceProvider::class,
+        RoyalPanel\Providers\AuthServiceProvider::class,
+        RoyalPanel\Providers\BackupsServiceProvider::class,
+        RoyalPanel\Providers\BladeServiceProvider::class,
+        RoyalPanel\Providers\EventServiceProvider::class,
+        RoyalPanel\Providers\HashidsServiceProvider::class,
+        RoyalPanel\Providers\RouteServiceProvider::class,
+        RoyalPanel\Providers\RepositoryServiceProvider::class,
+        RoyalPanel\Providers\ViewComposerServiceProvider::class,
+        RoyalPanel\Providers\SecurityServiceProvider::class,
 
         /*
          * Additional Dependencies
@@ -233,11 +233,11 @@ return [
         'Alert' => Prologue\Alerts\Facades\Alert::class,
         'Carbon' => Carbon\Carbon::class,
         'JavaScript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
-        'Theme' => Pterodactyl\Extensions\Facades\Theme::class,
+        'Theme' => RoyalPanel\Extensions\Facades\Theme::class,
 
         // Custom Facades
-        'Activity' => Pterodactyl\Facades\Activity::class,
-        'LogBatch' => Pterodactyl\Facades\LogBatch::class,
-        'LogTarget' => Pterodactyl\Facades\LogTarget::class,
+        'Activity' => RoyalPanel\Facades\Activity::class,
+        'LogBatch' => RoyalPanel\Facades\LogBatch::class,
+        'LogTarget' => RoyalPanel\Facades\LogTarget::class,
     ])->toArray(),
 ];

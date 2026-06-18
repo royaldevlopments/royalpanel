@@ -1,8 +1,8 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client;
+namespace RoyalPanel\Http\Requests\Api\Client;
 
-use Pterodactyl\Models\ServerOrder;
+use RoyalPanel\Models\ServerOrder;
 
 class UpdateServerOrderRequest extends ClientApiRequest
 {

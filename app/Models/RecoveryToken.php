@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -27,7 +27,7 @@ class RecoveryToken extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\User, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\User, $this>
      */
     public function user(): BelongsTo
     {

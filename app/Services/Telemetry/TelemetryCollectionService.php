@@ -1,22 +1,22 @@
 <?php
 
-namespace Pterodactyl\Services\Telemetry;
+namespace RoyalPanel\Services\Telemetry;
 
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Arr;
-use Pterodactyl\Models\Egg;
-use Pterodactyl\Models\Nest;
-use Pterodactyl\Models\Node;
-use Pterodactyl\Models\User;
-use Pterodactyl\Models\Mount;
-use Pterodactyl\Models\Backup;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Location;
+use RoyalPanel\Models\Egg;
+use RoyalPanel\Models\Nest;
+use RoyalPanel\Models\Node;
+use RoyalPanel\Models\User;
+use RoyalPanel\Models\Mount;
+use RoyalPanel\Models\Backup;
+use RoyalPanel\Models\Server;
+use RoyalPanel\Models\Location;
 use Illuminate\Support\Facades\DB;
-use Pterodactyl\Models\Allocation;
+use RoyalPanel\Models\Allocation;
 use Illuminate\Support\Facades\Http;
-use Pterodactyl\Repositories\Eloquent\SettingsRepository;
-use Pterodactyl\Repositories\Wings\DaemonConfigurationRepository;
+use RoyalPanel\Repositories\Eloquent\SettingsRepository;
+use RoyalPanel\Repositories\Wings\DaemonConfigurationRepository;
 
 class TelemetryCollectionService
 {
@@ -40,13 +40,13 @@ class TelemetryCollectionService
             return;
         }
 
-        Http::post('https://telemetry.pterodactyl.io', $data);
+        Http::post('https://telemetry.royalpanel.io', $data);
     }
 
     /**
      * Collects telemetry data and returns it as an array.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
      */
     public function collect(): array
     {

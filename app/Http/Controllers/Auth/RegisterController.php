@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Auth;
+namespace RoyalPanel\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Pterodactyl\Models\User;
+use RoyalPanel\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -23,7 +23,7 @@ class RegisterController extends AbstractRegisterController
     /**
      * Handle a register request to the application.
      *
-     * @throws \Pterodactyl\Exceptions\DisplayException
+     * @throws \RoyalPanel\Exceptions\DisplayException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function register(Request $request): JsonResponse

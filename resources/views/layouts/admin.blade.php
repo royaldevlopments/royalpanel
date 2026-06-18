@@ -25,7 +25,7 @@
             {!! Theme::css('vendor/adminlte/colors/skin-blue.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
-            {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
+            {!! Theme::css('css/royalpanel.css?t={cache-version}') !!}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
             <style>
@@ -47,17 +47,17 @@
         @show
 
         <style>
-            .arix{
+            .royal{
                 position: relative;
                 font-weight: 500;
                 color: #ffffff;
                 overflow: hidden;
                 z-index: 2;
             }
-            .arix a{
+            .royal a{
                 background-color: transparent !important;
             }
-            .arix::after {
+            .royal::after {
                 opacity: 1;
                 content: '';
                 position: absolute;
@@ -66,17 +66,17 @@
                 background: #EEAECA;
                 filter: blur(20px);
                 background: linear-gradient(225deg,rgba(238, 174, 202, 1) 0%, rgba(125, 107, 242, 1) 25%, rgba(74, 53, 207, 1) 50%, rgba(53, 138, 207, 1) 75%, rgba(53, 207, 125, 1) 100%);
-                animation: arixAnimationNav 10s infinite linear;
+                animation: royalAnimationNav 10s infinite linear;
                 transition: 0.3s;
             }
-            .arix:hover::after{
+            .royal:hover::after{
                 opacity: 0.7;
             }
-            .arix span, .arix svg {
+            .royal span, .royal svg {
                 font-weight: 500;
                 color: #ffffff;
             }
-            @keyframes arixAnimationNav {
+            @keyframes royalAnimationNav {
                 0%, 100% {
                     transform: scale(3) rotate(0deg) translateX(-25%) translateY(10px);
                 }
@@ -155,8 +155,8 @@
                                 <i data-lucide="cog"></i> <span>Settings</span>
                             </a>
                         </li>
-                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.arix') ? 'active' : '' }}">
-                            <a href="{{ route('admin.arix')}}">
+                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.royal') ? 'active' : '' }}">
+                            <a href="{{ route('admin.royal')}}">
                                 <i data-lucide="palette"></i><span>Royal Editor</span>
                             </a>
                         </li>

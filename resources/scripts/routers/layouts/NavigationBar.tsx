@@ -49,7 +49,7 @@ const MobileLinks = styled.div`
                 ${tw`text-gray-50`};
 
                 & > svg{
-                    ${tw`text-arix`}
+                    ${tw`text-royal`}
                 }
             }
         }
@@ -78,18 +78,18 @@ export default ({ children }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [guildData, setGuildData] = useState<{ instant_invite: string } | null>(null);
 
-    const { t } = useTranslation(['arix/navigation']);
+    const { t } = useTranslation(['royal/navigation']);
 
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.layout);
-    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logo);
-    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoLight);
-    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoHeight);
-    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.fullLogo);
-    const searchComponent = useStoreState((state: ApplicationStore) => state.settings.data!.arix.searchComponent);
-    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.arix.discord);
-    const support = useStoreState((state: ApplicationStore) => state.settings.data!.arix.support);
-    const icon = useStoreState((state: ApplicationStore) => state.settings.data!.arix.icon);
+    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.royal.layout);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logo);
+    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoLight);
+    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoHeight);
+    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.fullLogo);
+    const searchComponent = useStoreState((state: ApplicationStore) => state.settings.data!.royal.searchComponent);
+    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.royal.discord);
+    const support = useStoreState((state: ApplicationStore) => state.settings.data!.royal.support);
+    const icon = useStoreState((state: ApplicationStore) => state.settings.data!.royal.icon);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
 
     const darkMode = localStorage.getItem('darkMode') === 'true';

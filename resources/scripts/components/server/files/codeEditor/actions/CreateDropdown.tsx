@@ -6,7 +6,7 @@ import CreateFile from "./CreateFile";
 import { useTranslation } from "react-i18next";
 
 export default function CreateDropdown({ onRefresh }: { onRefresh?: () => void }) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uploadRef = useRef<HTMLDivElement | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 

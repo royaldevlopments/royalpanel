@@ -24,7 +24,7 @@ import CodemirrorEditor from '@/components/elements/CodemirrorEditor';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const [error, setError] = useState('');
     const { action } = useParams<{ action: 'new' | string }>();
     const [loading, setLoading] = useState(action === 'edit');

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Exceptions\Service\Allocation;
+namespace RoyalPanel\Exceptions\Service\Allocation;
 
-use Pterodactyl\Exceptions\PterodactylException;
+use RoyalPanel\Exceptions\RoyalPanelException;
 
-class AllocationDoesNotBelongToServerException extends PterodactylException
+class AllocationDoesNotBelongToServerException extends RoyalPanelException
 {
 }

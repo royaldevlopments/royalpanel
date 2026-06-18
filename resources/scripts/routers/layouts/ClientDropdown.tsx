@@ -19,9 +19,9 @@ const ClientDropdown = ({ sideBar }: Dropdown) => {
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const onClickRef = useRef<DropdownMenu>(null);
     
-    const { t } = useTranslation(['arix/navigation']);
+    const { t } = useTranslation(['royal/navigation']);
 
-    const modeToggler = useStoreState((state: ApplicationStore) => state.settings.data!.arix.modeToggler);
+    const modeToggler = useStoreState((state: ApplicationStore) => state.settings.data!.royal.modeToggler);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const ClientDropdown = ({ sideBar }: Dropdown) => {
                 <SpinnerOverlay visible={isLoggingOut} />
                 {rootAdmin && (
                     <>
-                    <DropdownLinkRow href="/admin/arix" className="bg-arix !text-white">
+                    <DropdownLinkRow href="/admin/royal" className="bg-royal !text-white">
                         <ColorSwatchIcon className="w-5 !text-white" /> Theme Editor
                     </DropdownLinkRow>
                     <DropdownLinkRow href="/admin">

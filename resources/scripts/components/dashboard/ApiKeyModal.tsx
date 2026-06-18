@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ApiKeyModal = ({ apiKey }: Props) => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const { dismiss } = useContext(ModalContext);
 
     return (

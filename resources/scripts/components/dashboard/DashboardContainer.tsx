@@ -75,7 +75,7 @@ const SortableServerCard = ({ server, index, renderServerCard }: { server: Serve
 };
 
 export default () => {
-    const { t } = useTranslation('arix/dashboard');
+    const { t } = useTranslation('royal/dashboard');
     const { search } = useLocation();
     const defaultPage = Number(new URLSearchParams(search).get('page') || '1');
     const [guildData, setGuildData] = useState<{ instant_invite: string, presence_count: number } | null>(null);
@@ -85,11 +85,11 @@ export default () => {
     const uuid = useStoreState((state) => state.user.data!.uuid);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [showOnlyAdmin, setShowOnlyAdmin] = usePersistedState(`${uuid}:show_all_servers`, false);
-    const discordBox = useStoreState((state: ApplicationStore) => state.settings.data!.arix.discordBox);
-    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.arix.discord);
-    const socials = useStoreState((state: ApplicationStore) => state.settings.data!.arix.socials);
-    const socialButtons = useStoreState((state: ApplicationStore) => state.settings.data!.arix.socialButtons);
-    const serverRow = useStoreState((state: ApplicationStore) => state.settings.data!.arix.serverRow);
+    const discordBox = useStoreState((state: ApplicationStore) => state.settings.data!.royal.discordBox);
+    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.royal.discord);
+    const socials = useStoreState((state: ApplicationStore) => state.settings.data!.royal.socials);
+    const socialButtons = useStoreState((state: ApplicationStore) => state.settings.data!.royal.socialButtons);
+    const serverRow = useStoreState((state: ApplicationStore) => state.settings.data!.royal.serverRow);
 
     const [sortedServers, setSortedServers] = useState<Server[]>([]);
 
@@ -270,7 +270,7 @@ export default () => {
                                     </p>
                                     <span className={'font-light text-sm text-gray-200'}>{social.description}</span>
                                 </div>
-                                <IconComponent className={'text-[2.5rem] text-arix'}/>
+                                <IconComponent className={'text-[2.5rem] text-royal'}/>
                             </a>
                         );
                     })}

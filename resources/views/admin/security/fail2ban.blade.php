@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Jail Log Path (e.g. /var/www/pterodactyl/storage/logs/laravel.log)</label>
+                        <label>Jail Log Path (e.g. /var/www/royalpanel/storage/logs/laravel.log)</label>
                         <input type="text" name="log_path" class="form-control" value="{{ config('security.fail2ban.log_path', storage_path('logs/laravel.log')) }}">
                     </div>
                 </div>

@@ -26,7 +26,7 @@ interface DirectoryBrowserProps {
 }
 
 const DirectoryBrowser: React.FC<DirectoryBrowserProps> = ({ currentDirectory, selectedPath, onPathSelect }) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const [browsePath, setBrowsePath] = useState(currentDirectory);
     const [directories, setDirectories] = useState<FileObject[]>([]);
@@ -115,7 +115,7 @@ const DirectoryBrowser: React.FC<DirectoryBrowserProps> = ({ currentDirectory, s
 const MoveFileDialog = asDialog({
     title: 'Move Files',
 })(({ files, path, onRefresh }: { files: string[]; path?: string; onRefresh?: () => void }) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { mutate } = useFileManagerSwr();
     const { clearFlashes, clearAndAddHttpError } = useFlash();

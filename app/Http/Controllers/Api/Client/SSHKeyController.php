@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Client;
+namespace RoyalPanel\Http\Controllers\Api\Client;
 
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Facades\Activity;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
-use Pterodactyl\Transformers\Api\Client\UserSSHKeyTransformer;
-use Pterodactyl\Http\Requests\Api\Client\Account\StoreSSHKeyRequest;
+use RoyalPanel\Facades\Activity;
+use RoyalPanel\Http\Requests\Api\Client\ClientApiRequest;
+use RoyalPanel\Transformers\Api\Client\UserSSHKeyTransformer;
+use RoyalPanel\Http\Requests\Api\Client\Account\StoreSSHKeyRequest;
 
 class SSHKeyController extends ClientApiController
 {

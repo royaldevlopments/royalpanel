@@ -69,7 +69,7 @@ interface Props {
 }
 
 export default ({ fullConsole }: Props) => {
-    const { t } = useTranslation('arix/server/console');
+    const { t } = useTranslation('royal/server/console');
     const [consoleLog, setConsoleLog] = useState<LogEntry[]>([]);
     const logBufferRef = useRef<LogEntry[]>([]);
     const [logFilter, setLogFilter] = useState<LogLevel | null>(null);
@@ -142,7 +142,7 @@ export default ({ fullConsole }: Props) => {
         addLog(
             (prelude ? TERMINAL_PRELUDE : '') +
             line
-                .replace('container@pterodactyl~ ', TERMINAL_PRELUDE)
+                .replace('container@royalpanel~ ', TERMINAL_PRELUDE)
                 .replace('[Royal Daemon]:', TERMINAL_DAEMON)
                 .replace(/(?:\r\n|\r|\n)$/im, '') +
             '\u001b[0m'
@@ -296,7 +296,7 @@ export default ({ fullConsole }: Props) => {
             const responseData = await response.json();
             await copy(responseData['url']);
             if (localStorage.getItem('panelSounds') === 'true'){
-                const copySound = new Audio('/arix/copy.mp3');
+                const copySound = new Audio('/royal/copy.mp3');
                 copySound.volume = 0.2;
                 copySound.play();
             }

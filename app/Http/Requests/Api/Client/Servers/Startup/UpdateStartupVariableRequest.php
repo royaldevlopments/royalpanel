@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client\Servers\Startup;
+namespace RoyalPanel\Http\Requests\Api\Client\Servers\Startup;
 
-use Pterodactyl\Models\Permission;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
+use RoyalPanel\Models\Permission;
+use RoyalPanel\Http\Requests\Api\Client\ClientApiRequest;
 
 class UpdateStartupVariableRequest extends ClientApiRequest
 {

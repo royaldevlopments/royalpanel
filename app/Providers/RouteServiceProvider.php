@@ -1,16 +1,16 @@
 <?php
 
-namespace Pterodactyl\Providers;
+namespace RoyalPanel\Providers;
 
 use Illuminate\Http\Request;
-use Pterodactyl\Models\Database;
-use Pterodactyl\Enum\ResourceLimit;
+use RoyalPanel\Models\Database;
+use RoyalPanel\Enum\ResourceLimit;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
-use Pterodactyl\Http\Middleware\TrimStrings;
-use Pterodactyl\Http\Middleware\AdminAuthenticate;
-use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
+use RoyalPanel\Http\Middleware\TrimStrings;
+use RoyalPanel\Http\Middleware\AdminAuthenticate;
+use RoyalPanel\Http\Middleware\RequireTwoFactorAuthentication;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider

@@ -53,7 +53,7 @@ function FileRow({ file, path, onFileSelect, refreshKey, expandedPaths, onToggle
             <div
                 onContextMenu={(e) => {
                     e.preventDefault();
-                    window.dispatchEvent(new CustomEvent(`pterodactyl:files:ctx:${file.key}`, { detail: { clientX: e.clientX, clientY: e.clientY } }));
+                    window.dispatchEvent(new CustomEvent(`royalpanel:files:ctx:${file.key}`, { detail: { clientX: e.clientX, clientY: e.clientY } }));
                 }} 
                 className='flex items-center whitespace-nowrap gap-x-2 px-2 py-2 after:absolute after:opacity-0 after:duration-300 hover:after:opacity-100 after:-z-10 after:content-[""] after:h-10 after:bg-gray-600 after:w-full after:right-0 cursor-pointer'
             >
@@ -80,7 +80,7 @@ function FileRow({ file, path, onFileSelect, refreshKey, expandedPaths, onToggle
             <div 
                 onContextMenu={(e) => {
                     e.preventDefault();
-                    window.dispatchEvent(new CustomEvent(`pterodactyl:files:ctx:${file.key}`, { detail: { clientX: e.clientX, clientY: e.clientY } }));
+                    window.dispatchEvent(new CustomEvent(`royalpanel:files:ctx:${file.key}`, { detail: { clientX: e.clientX, clientY: e.clientY } }));
                 }}
                 className='flex items-center whitespace-nowrap gap-x-2 px-2 py-2 after:absolute after:opacity-0 after:duration-300 hover:after:opacity-100 after:-z-10 after:content-[""] after:h-10 after:bg-gray-600 after:w-full after:right-0 cursor-pointer'
                 onClick={handleClick}
@@ -119,7 +119,7 @@ interface DirectoryContentsProps {
 }
 
 function DirectoryContents({ path, onFileSelect, refreshKey, expandedPaths, onToggleExpand, onRefresh }: DirectoryContentsProps) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const [files, setFiles] = useState<FileObject[]>([]);
     const [loading, setLoading] = useState(true);
@@ -170,7 +170,7 @@ function DirectoryContents({ path, onFileSelect, refreshKey, expandedPaths, onTo
 }
 
 export default function LoadFiles({ onFileSelect, refreshKey, expandedPaths, onToggleExpand, onRefresh }: LoadFilesProps) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const [files, setFiles] = useState<FileObject[]>([]);
     const [loading, setLoading] = useState(true);

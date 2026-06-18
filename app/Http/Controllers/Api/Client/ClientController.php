@@ -1,17 +1,17 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Client;
+namespace RoyalPanel\Http\Controllers\Api\Client;
 
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\ServerOrder;
-use Pterodactyl\Models\Permission;
+use RoyalPanel\Models\Server;
+use RoyalPanel\Models\ServerOrder;
+use RoyalPanel\Models\Permission;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use Pterodactyl\Models\Filters\MultiFieldServerFilter;
-use Pterodactyl\Transformers\Api\Client\ServerTransformer;
-use Pterodactyl\Transformers\Api\Client\ServerOrderTransformer;
-use Pterodactyl\Http\Requests\Api\Client\GetServersRequest;
-use Pterodactyl\Http\Requests\Api\Client\UpdateServerOrderRequest;
+use RoyalPanel\Models\Filters\MultiFieldServerFilter;
+use RoyalPanel\Transformers\Api\Client\ServerTransformer;
+use RoyalPanel\Transformers\Api\Client\ServerOrderTransformer;
+use RoyalPanel\Http\Requests\Api\Client\GetServersRequest;
+use RoyalPanel\Http\Requests\Api\Client\UpdateServerOrderRequest;
 
 class ClientController extends ClientApiController
 {

@@ -21,7 +21,7 @@ interface Values {
 }
 
 export default () => {
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
     const ref = useRef<Reaptcha>(null);
     const turnstile = useTurnstile();
     const [token, setToken] = useState('');

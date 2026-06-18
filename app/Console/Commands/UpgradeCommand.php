@@ -1,15 +1,15 @@
 <?php
 
-namespace Pterodactyl\Console\Commands;
+namespace RoyalPanel\Console\Commands;
 
 use Illuminate\Console\Command;
-use Pterodactyl\Console\Kernel;
+use RoyalPanel\Console\Kernel;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 class UpgradeCommand extends Command
 {
-    protected const DEFAULT_URL = 'https://github.com/pterodactyl/panel/releases/%s/panel.tar.gz';
+    protected const DEFAULT_URL = 'https://github.com/royalpanel/panel/releases/%s/panel.tar.gz';
 
     protected $signature = 'p:upgrade
         {--user= : The user that PHP runs under. All files will be owned by this user.}
@@ -173,7 +173,7 @@ class UpgradeCommand extends Command
         });
 
         $this->newLine(2);
-        $this->info('Panel has been successfully upgraded. Please ensure you also update any Wings instances: https://pterodactyl.io/wings/1.0/upgrading.html');
+        $this->info('Panel has been successfully upgraded. Please ensure you also update any Wings instances: https://royalpanel.io/wings/1.0/upgrading.html');
     }
 
     protected function withProgress(ProgressBar $bar, \Closure $callback)

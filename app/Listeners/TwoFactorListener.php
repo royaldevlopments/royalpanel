@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Listeners;
+namespace RoyalPanel\Listeners;
 
-use Pterodactyl\Facades\Activity;
+use RoyalPanel\Facades\Activity;
 use Illuminate\Contracts\Events\Dispatcher;
-use Pterodactyl\Events\Auth\ProvidedAuthenticationToken;
-use Pterodactyl\Extensions\Illuminate\Events\Contracts\SubscribesToEvents;
+use RoyalPanel\Events\Auth\ProvidedAuthenticationToken;
+use RoyalPanel\Extensions\Illuminate\Events\Contracts\SubscribesToEvents;
 
 class TwoFactorListener implements SubscribesToEvents
 {

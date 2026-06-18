@@ -1,38 +1,38 @@
 <?php
 
-namespace Pterodactyl\Http;
+namespace RoyalPanel\Http;
 
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Middleware\HandleCors;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Http\Middleware\TrustProxies;
-use Pterodactyl\Http\Middleware\TrimStrings;
+use RoyalPanel\Http\Middleware\TrimStrings;
 use Illuminate\Session\Middleware\StartSession;
-use Pterodactyl\Http\Middleware\EncryptCookies;
-use Pterodactyl\Http\Middleware\Api\IsValidJson;
-use Pterodactyl\Http\Middleware\VerifyCsrfToken;
-use Pterodactyl\Http\Middleware\VerifyReCaptcha;
+use RoyalPanel\Http\Middleware\EncryptCookies;
+use RoyalPanel\Http\Middleware\Api\IsValidJson;
+use RoyalPanel\Http\Middleware\VerifyCsrfToken;
+use RoyalPanel\Http\Middleware\VerifyReCaptcha;
 use Illuminate\Routing\Middleware\ThrottleRequests;
-use Pterodactyl\Http\Middleware\LanguageMiddleware;
+use RoyalPanel\Http\Middleware\LanguageMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Illuminate\Routing\Middleware\SubstituteBindings;
-use Pterodactyl\Http\Middleware\Activity\TrackAPIKey;
+use RoyalPanel\Http\Middleware\Activity\TrackAPIKey;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Pterodactyl\Http\Middleware\MaintenanceMiddleware;
-use Pterodactyl\Http\Middleware\EnsureStatefulRequests;
-use Pterodactyl\Http\Middleware\RedirectIfAuthenticated;
+use RoyalPanel\Http\Middleware\MaintenanceMiddleware;
+use RoyalPanel\Http\Middleware\EnsureStatefulRequests;
+use RoyalPanel\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
-use Pterodactyl\Http\Middleware\Api\AuthenticateIPAccess;
+use RoyalPanel\Http\Middleware\Api\AuthenticateIPAccess;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Pterodactyl\Http\Middleware\Api\Daemon\DaemonAuthenticate;
-use Pterodactyl\Http\Middleware\Api\Client\RequireClientApiKey;
-use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
+use RoyalPanel\Http\Middleware\Api\Daemon\DaemonAuthenticate;
+use RoyalPanel\Http\Middleware\Api\Client\RequireClientApiKey;
+use RoyalPanel\Http\Middleware\RequireTwoFactorAuthentication;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use Pterodactyl\Http\Middleware\Api\Client\SubstituteClientBindings;
+use RoyalPanel\Http\Middleware\Api\Client\SubstituteClientBindings;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
-use Pterodactyl\Http\Middleware\Api\Application\AuthenticateApplicationUser;
+use RoyalPanel\Http\Middleware\Api\Application\AuthenticateApplicationUser;
 
 class Kernel extends HttpKernel
 {
@@ -108,6 +108,6 @@ class Kernel extends HttpKernel
         'bindings' => SubstituteBindings::class,
         'recaptcha' => VerifyReCaptcha::class,
         'node.maintenance' => MaintenanceMiddleware::class,
-        'security' => \Pterodactyl\Http\Middleware\SecurityMiddleware::class,
+        'security' => \RoyalPanel\Http\Middleware\SecurityMiddleware::class,
     ];
 }

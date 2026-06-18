@@ -21,7 +21,7 @@ const CustomTextarea = styled(Textarea)`
 `;
 
 export default () => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const { clearAndAddHttpError } = useFlashKey('account');
     const { mutate } = useSSHKeys();
 

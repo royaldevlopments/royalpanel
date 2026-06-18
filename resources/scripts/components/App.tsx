@@ -23,7 +23,7 @@ const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
-    PterodactylUser?: {
+    RoyalPanelUser?: {
         uuid: string;
         username: string;
         name_first: string;
@@ -43,20 +43,20 @@ interface ExtendedWindow extends Window {
 setupInterceptors(history);
 
 const App = () => {
-    const { PterodactylUser, SiteConfiguration } = window as ExtendedWindow;
-    if (PterodactylUser && !store.getState().user.data) {
+    const { RoyalPanelUser, SiteConfiguration } = window as ExtendedWindow;
+    if (RoyalPanelUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
-            uuid: PterodactylUser.uuid,
-            username: PterodactylUser.username,
-            firstName: PterodactylUser.name_first,
-            lastName: PterodactylUser.name_last,
-            email: PterodactylUser.email,
-            language: PterodactylUser.language,
-            languageSet: PterodactylUser.language_set,
-            rootAdmin: PterodactylUser.root_admin,
-            useTotp: PterodactylUser.use_totp,
-            createdAt: new Date(PterodactylUser.created_at),
-            updatedAt: new Date(PterodactylUser.updated_at),
+            uuid: RoyalPanelUser.uuid,
+            username: RoyalPanelUser.username,
+            firstName: RoyalPanelUser.name_first,
+            lastName: RoyalPanelUser.name_last,
+            email: RoyalPanelUser.email,
+            language: RoyalPanelUser.language,
+            languageSet: RoyalPanelUser.language_set,
+            rootAdmin: RoyalPanelUser.root_admin,
+            useTotp: RoyalPanelUser.use_totp,
+            createdAt: new Date(RoyalPanelUser.created_at),
+            updatedAt: new Date(RoyalPanelUser.updated_at),
         });
     }
 
@@ -65,10 +65,10 @@ const App = () => {
     }
 
     useEffect(() => {
-        if (PterodactylUser?.language && PterodactylUser?.language_set) {
-            i18n.changeLanguage(PterodactylUser.language);
+        if (RoyalPanelUser?.language && RoyalPanelUser?.language_set) {
+            i18n.changeLanguage(RoyalPanelUser.language);
         } else {
-            i18n.changeLanguage(SiteConfiguration?.arix.defaultLang || 'en');
+            i18n.changeLanguage(SiteConfiguration?.royal.defaultLang || 'en');
         }
     }, []);
 

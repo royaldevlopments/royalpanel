@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Pterodactyl\Http\Controllers\Base;
-use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
+use RoyalPanel\Http\Controllers\Base;
+use RoyalPanel\Http\Middleware\RequireTwoFactorAuthentication;
 
 Route::get('/', [Base\IndexController::class, 'index'])->name('index')->fallback();
 Route::get('/account', [Base\IndexController::class, 'index'])
@@ -14,7 +14,7 @@ Route::get('/locales/locale.json', Base\LocaleController::class)
     ->where('namespace', '.*');
 
 Route::get('/manifest.json', function () {
-    $siteConfiguration = config('arix', []);
+    $siteConfiguration = config('royal', []);
     return response()->view('manifest', compact('siteConfiguration'))->header('Content-Type', 'application/json');
 })->withoutMiddleware(['auth', RequireTwoFactorAuthentication::class]);
 

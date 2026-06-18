@@ -1,0 +1,162 @@
+@extends('layouts.royal', ['navbar' => 'announcement', 'sideEditor' => true])
+
+@section('title')
+    Royal Announcements
+@endsection
+
+@section('content')
+
+    <form action="{{ route('admin.royal.announcement') }}" method="POST">
+        <div class="header">
+            <p>Announcement settings</p>
+            <span class="description-text">Change the announcement settings of Royal Theme.</span>
+        </div>
+        <x-royal.switch 
+            hr="true"
+            id="royal:announcement"
+            name="royal:announcement"
+            :value="$announcement"
+            label="Enable announcement"
+        />
+        <div>
+            <div class="input-field">
+                <select id="announcement-type">
+                    <option value="custom" disabled hidden>Select type</option>
+                    <option value="success">Success</option>
+                    <option value="warning">Warning</option>
+                    <option value="alert">Alert</option>
+                    <option value="update">Update</option>
+                    <option value="info">Information</option>
+                </select>
+            </div>
+
+            <button type="button" id="dropdown-toggle">
+                Advanced settings
+                <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="announcement-dropdown" class="dropdown">
+                <x-royal.color-input
+                    id="royal:announcementColor" 
+                    :value="$announcementColor"
+                    label="Color"
+                />
+                @php
+                    $options = [
+                        [ 'value' => 'megaphone' ],
+                        [ 'value' => 'party-popper' ],
+                        [ 'value' => 'info' ],
+                        [ 'value' => 'circle-check' ],
+                        [ 'value' => 'circle-alert' ],
+                        [ 'value' => 'triangle-alert' ],
+                        [ 'value' => 'life-buoy' ],
+                        [ 'value' => 'flame' ]
+                    ];
+                @endphp
+                <div id="royal:announcementIcon" class="icon-options-wrapper">
+                    <x-royal.icon-option 
+                        :options="$options" 
+                        id="royal:announcementIcon"
+                        :oldValue="$announcementIcon"
+                    />
+                </div>
+            </div>
+            <hr />
+        </div>
+        <x-royal.textarea-field
+            hr="true"
+            id="royal:announcementMessage" 
+            :value="$announcementMessage"
+            label="Announcement message"
+            helpText="For styling use Markdown format."
+        />
+        <x-royal.switch
+            id="royal:announcementCta"
+            name="royal:announcementCta"
+            :value="$announcementCta"
+            label="Call to action"
+            helpText="Add a call to action to your announcement"
+        />
+        <x-royal.input-field
+            id="royal:announcementCtaTitle" 
+            :value="$announcementCtaTitle"
+            label="Button Text"
+        />
+        <x-royal.input-field 
+            hr="true"
+            id="royal:announcementCtaLink" 
+            :value="$announcementCtaLink"
+            label="Button Link"
+        />
+        <x-royal.switch
+            id="royal:announcementDismissable"
+            name="royal:announcementDismissable"
+            :value="$announcementDismissable"
+            label="Dismissable"
+            helpText="Allow users to hide an announcement."
+        />
+        <div class="floating-button">
+            {!! csrf_field() !!}
+            <button type="submit" class="button button-primary">Save changes</button>
+        </div>
+    </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButton = document.getElementById('dropdown-toggle');
+        const dropdown = document.getElementById('announcement-dropdown');
+        const select = document.getElementById('announcement-type');
+        const colorInput = document.getElementById('royal:announcementColor');
+        const iconInput = document.getElementById('royal:announcementIcon');
+
+        const configMap = {
+            success:    { color: '#0da22c', icon: 'circle-check' },
+            warning:    { color: '#d71919', icon: 'triangle-alert' },
+            alert:      { color: '#d7c219', icon: 'circle-alert' },
+            update:     { color: '#16aaaa', icon: 'megaphone' },
+            info:       { color: '#0a7fe6', icon: 'info' },
+        };
+
+        toggleButton.addEventListener('click', function () {
+            dropdown.classList.toggle('open');
+        });
+
+        select.addEventListener('change', function () {
+            const selected = this.value;
+            const config = configMap[selected];
+
+            if (config) {
+                colorInput.value = config.color;
+                colorInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+                iconInput.querySelectorAll('input[type=radio]').forEach(radio => {
+                    radio.checked = (radio.value === config.icon);
+                });
+            }
+        });
+
+        // Auto-detect current type on page load
+        function detectPresetType() {
+            const currentColor = colorInput.value?.toLowerCase();
+            let currentIcon = null;
+
+            iconInput.querySelectorAll('input[type=radio]').forEach(radio => {
+                if (radio.checked) {
+                    currentIcon = radio.value;
+                }
+            });
+
+            for (const [type, config] of Object.entries(configMap)) {
+                if (config.color.toLowerCase() === currentColor && config.icon === currentIcon) {
+                    select.value = type;
+                    return;
+                }
+            }
+
+            // If no match found, set to custom
+            select.value = 'custom';
+        }
+
+        detectPresetType();
+    });
+    </script>
+@endsection

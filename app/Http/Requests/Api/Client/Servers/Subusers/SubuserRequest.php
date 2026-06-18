@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client\Servers\Subusers;
+namespace RoyalPanel\Http\Requests\Api\Client\Servers\Subusers;
 
 use Illuminate\Http\Request;
-use Pterodactyl\Models\User;
-use Pterodactyl\Models\Subuser;
-use Pterodactyl\Exceptions\Http\HttpForbiddenException;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
-use Pterodactyl\Services\Servers\GetUserPermissionsService;
+use RoyalPanel\Models\User;
+use RoyalPanel\Models\Subuser;
+use RoyalPanel\Exceptions\Http\HttpForbiddenException;
+use RoyalPanel\Http\Requests\Api\Client\ClientApiRequest;
+use RoyalPanel\Services\Servers\GetUserPermissionsService;
 
 abstract class SubuserRequest extends ClientApiRequest
 {
@@ -52,7 +52,7 @@ abstract class SubuserRequest extends ClientApiRequest
     protected function validatePermissionsCanBeAssigned(array $permissions)
     {
         $user = $this->user();
-        /** @var \Pterodactyl\Models\Server $server */
+        /** @var \RoyalPanel\Models\Server $server */
         $server = $this->route()->parameter('server');
 
         // If we are a root admin or the server owner, no need to perform these checks.

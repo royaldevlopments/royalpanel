@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Contracts\Repository;
+namespace RoyalPanel\Contracts\Repository;
 
 interface ApiPermissionRepositoryInterface extends RepositoryInterface
 {

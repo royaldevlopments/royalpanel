@@ -31,7 +31,7 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 type Timer = ReturnType<typeof setInterval>;
 
 export default ({ server, count }: { server: Server, count: number }) => {
-    const { t } = useTranslation(['arix/utilities', 'arix/dashboard']);
+    const { t } = useTranslation(['royal/utilities', 'royal/dashboard']);
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
@@ -73,7 +73,7 @@ export default ({ server, count }: { server: Server, count: number }) => {
     return (
         <>
         <CardAnimator className="backdrop rounded-box overflow-hidden" css={'background-color:var(--gray700-default);'} style={{ animationDelay: `${count * 100}ms` }}>
-            <div className={'bg-center bg-cover bg-no-repeat relative px-6 pt-5 z-10'} css={`background-image:url(${server.eggImage ? server.eggImage : '/arix/minecraft-banner.png'})`}>
+            <div className={'bg-center bg-cover bg-no-repeat relative px-6 pt-5 z-10'} css={`background-image:url(${server.eggImage ? server.eggImage : '/royal/minecraft-banner.png'})`}>
                 <div className={'z-[-1] absolute inset-0'} css={'background-image:linear-gradient(0deg, var(--gray700-default) 0%, color-mix(in srgb, var(--gray700-default) 65%, transparent) 100%);'}/>
                 <div className="flex items-center justify-between pb-5">
                     <p className="text-lg font-semibold text-gray-50">{server.name}</p>
@@ -168,7 +168,7 @@ export default ({ server, count }: { server: Server, count: number }) => {
             </div>
             <div className={'px-6 pt-4 pb-5'}>
                 <Link to={`/server/${server.id}`} className={'text-secondary-50 bg-secondary-200 border border-secondary-100 hover:bg-secondary-100 rounded-component px-3 py-3 w-full block text-center duration-300'}>
-                    {t('manage-server', { ns: 'arix/dashboard'})}
+                    {t('manage-server', { ns: 'royal/dashboard'})}
                 </Link>
             </div>
         </CardAnimator>

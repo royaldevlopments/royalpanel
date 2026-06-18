@@ -20,7 +20,7 @@ const Copyright = styled.div`
 
 export default () => {
     const copyright = useStoreState(
-        (state: ApplicationStore) => state.settings.data?.arix?.copyright
+        (state: ApplicationStore) => state.settings.data?.royal?.copyright
     );
 
     return (

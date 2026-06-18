@@ -16,7 +16,7 @@ import tw from 'twin.macro';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/users');
+    const { t } = useTranslation('royal/server/users');
     const [loading, setLoading] = useState(true);
 
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);

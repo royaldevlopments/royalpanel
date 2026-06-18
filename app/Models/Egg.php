@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
-use Pterodactyl\Contracts\Models\Identifiable;
+use RoyalPanel\Contracts\Models\Identifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
+use RoyalPanel\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -44,8 +44,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $inherit_file_denylist
  * @property array|null $inherit_features
  * @property Nest $nest
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Server[] $servers
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\EggVariable[] $variables
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\Server[] $servers
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\EggVariable[] $variables
  * @property Egg|null $scriptFrom
  * @property Egg|null $configFrom
  */
@@ -272,7 +272,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets nest associated with an egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Nest, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\Nest, $this>
      */
     public function nest(): BelongsTo
     {
@@ -282,7 +282,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets all servers associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\Server, $this>
      */
     public function servers(): HasMany
     {
@@ -292,7 +292,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets all variables associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\EggVariable, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\EggVariable, $this>
      */
     public function variables(): HasMany
     {

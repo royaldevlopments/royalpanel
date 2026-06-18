@@ -25,7 +25,7 @@ interface Props {
 }
 
 export default ({ backup }: Props) => {
-    const { t } = useTranslation('arix/server/backups');
+    const { t } = useTranslation('royal/server/backups');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const setServerFromState = ServerContext.useStoreActions((actions) => actions.server.setServerFromState);
     const [modal, setModal] = useState('');

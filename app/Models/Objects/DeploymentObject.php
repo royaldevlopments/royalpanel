@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models\Objects;
+namespace RoyalPanel\Models\Objects;
 
 class DeploymentObject
 {

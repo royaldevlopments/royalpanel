@@ -7,7 +7,7 @@ import { HashtagIcon, ServerIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 
 const InfoCard = () => {
-    const { t } = useTranslation('arix/server/dashboard');
+    const { t } = useTranslation('royal/server/dashboard');
     const node = ServerContext.useStoreState((state) => state.server.data!.node);
     const nodeIcon = ServerContext.useStoreState((state) => state.server.data!.nodeIcon);
     const id = ServerContext.useStoreState((state) => state.server.data!.id);

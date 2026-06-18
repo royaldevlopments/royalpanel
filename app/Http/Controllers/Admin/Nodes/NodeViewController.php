@@ -1,18 +1,18 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Nodes;
+namespace RoyalPanel\Http\Controllers\Admin\Nodes;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Pterodactyl\Models\Node;
+use RoyalPanel\Models\Node;
 use Illuminate\Support\Collection;
-use Pterodactyl\Models\Allocation;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Repositories\Eloquent\NodeRepository;
-use Pterodactyl\Repositories\Eloquent\ServerRepository;
-use Pterodactyl\Traits\Controllers\JavascriptInjection;
-use Pterodactyl\Services\Helpers\SoftwareVersionService;
-use Pterodactyl\Repositories\Eloquent\LocationRepository;
+use RoyalPanel\Models\Allocation;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Repositories\Eloquent\NodeRepository;
+use RoyalPanel\Repositories\Eloquent\ServerRepository;
+use RoyalPanel\Traits\Controllers\JavascriptInjection;
+use RoyalPanel\Services\Helpers\SoftwareVersionService;
+use RoyalPanel\Repositories\Eloquent\LocationRepository;
 
 class NodeViewController extends Controller
 {

@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DeleteAllocationButton = ({ allocation }: Props) => {
-    const { t } = useTranslation('arix/server/network');
+    const { t } = useTranslation('royal/server/network');
     const [confirm, setConfirm] = useState(false);
 
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);

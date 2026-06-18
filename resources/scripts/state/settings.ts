@@ -3,7 +3,7 @@ import { action, Action } from 'easy-peasy';
 export interface SiteSettings {
     name: string;
     locale: string;
-    arix: {
+    royal: {
         logo: string,
         logoLight: string,
         fullLogo: boolean,

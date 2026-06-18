@@ -1,17 +1,17 @@
 <?php
 
-namespace Pterodactyl\Repositories\Wings;
+namespace RoyalPanel\Repositories\Wings;
 
 use Webmozart\Assert\Assert;
-use Pterodactyl\Models\Backup;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Backup;
+use RoyalPanel\Models\Server;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\TransferException;
-use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
+use RoyalPanel\Exceptions\Http\Connection\DaemonConnectionException;
 
 /**
- * @method \Pterodactyl\Repositories\Wings\DaemonBackupRepository setNode(\Pterodactyl\Models\Node $node)
- * @method \Pterodactyl\Repositories\Wings\DaemonBackupRepository setServer(\Pterodactyl\Models\Server $server)
+ * @method \RoyalPanel\Repositories\Wings\DaemonBackupRepository setNode(\RoyalPanel\Models\Node $node)
+ * @method \RoyalPanel\Repositories\Wings\DaemonBackupRepository setServer(\RoyalPanel\Models\Server $server)
  */
 class DaemonBackupRepository extends DaemonRepository
 {

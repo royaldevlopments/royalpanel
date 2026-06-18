@@ -62,7 +62,7 @@ export default ({ activity, children }: Props) => {
     const properties = wrapProperties(activity.properties);
     const [countryCode, setCountryCode] = useState<string | null>(null);
 
-    const ipFlag = String(useStoreState((state: ApplicationStore) => state.settings.data!.arix.ipFlag));
+    const ipFlag = String(useStoreState((state: ApplicationStore) => state.settings.data!.royal.ipFlag));
     
     // 17fe929d2adce3574decd4d087fdddb0
 
@@ -103,7 +103,7 @@ export default ({ activity, children }: Props) => {
                         <span className={'text-gray-400'}>&nbsp;&mdash;&nbsp;</span>
                         <Link
                             to={`#${pathTo({ event: activity.event })}`}
-                            className={'transition-colors duration-75 active:text-arix hover:text-arix'}
+                            className={'transition-colors duration-75 active:text-royal hover:text-royal'}
                         >
                             {activity.event}
                         </Link>

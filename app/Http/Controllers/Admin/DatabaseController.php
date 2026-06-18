@@ -1,19 +1,19 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin;
+namespace RoyalPanel\Http\Controllers\Admin;
 
 use Illuminate\View\View;
-use Pterodactyl\Models\DatabaseHost;
+use RoyalPanel\Models\DatabaseHost;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Services\Databases\Hosts\HostUpdateService;
-use Pterodactyl\Http\Requests\Admin\DatabaseHostFormRequest;
-use Pterodactyl\Services\Databases\Hosts\HostCreationService;
-use Pterodactyl\Services\Databases\Hosts\HostDeletionService;
-use Pterodactyl\Contracts\Repository\DatabaseRepositoryInterface;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
-use Pterodactyl\Contracts\Repository\DatabaseHostRepositoryInterface;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Services\Databases\Hosts\HostUpdateService;
+use RoyalPanel\Http\Requests\Admin\DatabaseHostFormRequest;
+use RoyalPanel\Services\Databases\Hosts\HostCreationService;
+use RoyalPanel\Services\Databases\Hosts\HostDeletionService;
+use RoyalPanel\Contracts\Repository\DatabaseRepositoryInterface;
+use RoyalPanel\Contracts\Repository\LocationRepositoryInterface;
+use RoyalPanel\Contracts\Repository\DatabaseHostRepositoryInterface;
 
 class DatabaseController extends Controller
 {
@@ -45,7 +45,7 @@ class DatabaseController extends Controller
     /**
      * Display database host to user.
      *
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \RoyalPanel\Exceptions\Repository\RecordNotFoundException
      */
     public function view(int $host): View
     {
@@ -114,7 +114,7 @@ class DatabaseController extends Controller
     /**
      * Handle request to delete a database host.
      *
-     * @throws \Pterodactyl\Exceptions\Service\HasActiveServersException
+     * @throws \RoyalPanel\Exceptions\Service\HasActiveServersException
      */
     public function delete(int $host): RedirectResponse
     {

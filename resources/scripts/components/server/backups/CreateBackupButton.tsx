@@ -28,7 +28,7 @@ interface Values {
 const CreateBackupDialog = asDialog({
     title: 'Create Backup',
 })(() => {
-    const { t } = useTranslation('arix/server/backups');
+    const { t } = useTranslation('royal/server/backups');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
@@ -103,7 +103,7 @@ const CreateBackupDialog = asDialog({
 });
 
 export default () => {
-    const { t } = useTranslation('arix/server/backups');
+    const { t } = useTranslation('royal/server/backups');
     const { clearFlashes } = useFlash();
     const [visible, setVisible] = useState(false);
 

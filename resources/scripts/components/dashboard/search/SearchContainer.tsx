@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 export default () => {
     const [visible, setVisible] = useState(false);
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
 
     useEventListener('keydown', (e: KeyboardEvent) => {
         if (['input', 'textarea'].indexOf(((e.target as HTMLElement).tagName || 'input').toLowerCase()) < 0) {

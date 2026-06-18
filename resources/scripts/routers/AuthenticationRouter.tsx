@@ -17,7 +17,7 @@ const Switches = () => {
     const { path } = useRouteMatch();
     const history = useHistory();
     const location = useLocation();
-    const registration = useStoreState((state: ApplicationStore) => state.settings.data!.arix.registration);
+    const registration = useStoreState((state: ApplicationStore) => state.settings.data!.royal.registration);
 
     return (
         <Switch location={location}>
@@ -37,18 +37,18 @@ const Switches = () => {
 };
 
 const TopBar = () => {
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
     const [guildData, setGuildData] = useState<{ instant_invite: string } | null>(null);
 
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logo);
-    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoLight);
-    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoHeight);
-    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.fullLogo);
-    const socialPosition = useStoreState((state: ApplicationStore) => state.settings.data!.arix.socialPosition);
-    const logoPosition = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoPosition);
-    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.arix.discord);
-    const support = useStoreState((state: ApplicationStore) => state.settings.data!.arix.support);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logo);
+    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoLight);
+    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoHeight);
+    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.fullLogo);
+    const socialPosition = useStoreState((state: ApplicationStore) => state.settings.data!.royal.socialPosition);
+    const logoPosition = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoPosition);
+    const discord = useStoreState((state: ApplicationStore) => state.settings.data!.royal.discord);
+    const support = useStoreState((state: ApplicationStore) => state.settings.data!.royal.support);
 
     const darkMode = localStorage.getItem('darkMode') === 'true';
 
@@ -89,9 +89,9 @@ const TopBar = () => {
 }
 
 const AuthContainer = () => {
-    const loginBackground = useStoreState((state: ApplicationStore) => state.settings.data!.arix.loginBackground);
-    const loginLayout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.loginLayout);
-    const loginGradient = useStoreState((state: ApplicationStore) => state.settings.data!.arix.loginGradient);
+    const loginBackground = useStoreState((state: ApplicationStore) => state.settings.data!.royal.loginBackground);
+    const loginLayout = useStoreState((state: ApplicationStore) => state.settings.data!.royal.loginLayout);
+    const loginGradient = useStoreState((state: ApplicationStore) => state.settings.data!.royal.loginGradient);
 
     const Gradient = () => (
         String(loginGradient) == 'true' ? <div className={'absolute inset-0 z-[-1]'} css={'background-image:radial-gradient(circle, color-mix(in srgb, var(--gray800) 45%, transparent) 0%, var(--gray800) 100%);'} /> : null
@@ -113,7 +113,7 @@ const AuthContainer = () => {
                     <TopBar />
                     <Switches />
                 </div>
-                <div className={'h-full bg-center bg-no-repeat bg-cover bg-arix z-10 relative'} css={`background-image:url(${loginBackground});`}>
+                <div className={'h-full bg-center bg-no-repeat bg-cover bg-royal z-10 relative'} css={`background-image:url(${loginBackground});`}>
                     <Gradient />
                 </div>
             </div>
@@ -124,7 +124,7 @@ const AuthContainer = () => {
                     <Switches />
                 </div>
                 <div className={'h-full lg:p-5'}>
-                    <div className={'h-full bg-center bg-no-repeat bg-cover bg-arix rounded-box overflow-hidden relative z-10'} css={`background-image:url(${loginBackground});`}>
+                    <div className={'h-full bg-center bg-no-repeat bg-cover bg-royal rounded-box overflow-hidden relative z-10'} css={`background-image:url(${loginBackground});`}>
                         <Gradient />
                     </div>
                 </div>

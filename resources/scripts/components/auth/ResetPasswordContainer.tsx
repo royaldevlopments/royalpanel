@@ -20,7 +20,7 @@ interface Values {
 }
 
 export default ({ match, location }: RouteComponentProps<{ token: string }>) => {
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
     const [email, setEmail] = useState('');
 
     const { clearFlashes, addFlash } = useStoreActions((actions: Actions<ApplicationStore>) => actions.flashes);

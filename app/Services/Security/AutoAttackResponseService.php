@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Services\Security;
+namespace RoyalPanel\Services\Security;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;

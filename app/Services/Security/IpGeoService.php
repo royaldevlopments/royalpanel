@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Services\Security;
+namespace RoyalPanel\Services\Security;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;

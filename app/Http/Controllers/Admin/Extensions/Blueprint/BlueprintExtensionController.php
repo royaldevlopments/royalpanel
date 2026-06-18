@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Extensions\Blueprint;
+namespace RoyalPanel\Http\Controllers\Admin\Extensions\Blueprint;
 
 use Illuminate\Http\RedirectResponse;
 use Database\Seeders\BlueprintSeeder;
 use Illuminate\Support\Facades\Artisan;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Http\Requests\Admin\AdminFormRequest;
+use RoyalPanel\Contracts\Repository\SettingsRepositoryInterface;
 
 class BlueprintExtensionController extends Controller
 {
@@ -21,8 +21,8 @@ class BlueprintExtensionController extends Controller
   }
 
   /**
-   * @throws \Pterodactyl\Exceptions\Model\DataValidationException
-   * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+   * @throws \RoyalPanel\Exceptions\Model\DataValidationException
+   * @throws \RoyalPanel\Exceptions\Repository\RecordNotFoundException
    */
   public function update(BlueprintAdminFormRequest $request): RedirectResponse
   {

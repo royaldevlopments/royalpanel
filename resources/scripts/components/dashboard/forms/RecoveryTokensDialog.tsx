@@ -10,7 +10,7 @@ interface RecoveryTokenDialogProps extends DialogProps {
 }
 
 export default ({ tokens, open, onClose }: RecoveryTokenDialogProps) => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const grouped = [] as [string, string][];
     tokens.forEach((token, index) => {
         if (index % 2 === 0) {

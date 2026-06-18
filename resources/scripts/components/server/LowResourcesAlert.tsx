@@ -24,9 +24,9 @@ const getBackgroundColor = (value: number, uptime: number | null, max: number | 
 };
 
 export default () => {
-    const { t } = useTranslation('arix/utilities');
+    const { t } = useTranslation('royal/utilities');
     const [stats, setStats] = useState<Stats>({ memory: 0, cpu: 0, disk: 0, uptime: 0 });
-    const [lowResourcesAlert, alertLink] = String(useStoreState((state: ApplicationStore) => state.settings.data!.arix));
+    const [lowResourcesAlert, alertLink] = String(useStoreState((state: ApplicationStore) => state.settings.data!.royal));
 
     const connected = ServerContext.useStoreState((state) => state.socket.connected);
     const instance = ServerContext.useStoreState((state) => state.socket.instance);

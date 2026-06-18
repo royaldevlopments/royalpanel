@@ -19,7 +19,7 @@ import { AdjustmentsIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 
 const StartupContainer = () => {
-    const { t } = useTranslation('arix/server/startup');
+    const { t } = useTranslation('royal/server/startup');
     const [loading, setLoading] = useState(false);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
 

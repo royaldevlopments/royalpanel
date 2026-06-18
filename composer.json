@@ -1,11 +1,11 @@
 {
-    "name": "pterodactyl/panel",
+    "name": "royalpanel/panel",
     "description": "The free, open-source game management panel. Supporting Minecraft, Spigot, BungeeCord, and SRCDS servers.",
     "license": "MIT",
     "authors": [
         {
             "name": "Matthew Penner",
-            "email": "matthew@pterodactyl.io",
+            "email": "matthew@royalpanel.io",
             "homepage": "https://github.com/matthewpi",
             "role": "Lead Developer"
         },
@@ -70,14 +70,14 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "Pterodactyl\\": "app/",
+            "RoyalPanel\\": "app/",
             "Database\\Factories\\": "database/Factories/",
             "Database\\Seeders\\": "database/Seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pterodactyl\\Tests\\": "tests/"
+            "RoyalPanel\\Tests\\": "tests/"
         }
     },
     "scripts": {

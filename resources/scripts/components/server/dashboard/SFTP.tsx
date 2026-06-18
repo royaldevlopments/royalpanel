@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 
 
 const Sftp = () => {
-    const { t } = useTranslation('arix/server/dashboard');
+    const { t } = useTranslation('royal/server/dashboard');
     const username = useStoreState((state) => state.user.data!.username);
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const sftp = ServerContext.useStoreState((state) => state.server.data!.sftpDetails, isEqual);

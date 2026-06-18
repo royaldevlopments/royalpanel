@@ -25,7 +25,7 @@ const RegisterContainer = () => {
     const ref = useRef<Reaptcha>(null);
     const turnstile = useTurnstile();
     const [token, setToken] = useState('');
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
 
     const { clearFlashes, clearAndAddHttpError, addFlash } = useFlash();
     const { recaptcha: recaptchaSettings, turnstile: turnstileSettings } = useStoreState((state) => state.settings.data!);

@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Services\Helpers;
+namespace RoyalPanel\Services\Helpers;
 
 use GuzzleHttp\Client;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Pterodactyl\Exceptions\Service\Helper\CdnVersionFetchingException;
+use RoyalPanel\Exceptions\Service\Helper\CdnVersionFetchingException;
 
 class SoftwareVersionService
 {
@@ -33,9 +33,9 @@ class SoftwareVersionService
     }
 
     /**
-     * Get the latest version of Arix Theme.
+     * Get the latest version of Royal Theme.
      */
-    public function getArix(): string
+    public function getRoyal(): string
     {
         try {
             $response = $this->client->request('GET', 'https://raw.githubusercontent.com/royaldevlopments/royalpanel/main/version.json');
@@ -88,13 +88,13 @@ class SoftwareVersionService
     /**
      * Determine if the current version of the panel is the latest.
      */
-    public function isLatestArix(): bool
+    public function isLatestRoyal(): bool
     {
-        if (config('app.arix') === 'canary') {
+        if (config('app.royal') === 'canary') {
             return true;
         }
 
-        return version_compare(config('app.arix'), $this->getArix()) >= 0;
+        return version_compare(config('app.royal'), $this->getRoyal()) >= 0;
     }
     /**
      * Determine if a passed daemon version string is the latest.
@@ -113,9 +113,9 @@ class SoftwareVersionService
      */
     protected function cacheVersionData(): array
     {
-        return $this->cache->remember(self::VERSION_CACHE_KEY, CarbonImmutable::now()->addMinutes(config('pterodactyl.cdn.cache_time', 60)), function () {
+        return $this->cache->remember(self::VERSION_CACHE_KEY, CarbonImmutable::now()->addMinutes(config('royalpanel.cdn.cache_time', 60)), function () {
             try {
-                $response = $this->client->request('GET', config('pterodactyl.cdn.url'));
+                $response = $this->client->request('GET', config('royalpanel.cdn.url'));
 
                 if ($response->getStatusCode() === 200) {
                     return json_decode($response->getBody(), true);

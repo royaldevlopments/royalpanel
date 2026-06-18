@@ -1,42 +1,42 @@
 <?php
 
-namespace Pterodactyl\Providers;
+namespace RoyalPanel\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Pterodactyl\Repositories\Eloquent\EggRepository;
-use Pterodactyl\Repositories\Eloquent\NestRepository;
-use Pterodactyl\Repositories\Eloquent\NodeRepository;
-use Pterodactyl\Repositories\Eloquent\TaskRepository;
-use Pterodactyl\Repositories\Eloquent\UserRepository;
-use Pterodactyl\Repositories\Eloquent\ApiKeyRepository;
-use Pterodactyl\Repositories\Eloquent\ServerRepository;
-use Pterodactyl\Repositories\Eloquent\SessionRepository;
-use Pterodactyl\Repositories\Eloquent\SubuserRepository;
-use Pterodactyl\Repositories\Eloquent\DatabaseRepository;
-use Pterodactyl\Repositories\Eloquent\LocationRepository;
-use Pterodactyl\Repositories\Eloquent\ScheduleRepository;
-use Pterodactyl\Repositories\Eloquent\SettingsRepository;
-use Pterodactyl\Repositories\Eloquent\AllocationRepository;
-use Pterodactyl\Contracts\Repository\EggRepositoryInterface;
-use Pterodactyl\Repositories\Eloquent\EggVariableRepository;
-use Pterodactyl\Contracts\Repository\NestRepositoryInterface;
-use Pterodactyl\Contracts\Repository\NodeRepositoryInterface;
-use Pterodactyl\Contracts\Repository\TaskRepositoryInterface;
-use Pterodactyl\Contracts\Repository\UserRepositoryInterface;
-use Pterodactyl\Repositories\Eloquent\DatabaseHostRepository;
-use Pterodactyl\Contracts\Repository\ApiKeyRepositoryInterface;
-use Pterodactyl\Contracts\Repository\ServerRepositoryInterface;
-use Pterodactyl\Repositories\Eloquent\ServerVariableRepository;
-use Pterodactyl\Contracts\Repository\SessionRepositoryInterface;
-use Pterodactyl\Contracts\Repository\SubuserRepositoryInterface;
-use Pterodactyl\Contracts\Repository\DatabaseRepositoryInterface;
-use Pterodactyl\Contracts\Repository\LocationRepositoryInterface;
-use Pterodactyl\Contracts\Repository\ScheduleRepositoryInterface;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
-use Pterodactyl\Contracts\Repository\AllocationRepositoryInterface;
-use Pterodactyl\Contracts\Repository\EggVariableRepositoryInterface;
-use Pterodactyl\Contracts\Repository\DatabaseHostRepositoryInterface;
-use Pterodactyl\Contracts\Repository\ServerVariableRepositoryInterface;
+use RoyalPanel\Repositories\Eloquent\EggRepository;
+use RoyalPanel\Repositories\Eloquent\NestRepository;
+use RoyalPanel\Repositories\Eloquent\NodeRepository;
+use RoyalPanel\Repositories\Eloquent\TaskRepository;
+use RoyalPanel\Repositories\Eloquent\UserRepository;
+use RoyalPanel\Repositories\Eloquent\ApiKeyRepository;
+use RoyalPanel\Repositories\Eloquent\ServerRepository;
+use RoyalPanel\Repositories\Eloquent\SessionRepository;
+use RoyalPanel\Repositories\Eloquent\SubuserRepository;
+use RoyalPanel\Repositories\Eloquent\DatabaseRepository;
+use RoyalPanel\Repositories\Eloquent\LocationRepository;
+use RoyalPanel\Repositories\Eloquent\ScheduleRepository;
+use RoyalPanel\Repositories\Eloquent\SettingsRepository;
+use RoyalPanel\Repositories\Eloquent\AllocationRepository;
+use RoyalPanel\Contracts\Repository\EggRepositoryInterface;
+use RoyalPanel\Repositories\Eloquent\EggVariableRepository;
+use RoyalPanel\Contracts\Repository\NestRepositoryInterface;
+use RoyalPanel\Contracts\Repository\NodeRepositoryInterface;
+use RoyalPanel\Contracts\Repository\TaskRepositoryInterface;
+use RoyalPanel\Contracts\Repository\UserRepositoryInterface;
+use RoyalPanel\Repositories\Eloquent\DatabaseHostRepository;
+use RoyalPanel\Contracts\Repository\ApiKeyRepositoryInterface;
+use RoyalPanel\Contracts\Repository\ServerRepositoryInterface;
+use RoyalPanel\Repositories\Eloquent\ServerVariableRepository;
+use RoyalPanel\Contracts\Repository\SessionRepositoryInterface;
+use RoyalPanel\Contracts\Repository\SubuserRepositoryInterface;
+use RoyalPanel\Contracts\Repository\DatabaseRepositoryInterface;
+use RoyalPanel\Contracts\Repository\LocationRepositoryInterface;
+use RoyalPanel\Contracts\Repository\ScheduleRepositoryInterface;
+use RoyalPanel\Contracts\Repository\SettingsRepositoryInterface;
+use RoyalPanel\Contracts\Repository\AllocationRepositoryInterface;
+use RoyalPanel\Contracts\Repository\EggVariableRepositoryInterface;
+use RoyalPanel\Contracts\Repository\DatabaseHostRepositoryInterface;
+use RoyalPanel\Contracts\Repository\ServerVariableRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

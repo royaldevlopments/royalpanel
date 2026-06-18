@@ -22,16 +22,16 @@ interface Props {
 }
 
 const SideBar = ({ children, type }: Props) => {
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
     const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.layout);
-    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logo);
-    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoLight);
-    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoHeight);
-    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.fullLogo);
-    const icon = useStoreState((state: ApplicationStore) => state.settings.data!.arix.icon);
+    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.royal.layout);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logo);
+    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoLight);
+    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoHeight);
+    const fullLogo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.fullLogo);
+    const icon = useStoreState((state: ApplicationStore) => state.settings.data!.royal.icon);
 
     const darkMode = localStorage.getItem('darkMode') === 'true';
 
@@ -75,14 +75,14 @@ const SideBar = ({ children, type }: Props) => {
             &:hover,
             &:focus,
             &.active{
-                ${tw`text-gray-100 border-arix`}
+                ${tw`text-gray-100 border-royal`}
 
                 &::after{
                     ${tw`opacity-100`}
                 }
 
                 & > svg{
-                    ${layout == 5 ? tw`text-gray-100` : tw`text-arix duration-300`}
+                    ${layout == 5 ? tw`text-gray-100` : tw`text-royal duration-300`}
                 }
             }
         }

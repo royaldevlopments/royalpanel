@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Enum;
+namespace RoyalPanel\Enum;
 
 use Illuminate\Http\Request;
 use Webmozart\Assert\Assert;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Server;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Routing\Middleware\ThrottleRequests;

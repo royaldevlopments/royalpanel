@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client\Account;
+namespace RoyalPanel\Http\Requests\Api\Client\Account;
 
 use Illuminate\Validation\Rules\In;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
-use Pterodactyl\Traits\Helpers\AvailableLanguages;
+use RoyalPanel\Http\Requests\Api\Client\ClientApiRequest;
+use RoyalPanel\Traits\Helpers\AvailableLanguages;
 
 class UpdateLanguageRequest extends ClientApiRequest
 {

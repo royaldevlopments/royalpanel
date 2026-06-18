@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Pterodactyl\BlueprintFramework\Libraries\ExtensionLibrary\Console\BlueprintConsoleLibrary as BlueprintExtensionLibrary;
+use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Console\BlueprintConsoleLibrary as BlueprintExtensionLibrary;
 use Illuminate\Database\Seeder;
 
 class BlueprintSeeder extends Seeder

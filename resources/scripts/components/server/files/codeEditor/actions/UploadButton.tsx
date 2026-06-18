@@ -29,7 +29,7 @@ interface UploadButtonProps extends WithClassname {
 }
 
 export default ({ className, onRefresh }: UploadButtonProps) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const fileUploadInput = useRef<HTMLInputElement>(null);
 
     const visible = useSignal(false);

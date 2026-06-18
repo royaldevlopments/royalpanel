@@ -31,7 +31,7 @@ interface FileEditProps {
 const allowedImageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'];
 
 export default function FileEdit({ openFiles, activeFileIndex, onContentChange, onSave, onModeChange }: FileEditProps) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { addError } = useFlash();
     const [loading, setLoading] = useState(false);

@@ -77,7 +77,7 @@ interface SocialLink {
 
 export default () => {
     const socialLinks = useStoreState(
-        (state: ApplicationStore) => (state.settings.data!.arix.socials || []) as unknown as SocialLink[]
+        (state: ApplicationStore) => (state.settings.data!.royal.socials || []) as unknown as SocialLink[]
     );
 
     if (!socialLinks || socialLinks.length === 0) return null;

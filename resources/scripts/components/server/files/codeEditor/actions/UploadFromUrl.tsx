@@ -104,7 +104,7 @@ const PullFromUrl = asDialog({
 });
 
 export default function UploadFromUrl({ className, onRefresh }: { className?: string; onRefresh?: () => void }) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const [isOpen, setIsOpen] = useState(false);
 
     return (

@@ -11,23 +11,23 @@
             
             <!-- meta data -->
 
-            <meta name="theme-color" content="{{ $siteConfiguration['arix']['meta_color'] }}"/>
-            <link rel="icon" type="image/x-icon" href="{{ $siteConfiguration['arix']['meta_favicon'] }}">
+            <meta name="theme-color" content="{{ $siteConfiguration['royal']['meta_color'] }}"/>
+            <link rel="icon" type="image/x-icon" href="{{ $siteConfiguration['royal']['meta_favicon'] }}">
 
-            <meta name="title" content="{{ $siteConfiguration['arix']['meta_title'] }}" />
-            <meta name="description" content="{{ $siteConfiguration['arix']['meta_description'] }}" />
+            <meta name="title" content="{{ $siteConfiguration['royal']['meta_title'] }}" />
+            <meta name="description" content="{{ $siteConfiguration['royal']['meta_description'] }}" />
 
             <meta property="og:type" content="website" />
             <meta property="og:url" content="{{config('app.url', 'https://localhost')}}" />
-            <meta property="og:title" content="{{ $siteConfiguration['arix']['meta_title'] }}" />
-            <meta property="og:description" content="{{ $siteConfiguration['arix']['meta_description'] }}" />
-            <meta property="og:image" content="{{ $siteConfiguration['arix']['meta_image'] }}" />
+            <meta property="og:title" content="{{ $siteConfiguration['royal']['meta_title'] }}" />
+            <meta property="og:description" content="{{ $siteConfiguration['royal']['meta_description'] }}" />
+            <meta property="og:image" content="{{ $siteConfiguration['royal']['meta_image'] }}" />
 
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content="{{config('app.url', 'https://localhost')}}" />
-            <meta property="twitter:title" content="{{ $siteConfiguration['arix']['meta_title'] }}" />
-            <meta property="twitter:description" content="{{ $siteConfiguration['arix']['meta_description'] }}" />
-            <meta property="twitter:image" content="{{ $siteConfiguration['arix']['meta_image'] }}" />
+            <meta property="twitter:title" content="{{ $siteConfiguration['royal']['meta_title'] }}" />
+            <meta property="twitter:description" content="{{ $siteConfiguration['royal']['meta_description'] }}" />
+            <meta property="twitter:image" content="{{ $siteConfiguration['royal']['meta_image'] }}" />
 
             <!-- PWA -->
             <link rel="manifest" href="/manifest.json">
@@ -51,7 +51,8 @@
         @section('user-data')
             @if(!is_null(Auth::user()))
                 <script>
-                    window.PterodactylUser = {!! json_encode(Auth::user()->toVueObject()) !!};
+                    window.RoyalPanelUser = {!! json_encode(Auth::user()->toVueObject()) !!};
+                    window.PterodactylUser = window.RoyalPanelUser;
                 </script>
             @endif
             @if(!empty($siteConfiguration))
@@ -78,19 +79,19 @@
                         'quicksand' => '//fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap',
                         'manrope' => '//fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap',
                         'space_grotesk' => '//fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap',
-                    ][$siteConfiguration['arix']['font']] ?? ''
+                    ][$siteConfiguration['royal']['font']] ?? ''
                 }}');
                 
             @import url('//fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap');
             @import url('//fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans:500&display=swap');
             
             :root{
-                <?php if ($siteConfiguration['arix']['borderInput'] === 'true') {
+                <?php if ($siteConfiguration['royal']['borderInput'] === 'true') {
                     echo '--borderInput: 1px solid;
 ';  
                 }?>
-                --radiusBox: {{ $siteConfiguration['arix']['radiusBox'] }}px;
-                --radiusInput: {{ $siteConfiguration['arix']['radiusInput'] }}px;
+                --radiusBox: {{ $siteConfiguration['royal']['radiusBox'] }}px;
+                --radiusInput: {{ $siteConfiguration['royal']['radiusInput'] }}px;
 
                 --fontFamily: '{{
                     [
@@ -109,79 +110,79 @@
                         'quicksand' => 'Quicksand',
                         'manrope' => 'Manrope',
                         'space_grotesk' => 'Space Grotesk',
-                    ][$siteConfiguration['arix']['font']] ?? ''
+                    ][$siteConfiguration['royal']['font']] ?? ''
                 }}';
             }
 
-            <?php if ($siteConfiguration['arix']['defaultMode'] === 'darkmode') {
+            <?php if ($siteConfiguration['royal']['defaultMode'] === 'darkmode') {
                 echo ':root';
             } else {
                 echo '.lightmode';
             }?>{
-                --image: url({{ $siteConfiguration['arix']['backgroundImage'] }});
-                --primary: {{ $siteConfiguration['arix']['primary'] }};
+                --image: url({{ $siteConfiguration['royal']['backgroundImage'] }});
+                --primary: {{ $siteConfiguration['royal']['primary'] }};
 
-                --successText: {{ $siteConfiguration['arix']['successText'] }};
-                --successBorder: {{ $siteConfiguration['arix']['successBorder'] }};
-                --successBackground: {{ $siteConfiguration['arix']['successBackground'] }};
+                --successText: {{ $siteConfiguration['royal']['successText'] }};
+                --successBorder: {{ $siteConfiguration['royal']['successBorder'] }};
+                --successBackground: {{ $siteConfiguration['royal']['successBackground'] }};
 
-                --dangerText: {{ $siteConfiguration['arix']['dangerText'] }};
-                --dangerBorder: {{ $siteConfiguration['arix']['dangerBorder'] }};
-                --dangerBackground: {{ $siteConfiguration['arix']['dangerBackground'] }}; 
+                --dangerText: {{ $siteConfiguration['royal']['dangerText'] }};
+                --dangerBorder: {{ $siteConfiguration['royal']['dangerBorder'] }};
+                --dangerBackground: {{ $siteConfiguration['royal']['dangerBackground'] }}; 
 
-                --secondaryText: {{ $siteConfiguration['arix']['secondaryText'] }};
-                --secondaryBorder: {{ $siteConfiguration['arix']['secondaryBorder'] }};
-                --secondaryBackground: {{ $siteConfiguration['arix']['secondaryBackground'] }};
+                --secondaryText: {{ $siteConfiguration['royal']['secondaryText'] }};
+                --secondaryBorder: {{ $siteConfiguration['royal']['secondaryBorder'] }};
+                --secondaryBackground: {{ $siteConfiguration['royal']['secondaryBackground'] }};
 
-                --gray50: {{ $siteConfiguration['arix']['gray50'] }};
-                --gray100: {{ $siteConfiguration['arix']['gray100'] }};
-                --gray200: {{ $siteConfiguration['arix']['gray200'] }};
-                --gray300: {{ $siteConfiguration['arix']['gray300'] }};
-                --gray400: {{ $siteConfiguration['arix']['gray400'] }};
-                --gray500: {{ $siteConfiguration['arix']['gray500'] }};
-                --gray600: {{ $siteConfiguration['arix']['gray600'] }};
-                --gray700: color-mix(in srgb, {{ $siteConfiguration['arix']['gray700'] }} {{ $siteConfiguration['arix']['backdropPercentage'] }}%, transparent);
-                --gray800: {{ $siteConfiguration['arix']['gray800'] }};
-                --gray900: {{ $siteConfiguration['arix']['gray900'] }};
+                --gray50: {{ $siteConfiguration['royal']['gray50'] }};
+                --gray100: {{ $siteConfiguration['royal']['gray100'] }};
+                --gray200: {{ $siteConfiguration['royal']['gray200'] }};
+                --gray300: {{ $siteConfiguration['royal']['gray300'] }};
+                --gray400: {{ $siteConfiguration['royal']['gray400'] }};
+                --gray500: {{ $siteConfiguration['royal']['gray500'] }};
+                --gray600: {{ $siteConfiguration['royal']['gray600'] }};
+                --gray700: color-mix(in srgb, {{ $siteConfiguration['royal']['gray700'] }} {{ $siteConfiguration['royal']['backdropPercentage'] }}%, transparent);
+                --gray800: {{ $siteConfiguration['royal']['gray800'] }};
+                --gray900: {{ $siteConfiguration['royal']['gray900'] }};
 
-                --gray700-default: {{ $siteConfiguration['arix']['gray700'] }};
-                --fallBackGray: color-mix(in srgb, {{ $siteConfiguration['arix']['gray700'] }} {{ $siteConfiguration['arix']['backdropPercentage'] }}%, transparent);
+                --gray700-default: {{ $siteConfiguration['royal']['gray700'] }};
+                --fallBackGray: color-mix(in srgb, {{ $siteConfiguration['royal']['gray700'] }} {{ $siteConfiguration['royal']['backdropPercentage'] }}%, transparent);
             }
-            <?php if ($siteConfiguration['arix']['defaultMode'] !== 'darkmode') {
+            <?php if ($siteConfiguration['royal']['defaultMode'] !== 'darkmode') {
                 echo ':root';
             } else {
                 echo '.lightmode';
             }?>{
-                --image: url({{ $siteConfiguration['arix']['backgroundImageLight'] }});
-                --primary: {{ $siteConfiguration['arix']['lightmode_primary'] }};
+                --image: url({{ $siteConfiguration['royal']['backgroundImageLight'] }});
+                --primary: {{ $siteConfiguration['royal']['lightmode_primary'] }};
 
-                --successText: {{ $siteConfiguration['arix']['lightmode_successText'] }};
-                --successBorder: {{ $siteConfiguration['arix']['lightmode_successBorder'] }};
-                --successBackground: {{ $siteConfiguration['arix']['lightmode_successBackground'] }};
+                --successText: {{ $siteConfiguration['royal']['lightmode_successText'] }};
+                --successBorder: {{ $siteConfiguration['royal']['lightmode_successBorder'] }};
+                --successBackground: {{ $siteConfiguration['royal']['lightmode_successBackground'] }};
 
-                --dangerText: {{ $siteConfiguration['arix']['lightmode_dangerText'] }};
-                --dangerBorder: {{ $siteConfiguration['arix']['lightmode_dangerBorder'] }};
-                --dangerBackground: {{ $siteConfiguration['arix']['lightmode_dangerBackground'] }}; 
+                --dangerText: {{ $siteConfiguration['royal']['lightmode_dangerText'] }};
+                --dangerBorder: {{ $siteConfiguration['royal']['lightmode_dangerBorder'] }};
+                --dangerBackground: {{ $siteConfiguration['royal']['lightmode_dangerBackground'] }}; 
 
-                --secondaryText: {{ $siteConfiguration['arix']['lightmode_secondaryText'] }};
-                --secondaryBorder: {{ $siteConfiguration['arix']['lightmode_secondaryBorder'] }};
-                --secondaryBackground: {{ $siteConfiguration['arix']['lightmode_secondaryBackground'] }};
+                --secondaryText: {{ $siteConfiguration['royal']['lightmode_secondaryText'] }};
+                --secondaryBorder: {{ $siteConfiguration['royal']['lightmode_secondaryBorder'] }};
+                --secondaryBackground: {{ $siteConfiguration['royal']['lightmode_secondaryBackground'] }};
 
-                --gray50: {{ $siteConfiguration['arix']['lightmode_gray50'] }};
-                --gray100: {{ $siteConfiguration['arix']['lightmode_gray100'] }};
-                --gray200: {{ $siteConfiguration['arix']['lightmode_gray200'] }};
-                --gray300: {{ $siteConfiguration['arix']['lightmode_gray300'] }};
-                --gray400: {{ $siteConfiguration['arix']['lightmode_gray400'] }};
-                --gray500: {{ $siteConfiguration['arix']['lightmode_gray500'] }};
-                --gray600: {{ $siteConfiguration['arix']['lightmode_gray600'] }}; 
-                --gray700: color-mix(in srgb, {{ $siteConfiguration['arix']['lightmode_gray700'] }} {{ $siteConfiguration['arix']['backdropPercentage'] }}%, transparent);
-                --gray800: {{ $siteConfiguration['arix']['lightmode_gray800'] }};
-                --gray900: {{ $siteConfiguration['arix']['lightmode_gray900'] }};
+                --gray50: {{ $siteConfiguration['royal']['lightmode_gray50'] }};
+                --gray100: {{ $siteConfiguration['royal']['lightmode_gray100'] }};
+                --gray200: {{ $siteConfiguration['royal']['lightmode_gray200'] }};
+                --gray300: {{ $siteConfiguration['royal']['lightmode_gray300'] }};
+                --gray400: {{ $siteConfiguration['royal']['lightmode_gray400'] }};
+                --gray500: {{ $siteConfiguration['royal']['lightmode_gray500'] }};
+                --gray600: {{ $siteConfiguration['royal']['lightmode_gray600'] }}; 
+                --gray700: color-mix(in srgb, {{ $siteConfiguration['royal']['lightmode_gray700'] }} {{ $siteConfiguration['royal']['backdropPercentage'] }}%, transparent);
+                --gray800: {{ $siteConfiguration['royal']['lightmode_gray800'] }};
+                --gray900: {{ $siteConfiguration['royal']['lightmode_gray900'] }};
 
-                --gray700-default: {{ $siteConfiguration['arix']['lightmode_gray700'] }};
+                --gray700-default: {{ $siteConfiguration['royal']['lightmode_gray700'] }};
             }
 
-            <?php if ($siteConfiguration['arix']['backdrop'] === 'true') {
+            <?php if ($siteConfiguration['royal']['backdrop'] === 'true') {
                 echo '.backdrop{border:1px solid;border-color:var(--gray600)!important;backdrop-filter:blur(16px);}';
             }?>
 

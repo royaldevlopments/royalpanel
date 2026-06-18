@@ -1,18 +1,18 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Servers;
+namespace RoyalPanel\Http\Controllers\Admin\Servers;
 
 use Illuminate\View\View;
-use Pterodactyl\Models\Nest;
-use Pterodactyl\Models\Node;
-use Pterodactyl\Models\Location;
+use RoyalPanel\Models\Nest;
+use RoyalPanel\Models\Node;
+use RoyalPanel\Models\Location;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Repositories\Eloquent\NestRepository;
-use Pterodactyl\Repositories\Eloquent\NodeRepository;
-use Pterodactyl\Http\Requests\Admin\ServerFormRequest;
-use Pterodactyl\Services\Servers\ServerCreationService;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Repositories\Eloquent\NestRepository;
+use RoyalPanel\Repositories\Eloquent\NodeRepository;
+use RoyalPanel\Http\Requests\Admin\ServerFormRequest;
+use RoyalPanel\Services\Servers\ServerCreationService;
 
 class CreateServerController extends Controller
 {
@@ -30,7 +30,7 @@ class CreateServerController extends Controller
     /**
      * Displays the create server page.
      *
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \RoyalPanel\Exceptions\Repository\RecordNotFoundException
      */
     public function index(): View|RedirectResponse
     {
@@ -62,9 +62,9 @@ class CreateServerController extends Controller
      * Create a new server on the remote system.
      *
      * @throws \Illuminate\Validation\ValidationException
-     * @throws \Pterodactyl\Exceptions\DisplayException
-     * @throws \Pterodactyl\Exceptions\Service\Deployment\NoViableAllocationException
-     * @throws \Pterodactyl\Exceptions\Service\Deployment\NoViableNodeException
+     * @throws \RoyalPanel\Exceptions\DisplayException
+     * @throws \RoyalPanel\Exceptions\Service\Deployment\NoViableAllocationException
+     * @throws \RoyalPanel\Exceptions\Service\Deployment\NoViableNodeException
      * @throws \Throwable
      */
     public function store(ServerFormRequest $request): RedirectResponse

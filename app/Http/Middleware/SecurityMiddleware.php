@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Http\Middleware;
+namespace RoyalPanel\Http\Middleware;
 
 use Closure;
-use Pterodactyl\Services\Security\AttackDetector;
-use Pterodactyl\Services\Security\IpBlockService;
-use Pterodactyl\Services\Security\RateLimitService;
-use Pterodactyl\Services\Security\HoneypotService;
+use RoyalPanel\Services\Security\AttackDetector;
+use RoyalPanel\Services\Security\IpBlockService;
+use RoyalPanel\Services\Security\RateLimitService;
+use RoyalPanel\Services\Security\HoneypotService;
 
 class SecurityMiddleware
 {

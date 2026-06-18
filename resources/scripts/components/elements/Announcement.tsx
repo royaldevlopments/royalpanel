@@ -20,14 +20,14 @@ const MyAlert = styled.div<{ $color: string }>`
 const Announcement = () => {
     const [isOpen, setIsOpen] = useState(true);
 
-    const announcement = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcement);
-    const announcementColor = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementColor);
-    const announcementIcon = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementIcon);
-    const announcementMessage = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementMessage);
-    const announcementCta = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementCta);
-    const announcementCtaTitle = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementCtaTitle);
-    const announcementCtaLink = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementCtaLink);
-    const announcementDismissable = useStoreState((state: ApplicationStore) => state.settings.data!.arix.announcementDismissable);
+    const announcement = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcement);
+    const announcementColor = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementColor);
+    const announcementIcon = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementIcon);
+    const announcementMessage = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementMessage);
+    const announcementCta = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementCta);
+    const announcementCtaTitle = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementCtaTitle);
+    const announcementCtaLink = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementCtaLink);
+    const announcementDismissable = useStoreState((state: ApplicationStore) => state.settings.data!.royal.announcementDismissable);
 
     useEffect(() => {
         const announcementKey = `${announcementMessage?.slice(0, 5)}-${announcementMessage?.slice(-5)}`;

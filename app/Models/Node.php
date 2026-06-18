@@ -1,15 +1,15 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 use Illuminate\Container\Container;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Encryption\Encrypter;
-use Pterodactyl\Contracts\Models\Identifiable;
+use RoyalPanel\Contracts\Models\Identifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
+use RoyalPanel\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -38,9 +38,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property Location $location
- * @property \Pterodactyl\Models\Mount[]|\Illuminate\Database\Eloquent\Collection $mounts
- * @property \Pterodactyl\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
- * @property \Pterodactyl\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations
+ * @property \RoyalPanel\Models\Mount[]|\Illuminate\Database\Eloquent\Collection $mounts
+ * @property \RoyalPanel\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
+ * @property \RoyalPanel\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations
  */
 #[Attributes\Identifiable('node')]
 class Node extends Model implements Identifiable
@@ -129,7 +129,7 @@ class Node extends Model implements Identifiable
         'behind_proxy' => false,
         'memory_overallocate' => 0,
         'disk_overallocate' => 0,
-        'daemonBase' => '/var/lib/pterodactyl/volumes',
+        'daemonBase' => '/var/lib/royalpanel/volumes',
         'daemonSFTP' => 2022,
         'daemonListen' => 8080,
         'maintenance_mode' => false,
@@ -206,7 +206,7 @@ class Node extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Pterodactyl\Models\Mount, \Pterodactyl\Models\MountNode, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\RoyalPanel\Models\Mount, \RoyalPanel\Models\MountNode, $this>
      */
     public function mounts(): HasManyThrough
     {
@@ -216,7 +216,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the location associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Location, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\Location, $this>
      */
     public function location(): BelongsTo
     {
@@ -226,7 +226,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the servers associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\Server, $this>
      */
     public function servers(): HasMany
     {
@@ -236,7 +236,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the allocations associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Allocation, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\Allocation, $this>
      */
     public function allocations(): HasMany
     {

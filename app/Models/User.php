@@ -1,30 +1,30 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
-use Pterodactyl\Rules\Username;
-use Pterodactyl\Facades\Activity;
+use RoyalPanel\Rules\Username;
+use RoyalPanel\Facades\Activity;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rules\In;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
-use Pterodactyl\Contracts\Models\Identifiable;
-use Pterodactyl\Models\Traits\HasAccessTokens;
+use RoyalPanel\Contracts\Models\Identifiable;
+use RoyalPanel\Models\Traits\HasAccessTokens;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Pterodactyl\Traits\Helpers\AvailableLanguages;
+use RoyalPanel\Traits\Helpers\AvailableLanguages;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
+use RoyalPanel\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Pterodactyl\Notifications\SendPasswordReset as ResetPasswordNotification;
+use RoyalPanel\Notifications\SendPasswordReset as ResetPasswordNotification;
 
 /**
- * Pterodactyl\Models\User.
+ * RoyalPanel\Models\User.
  *
  * @property int $id
  * @property string|null $external_id
@@ -43,18 +43,18 @@ use Pterodactyl\Notifications\SendPasswordReset as ResetPasswordNotification;
  * @property bool $gravatar
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\ApiKey[] $apiKeys
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\ApiKey[] $apiKeys
  * @property int|null $api_keys_count
  * @property string $name
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property int|null $notifications_count
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\RecoveryToken[] $recoveryTokens
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\RecoveryToken[] $recoveryTokens
  * @property int|null $recovery_tokens_count
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Server[] $servers
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\Server[] $servers
  * @property int|null $servers_count
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\UserSSHKey[] $sshKeys
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\UserSSHKey[] $sshKeys
  * @property int|null $ssh_keys_count
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\ApiKey[] $tokens
+ * @property \Illuminate\Database\Eloquent\Collection|\RoyalPanel\Models\ApiKey[] $tokens
  * @property int|null $tokens_count
  *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
@@ -93,7 +93,7 @@ class User extends Model implements
     use Authorizable;
     use AvailableLanguages;
     use CanResetPassword;
-    /** @use \Pterodactyl\Models\Traits\HasAccessTokens<\Pterodactyl\Models\ApiKey> */
+    /** @use \RoyalPanel\Models\Traits\HasAccessTokens<\RoyalPanel\Models\ApiKey> */
     use HasAccessTokens;
     use Notifiable;
     /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\UserFactory> */
@@ -242,7 +242,7 @@ class User extends Model implements
     /**
      * Returns all servers that a user owns.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\Server, $this>
      */
     public function servers(): HasMany
     {
@@ -250,7 +250,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\ApiKey, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\ApiKey, $this>
      */
     public function apiKeys(): HasMany
     {
@@ -259,7 +259,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\RecoveryToken, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\RecoveryToken, $this>
      */
     public function recoveryTokens(): HasMany
     {
@@ -267,7 +267,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\UserSSHKey, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\UserSSHKey, $this>
      */
     public function sshKeys(): HasMany
     {
@@ -275,7 +275,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\ServerOrder, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\RoyalPanel\Models\ServerOrder, $this>
      */
     public function serverOrders(): HasMany
     {
@@ -286,7 +286,7 @@ class User extends Model implements
      * Returns all the activity logs where this user is the subject — not to
      * be confused by activity logs where this user is the _actor_.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany<\Pterodactyl\Models\ActivityLog, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany<\RoyalPanel\Models\ActivityLog, $this>
      */
     public function activity(): MorphToMany
     {
@@ -297,7 +297,7 @@ class User extends Model implements
      * Returns all the servers that a user can access by way of being the owner of the
      * server, or because they are assigned as a subuser for that server.
      *
-     * @return \Illuminate\Database\Eloquent\Builder<\Pterodactyl\Models\Server>
+     * @return \Illuminate\Database\Eloquent\Builder<\RoyalPanel\Models\Server>
      */
     public function accessibleServers(): Builder
     {

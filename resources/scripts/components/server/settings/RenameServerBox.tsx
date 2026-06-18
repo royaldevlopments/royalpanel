@@ -22,7 +22,7 @@ interface Values {
 }
 
 const RenameServerBox = () => {
-    const { t } = useTranslation('arix/server/settings');
+    const { t } = useTranslation('royal/server/settings');
     const { isSubmitting } = useFormikContext<Values>();
 
     return (

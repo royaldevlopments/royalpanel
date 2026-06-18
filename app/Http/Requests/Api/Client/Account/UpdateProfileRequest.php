@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client\Account;
+namespace RoyalPanel\Http\Requests\Api\Client\Account;
 
-use Pterodactyl\Models\User;
+use RoyalPanel\Models\User;
 use Illuminate\Support\Collection;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
+use RoyalPanel\Http\Requests\Api\Client\ClientApiRequest;
 
 class UpdateProfileRequest extends ClientApiRequest
 {

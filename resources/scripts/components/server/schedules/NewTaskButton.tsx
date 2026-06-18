@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default ({ schedule }: Props) => {
-    const { t } = useTranslation('arix/server/schedules');
+    const { t } = useTranslation('royal/server/schedules');
     const [visible, setVisible] = useState(false);
 
     return (

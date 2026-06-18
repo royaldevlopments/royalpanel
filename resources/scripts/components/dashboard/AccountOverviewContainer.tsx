@@ -14,7 +14,7 @@ import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const { state } = useLocation<undefined | { twoFactorRedirect?: boolean }>();
     const [isTab, setIsTab] = useState('ssh')
 
@@ -60,10 +60,10 @@ export default () => {
                                 && t('sshkey')}
                             </p>
                             <div className={'flex gap-x-4'}>
-                                <button onClick={() => setIsTab('api')} className={`pb-2 border-b duration-300 ${isTab === 'api' ? 'border-arix text-gray-50' : 'border-transparent hover:text-gray-50'}`}>
+                                <button onClick={() => setIsTab('api')} className={`pb-2 border-b duration-300 ${isTab === 'api' ? 'border-royal text-gray-50' : 'border-transparent hover:text-gray-50'}`}>
                                     {t('apikey')}
                                 </button>
-                                <button onClick={() => setIsTab('ssh')} className={`pb-2 border-b duration-300 ${isTab === 'ssh' ? 'border-arix text-gray-50' : 'border-transparent hover:text-gray-50'}`}>
+                                <button onClick={() => setIsTab('ssh')} className={`pb-2 border-b duration-300 ${isTab === 'ssh' ? 'border-royal text-gray-50' : 'border-transparent hover:text-gray-50'}`}>
                                     {t('sshkey')}
                                 </button>
                             </div>

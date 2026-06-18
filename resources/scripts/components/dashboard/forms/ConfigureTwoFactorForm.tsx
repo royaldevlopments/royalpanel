@@ -12,7 +12,7 @@ import { ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/react/outline
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const [tokens, setTokens] = useState<string[]>([]);
     const [visible, setVisible] = useState<'enable' | 'disable' | null>(null);
     const isEnabled = useStoreState((state: ApplicationStore) => state.user.data!.useTotp);

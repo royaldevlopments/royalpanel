@@ -17,7 +17,7 @@ interface FormikValues {
 type OwnProps = RequiredModalProps & { files: string[]; onRefresh?: () => void };
 
 const RenameFileModal = ({ files, onRefresh, ...props }: OwnProps) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { mutate } = useFileManagerSwr();
     const { clearFlashes, clearAndAddHttpError } = useFlash();

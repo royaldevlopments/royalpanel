@@ -32,7 +32,7 @@ interface Props {
 }
 
 export default ({ backup, className }: Props) => {
-    const { t } = useTranslation('arix/server/backups');
+    const { t } = useTranslation('royal/server/backups');
     const { mutate } = getServerBackups();
     const { i18n } = useTranslation();
     const currentLang = i18n.language;

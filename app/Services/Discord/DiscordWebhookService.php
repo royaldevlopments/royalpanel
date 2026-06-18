@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Services\Discord;
+namespace RoyalPanel\Services\Discord;
 
 use Illuminate\Support\Facades\Http;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\ServerDiscordWebhook;
+use RoyalPanel\Models\Server;
+use RoyalPanel\Models\ServerDiscordWebhook;
 
 class DiscordWebhookService
 {

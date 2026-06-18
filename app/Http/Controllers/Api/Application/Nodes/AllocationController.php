@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Application\Nodes;
+namespace RoyalPanel\Http\Controllers\Api\Application\Nodes;
 
-use Pterodactyl\Models\Node;
+use RoyalPanel\Models\Node;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Models\Allocation;
+use RoyalPanel\Models\Allocation;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Pterodactyl\Services\Allocations\AssignmentService;
-use Pterodactyl\Services\Allocations\AllocationDeletionService;
-use Pterodactyl\Transformers\Api\Application\AllocationTransformer;
-use Pterodactyl\Http\Controllers\Api\Application\ApplicationApiController;
-use Pterodactyl\Http\Requests\Api\Application\Allocations\GetAllocationsRequest;
-use Pterodactyl\Http\Requests\Api\Application\Allocations\StoreAllocationRequest;
-use Pterodactyl\Http\Requests\Api\Application\Allocations\DeleteAllocationRequest;
+use RoyalPanel\Services\Allocations\AssignmentService;
+use RoyalPanel\Services\Allocations\AllocationDeletionService;
+use RoyalPanel\Transformers\Api\Application\AllocationTransformer;
+use RoyalPanel\Http\Controllers\Api\Application\ApplicationApiController;
+use RoyalPanel\Http\Requests\Api\Application\Allocations\GetAllocationsRequest;
+use RoyalPanel\Http\Requests\Api\Application\Allocations\StoreAllocationRequest;
+use RoyalPanel\Http\Requests\Api\Application\Allocations\DeleteAllocationRequest;
 
 class AllocationController extends ApplicationApiController
 {
@@ -56,11 +56,11 @@ class AllocationController extends ApplicationApiController
     /**
      * Store new allocations for a given node.
      *
-     * @throws \Pterodactyl\Exceptions\DisplayException
-     * @throws \Pterodactyl\Exceptions\Service\Allocation\CidrOutOfRangeException
-     * @throws \Pterodactyl\Exceptions\Service\Allocation\InvalidPortMappingException
-     * @throws \Pterodactyl\Exceptions\Service\Allocation\PortOutOfRangeException
-     * @throws \Pterodactyl\Exceptions\Service\Allocation\TooManyPortsInRangeException
+     * @throws \RoyalPanel\Exceptions\DisplayException
+     * @throws \RoyalPanel\Exceptions\Service\Allocation\CidrOutOfRangeException
+     * @throws \RoyalPanel\Exceptions\Service\Allocation\InvalidPortMappingException
+     * @throws \RoyalPanel\Exceptions\Service\Allocation\PortOutOfRangeException
+     * @throws \RoyalPanel\Exceptions\Service\Allocation\TooManyPortsInRangeException
      */
     public function store(StoreAllocationRequest $request, Node $node): JsonResponse
     {
@@ -72,7 +72,7 @@ class AllocationController extends ApplicationApiController
     /**
      * Delete a specific allocation from the Panel.
      *
-     * @throws \Pterodactyl\Exceptions\Service\Allocation\ServerUsingAllocationException
+     * @throws \RoyalPanel\Exceptions\Service\Allocation\ServerUsingAllocationException
      */
     public function delete(DeleteAllocationRequest $request, Node $node, Allocation $allocation): JsonResponse
     {

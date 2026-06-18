@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Pterodactyl\Http\Controllers\Admin;
-use Pterodactyl\Http\Middleware\Admin\Servers\ServerInstalled;
+use RoyalPanel\Http\Controllers\Admin;
+use RoyalPanel\Http\Middleware\Admin\Servers\ServerInstalled;
 
 Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 
@@ -14,41 +14,41 @@ Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 | Endpoint: /admin/theme
 |
 */
-Route::group(['prefix' => 'arix'], function () {
-    Route::get('/', [Admin\Arix\ArixController::class, 'index'])->name('admin.arix');
-    Route::post('/', [Admin\Arix\ArixController::class, 'store']);
+Route::group(['prefix' => 'royal'], function () {
+    Route::get('/', [Admin\Royal\RoyalController::class, 'index'])->name('admin.royal');
+    Route::post('/', [Admin\Royal\RoyalController::class, 'store']);
 
-    Route::get('/layout', [Admin\Arix\ArixLayoutController::class, 'index'])->name('admin.arix.layout');
-    Route::post('/layout', [Admin\Arix\ArixLayoutController::class, 'store']);
+    Route::get('/layout', [Admin\Royal\RoyalLayoutController::class, 'index'])->name('admin.royal.layout');
+    Route::post('/layout', [Admin\Royal\RoyalLayoutController::class, 'store']);
 
-    Route::get('/components', [Admin\Arix\ArixComponentsController::class, 'index'])->name('admin.arix.components');
-    Route::post('/components', [Admin\Arix\ArixComponentsController::class, 'store']);
+    Route::get('/components', [Admin\Royal\RoyalComponentsController::class, 'index'])->name('admin.royal.components');
+    Route::post('/components', [Admin\Royal\RoyalComponentsController::class, 'store']);
 
-    Route::get('/dashboard', [Admin\Arix\ArixDashboardController::class, 'index'])->name('admin.arix.dashboard');
-    Route::post('/dashboard', [Admin\Arix\ArixDashboardController::class, 'store']);
+    Route::get('/dashboard', [Admin\Royal\RoyalDashboardController::class, 'index'])->name('admin.royal.dashboard');
+    Route::post('/dashboard', [Admin\Royal\RoyalDashboardController::class, 'store']);
 
-    Route::get('/announcement', [Admin\Arix\ArixAnnouncementController::class, 'index'])->name('admin.arix.announcement');
-    Route::post('/announcement', [Admin\Arix\ArixAnnouncementController::class, 'store']);
+    Route::get('/announcement', [Admin\Royal\RoyalAnnouncementController::class, 'index'])->name('admin.royal.announcement');
+    Route::post('/announcement', [Admin\Royal\RoyalAnnouncementController::class, 'store']);
 
-    Route::get('/mail', [Admin\Arix\ArixMailController::class, 'index'])->name('admin.arix.mail');
-    Route::post('/mail', [Admin\Arix\ArixMailController::class, 'store']);
+    Route::get('/mail', [Admin\Royal\RoyalMailController::class, 'index'])->name('admin.royal.mail');
+    Route::post('/mail', [Admin\Royal\RoyalMailController::class, 'store']);
 
-    Route::get('/styling', [Admin\Arix\ArixStylingController::class, 'index'])->name('admin.arix.styling');
-    Route::post('/styling', [Admin\Arix\ArixStylingController::class, 'store']);
+    Route::get('/styling', [Admin\Royal\RoyalStylingController::class, 'index'])->name('admin.royal.styling');
+    Route::post('/styling', [Admin\Royal\RoyalStylingController::class, 'store']);
 
-    Route::get('/meta', [Admin\Arix\ArixMetaController::class, 'index'])->name('admin.arix.meta');
-    Route::post('/meta', [Admin\Arix\ArixMetaController::class, 'store']);
+    Route::get('/meta', [Admin\Royal\RoyalMetaController::class, 'index'])->name('admin.royal.meta');
+    Route::post('/meta', [Admin\Royal\RoyalMetaController::class, 'store']);
 
-    Route::get('/colors', [Admin\Arix\ArixColorsController::class, 'index'])->name('admin.arix.colors');
-    Route::post('/colors', [Admin\Arix\ArixColorsController::class, 'store']);
+    Route::get('/colors', [Admin\Royal\RoyalColorsController::class, 'index'])->name('admin.royal.colors');
+    Route::post('/colors', [Admin\Royal\RoyalColorsController::class, 'store']);
 
-    Route::get('/social', [Admin\Arix\ArixSocialController::class, 'index'])->name('admin.arix.social');
-    Route::post('/social', [Admin\Arix\ArixSocialController::class, 'store']);
+    Route::get('/social', [Admin\Royal\RoyalSocialController::class, 'index'])->name('admin.royal.social');
+    Route::post('/social', [Admin\Royal\RoyalSocialController::class, 'store']);
 
-    Route::get('/advanced', [Admin\Arix\ArixAdvancedController::class, 'index'])->name('admin.arix.advanced');
-    Route::post('/advanced', [Admin\Arix\ArixAdvancedController::class, 'store']);
+    Route::get('/advanced', [Admin\Royal\RoyalAdvancedController::class, 'index'])->name('admin.royal.advanced');
+    Route::post('/advanced', [Admin\Royal\RoyalAdvancedController::class, 'store']);
     
-    Route::post('/advanced/preset', [Admin\Arix\ArixAdvancedController::class, 'preset'])->name('admin.arix.advanced.preset');
+    Route::post('/advanced/preset', [Admin\Royal\RoyalAdvancedController::class, 'preset'])->name('admin.royal.advanced.preset');
 });
 
 /*

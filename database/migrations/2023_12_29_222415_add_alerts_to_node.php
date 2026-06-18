@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('nodes', function (Blueprint $table) {
             $table->string('alert')->nullable()->after('name');
-            $table->string('daemon_text')->default('[Pterodactyl Daemon]:')->after('alert');
-            $table->string('container_text')->default('container@pterodactyl~')->after('daemon_text');
+            $table->string('daemon_text')->default('[RoyalPanel Daemon]:')->after('alert');
+            $table->string('container_text')->default('container@royalpanel~')->after('daemon_text');
         });
     }
 

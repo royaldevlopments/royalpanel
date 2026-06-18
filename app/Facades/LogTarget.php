@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Facades;
+namespace RoyalPanel\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Pterodactyl\Services\Activity\ActivityLogTargetableService;
+use RoyalPanel\Services\Activity\ActivityLogTargetableService;
 
 /**
- * @mixin \Pterodactyl\Services\Activity\ActivityLogTargetableService
+ * @mixin \RoyalPanel\Services\Activity\ActivityLogTargetableService
  */
 class LogTarget extends Facade
 {

@@ -20,7 +20,7 @@ import { CogIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/settings');
+    const { t } = useTranslation('royal/server/settings');
     const username = useStoreState((state) => state.user.data!.username);
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);

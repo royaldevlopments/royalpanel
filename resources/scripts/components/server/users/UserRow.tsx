@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default ({ subuser }: Props) => {
-    const { t, i18n } = useTranslation('arix/server/users');
+    const { t, i18n } = useTranslation('royal/server/users');
     const currentLang = i18n.language;
     const localeKey = currentLang as keyof typeof locales;
     const uuid = useStoreState((state) => state.user!.data!.uuid);

@@ -41,7 +41,7 @@ interface Props {
     type?: FlashMessageType;
 }
 const MessageBox = ({ title, children, type }: Props) => {
-    const flashMessage = useStoreState((state: ApplicationStore) => state.settings.data!.arix.flashMessage);
+    const flashMessage = useStoreState((state: ApplicationStore) => state.settings.data!.royal.flashMessage);
 
     return (
         String(flashMessage) === "0" ? 

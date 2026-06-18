@@ -1,14 +1,14 @@
 <?php
 
-namespace Pterodactyl\Services\Users;
+namespace RoyalPanel\Services\Users;
 
 use Ramsey\Uuid\Uuid;
-use Pterodactyl\Models\User;
+use RoyalPanel\Models\User;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Auth\PasswordBroker;
-use Pterodactyl\Notifications\AccountCreated;
-use Pterodactyl\Contracts\Repository\UserRepositoryInterface;
+use RoyalPanel\Notifications\AccountCreated;
+use RoyalPanel\Contracts\Repository\UserRepositoryInterface;
 
 class UserCreationService
 {
@@ -27,7 +27,7 @@ class UserCreationService
      * Create a new user on the system.
      *
      * @throws \Exception
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
      */
     public function handle(array $data): User
     {

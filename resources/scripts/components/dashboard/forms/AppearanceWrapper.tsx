@@ -8,13 +8,13 @@ import Select from '@/components/elements/Select';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 
 const AppearanceWrapper = () => {
-    const { i18n, t } = useTranslation('arix/account');
+    const { i18n, t } = useTranslation('royal/account');
     const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
 
-    const modeToggler = String(useStoreState((state: ApplicationStore) => state.settings.data!.arix.modeToggler));
-    const langSwitch = String(useStoreState((state: ApplicationStore) => state.settings.data!.arix.langSwitch));
-    const defaultMode = useStoreState((state: ApplicationStore) => state.settings.data!.arix.defaultMode);
-    const languages = useStoreState((state: ApplicationStore) => state.settings.data!.arix.languageOptions);
+    const modeToggler = String(useStoreState((state: ApplicationStore) => state.settings.data!.royal.modeToggler));
+    const langSwitch = String(useStoreState((state: ApplicationStore) => state.settings.data!.royal.langSwitch));
+    const defaultMode = useStoreState((state: ApplicationStore) => state.settings.data!.royal.defaultMode);
+    const languages = useStoreState((state: ApplicationStore) => state.settings.data!.royal.languageOptions);
 
     const useLocalToggle = (key: string, className?: string) => {
         const [value, setValue] = useState<boolean>(() => {

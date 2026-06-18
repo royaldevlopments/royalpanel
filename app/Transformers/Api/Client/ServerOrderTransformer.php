@@ -1,8 +1,8 @@
 <?php
 
-namespace Pterodactyl\Transformers\Api\Client;
+namespace RoyalPanel\Transformers\Api\Client;
 
-use Pterodactyl\Models\ServerOrder;
+use RoyalPanel\Models\ServerOrder;
 
 class ServerOrderTransformer extends BaseClientTransformer
 {

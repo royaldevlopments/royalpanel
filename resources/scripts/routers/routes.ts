@@ -38,7 +38,7 @@ const ScheduleEditContainer = lazy(() => import('@/components/server/schedules/S
 
         Read this before doing addon modifications
 
-        Arix Theme has already handled many panel 
+        Royal Theme has already handled many panel 
         modifications for you, so there's no need for 
         any changes in the "ServerRouter.tsx" file.
 

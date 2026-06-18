@@ -1,17 +1,17 @@
 <?php
 
-namespace Pterodactyl\Services\Backups;
+namespace RoyalPanel\Services\Backups;
 
 use Ramsey\Uuid\Uuid;
 use Carbon\CarbonImmutable;
 use Webmozart\Assert\Assert;
-use Pterodactyl\Models\Backup;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Backup;
+use RoyalPanel\Models\Server;
 use Illuminate\Database\ConnectionInterface;
-use Pterodactyl\Extensions\Backups\BackupManager;
-use Pterodactyl\Repositories\Eloquent\BackupRepository;
-use Pterodactyl\Repositories\Wings\DaemonBackupRepository;
-use Pterodactyl\Exceptions\Service\Backup\TooManyBackupsException;
+use RoyalPanel\Extensions\Backups\BackupManager;
+use RoyalPanel\Repositories\Eloquent\BackupRepository;
+use RoyalPanel\Repositories\Wings\DaemonBackupRepository;
+use RoyalPanel\Exceptions\Service\Backup\TooManyBackupsException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 class InitiateBackupService

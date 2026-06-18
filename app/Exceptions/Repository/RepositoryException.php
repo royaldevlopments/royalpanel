@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Exceptions\Repository;
+namespace RoyalPanel\Exceptions\Repository;
 
-use Pterodactyl\Exceptions\PterodactylException;
+use RoyalPanel\Exceptions\RoyalPanelException;
 
-class RepositoryException extends PterodactylException
+class RepositoryException extends RoyalPanelException
 {
 }

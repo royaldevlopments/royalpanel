@@ -44,7 +44,7 @@ import { useFloating } from '@/context/FloatingContext';
 
         Read this before doing addon modifications
 
-        Arix Theme has already handled many panel 
+        Royal Theme has already handled many panel 
         modifications for you, so there's no need for 
         any changes in the "ServerRouter.tsx" file.
 */
@@ -61,12 +61,12 @@ export default () => {
         }
     }, [location.search]);
 
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
 
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
-    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.layout);
-    const background = useStoreState((state: ApplicationStore) => state.settings.data!.arix.background);
-    const backgroundFaded = useStoreState((state: ApplicationStore) => state.settings.data!.arix.backgroundFaded);
+    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.royal.layout);
+    const background = useStoreState((state: ApplicationStore) => state.settings.data!.royal.background);
+    const backgroundFaded = useStoreState((state: ApplicationStore) => state.settings.data!.royal.backgroundFaded);
     const [error, setError] = useState('');
 
     const name = ServerContext.useStoreState((state) => state.server.data?.name);

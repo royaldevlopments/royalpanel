@@ -24,7 +24,7 @@ type Props = OwnProps & {
 };
 
 const LoginCheckpointContainer = () => {
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
     const { isSubmitting, setFieldValue } = useFormikContext<Values>();
     const [isMissingDevice, setIsMissingDevice] = useState(false);
 

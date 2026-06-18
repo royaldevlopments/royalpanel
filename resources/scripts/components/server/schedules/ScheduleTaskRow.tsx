@@ -41,7 +41,7 @@ const getActionDetails = (action: string): [string, any] => {
 };
 
 export default ({ schedule, task }: Props) => {
-    const { t } = useTranslation('arix/server/schedules');
+    const { t } = useTranslation('royal/server/schedules');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, addError } = useFlash();
     const [visible, setVisible] = useState(false);

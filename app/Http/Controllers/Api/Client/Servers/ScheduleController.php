@@ -1,26 +1,26 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Client\Servers;
+namespace RoyalPanel\Http\Controllers\Api\Client\Servers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Schedule;
+use RoyalPanel\Models\Server;
+use RoyalPanel\Models\Schedule;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Facades\Activity;
-use Pterodactyl\Helpers\Utilities;
-use Pterodactyl\Exceptions\DisplayException;
-use Pterodactyl\Repositories\Eloquent\ScheduleRepository;
-use Pterodactyl\Services\Schedules\ProcessScheduleService;
-use Pterodactyl\Transformers\Api\Client\ScheduleTransformer;
-use Pterodactyl\Http\Controllers\Api\Client\ClientApiController;
+use RoyalPanel\Facades\Activity;
+use RoyalPanel\Helpers\Utilities;
+use RoyalPanel\Exceptions\DisplayException;
+use RoyalPanel\Repositories\Eloquent\ScheduleRepository;
+use RoyalPanel\Services\Schedules\ProcessScheduleService;
+use RoyalPanel\Transformers\Api\Client\ScheduleTransformer;
+use RoyalPanel\Http\Controllers\Api\Client\ClientApiController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\ViewScheduleRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\StoreScheduleRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\DeleteScheduleRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\UpdateScheduleRequest;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\TriggerScheduleRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Schedules\ViewScheduleRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Schedules\StoreScheduleRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Schedules\DeleteScheduleRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Schedules\UpdateScheduleRequest;
+use RoyalPanel\Http\Requests\Api\Client\Servers\Schedules\TriggerScheduleRequest;
 
 class ScheduleController extends ClientApiController
 {
@@ -48,7 +48,7 @@ class ScheduleController extends ClientApiController
      * Store a new schedule for a server.
      *
      * @throws DisplayException
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
      */
     public function store(StoreScheduleRequest $request, Server $server): array
     {
@@ -96,8 +96,8 @@ class ScheduleController extends ClientApiController
      * Updates a given schedule with the new data provided.
      *
      * @throws DisplayException
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \RoyalPanel\Exceptions\Model\DataValidationException
+     * @throws \RoyalPanel\Exceptions\Repository\RecordNotFoundException
      */
     public function update(UpdateScheduleRequest $request, Server $server, Schedule $schedule): array
     {
@@ -118,7 +118,7 @@ class ScheduleController extends ClientApiController
         // Toggle the processing state of the scheduled task when it is enabled or disabled so that an
         // invalid state can be reset without manual database intervention.
         //
-        // @see https://github.com/pterodactyl/panel/issues/2425
+        // @see https://github.com/royalpanel/panel/issues/2425
         if ($schedule->is_active !== $active) {
             $data['is_processing'] = false;
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Console\Commands\Maintenance;
+namespace RoyalPanel\Console\Commands\Maintenance;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;

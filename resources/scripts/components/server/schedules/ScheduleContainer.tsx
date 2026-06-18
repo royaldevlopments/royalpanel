@@ -16,7 +16,7 @@ import { CalendarIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/schedules');
+    const { t } = useTranslation('royal/server/schedules');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, addError } = useFlash();
     const [loading, setLoading] = useState(true);

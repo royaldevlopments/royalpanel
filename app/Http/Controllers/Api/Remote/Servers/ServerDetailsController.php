@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Remote\Servers;
+namespace RoyalPanel\Http\Controllers\Api\Remote\Servers;
 
 use Illuminate\Http\Request;
-use Pterodactyl\Models\Node;
+use RoyalPanel\Models\Node;
 use Webmozart\Assert\Assert;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Server;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Facades\Activity;
+use RoyalPanel\Facades\Activity;
 use Illuminate\Database\ConnectionInterface;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Services\Eggs\EggConfigurationService;
-use Pterodactyl\Exceptions\Http\HttpForbiddenException;
-use Pterodactyl\Repositories\Eloquent\ServerRepository;
-use Pterodactyl\Http\Resources\Wings\ServerConfigurationCollection;
-use Pterodactyl\Services\Servers\ServerConfigurationStructureService;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Services\Eggs\EggConfigurationService;
+use RoyalPanel\Exceptions\Http\HttpForbiddenException;
+use RoyalPanel\Repositories\Eloquent\ServerRepository;
+use RoyalPanel\Http\Resources\Wings\ServerConfigurationCollection;
+use RoyalPanel\Services\Servers\ServerConfigurationStructureService;
 
 class ServerDetailsController extends Controller
 {
@@ -33,7 +33,7 @@ class ServerDetailsController extends Controller
      * Returns details about the server that allows Wings to self-recover and ensure
      * that the state of the server matches the Panel at all times.
      *
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \RoyalPanel\Exceptions\Repository\RecordNotFoundException
      */
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
@@ -109,7 +109,7 @@ class ServerDetailsController extends Controller
         $this->connection->transaction(function () use ($node, $servers) {
             /** @var Server $server */
             foreach ($servers as $server) {
-                /** @var \Pterodactyl\Models\ActivityLog|null $activity */
+                /** @var \RoyalPanel\Models\ActivityLog|null $activity */
                 $activity = $server->activity->first();
                 if (!is_null($activity)) {
                     if ($subject = $activity->subjects->where('subject_type', 'backup')->first()) {

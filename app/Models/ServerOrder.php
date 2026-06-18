@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
-use Pterodactyl\Contracts\Models\Identifiable;
+use RoyalPanel\Models\Traits\HasRealtimeIdentifier;
+use RoyalPanel\Contracts\Models\Identifiable;
 
 #[Attributes\Identifiable('server_order')]
 class ServerOrder extends Model implements Identifiable{

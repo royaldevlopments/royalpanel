@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Services\Users;
+namespace RoyalPanel\Services\Users;
 
-use Pterodactyl\Models\User;
+use RoyalPanel\Models\User;
 use Illuminate\Contracts\Hashing\Hasher;
-use Pterodactyl\Events\User\PasswordChanged;
-use Pterodactyl\Traits\Services\HasUserLevels;
+use RoyalPanel\Events\User\PasswordChanged;
+use RoyalPanel\Traits\Services\HasUserLevels;
 
 class UserUpdateService
 {

@@ -54,8 +54,8 @@ const Component = ({ type }: Props) => {
 
 
 const DashboardContainer = () => {
-    const { t } = useTranslation(['arix/server/dashboard', 'arix/server/console']);
-    const dashboardWidgets = useStoreState((state: ApplicationStore) => state.settings.data!.arix.dashboardWidgets);
+    const { t } = useTranslation(['royal/server/dashboard', 'royal/server/console']);
+    const dashboardWidgets = useStoreState((state: ApplicationStore) => state.settings.data!.royal.dashboardWidgets);
 
     const isInstalling = ServerContext.useStoreState((state) => state.server.isInstalling);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
@@ -67,10 +67,10 @@ const DashboardContainer = () => {
                 <div>
                     <Alert type={'warning'} className={'mb-4'}>
                         {isNodeUnderMaintenance
-                            ? t('node-under-maintenance', { ns: 'arix/server/console' })
+                            ? t('node-under-maintenance', { ns: 'royal/server/console' })
                             : isInstalling
-                            ? t('running-installation-process', { ns: 'arix/server/console' })
-                            : t('being-transferred', { ns: 'arix/server/console' })}
+                            ? t('running-installation-process', { ns: 'royal/server/console' })
+                            : t('being-transferred', { ns: 'royal/server/console' })}
                     </Alert>
                     <Spinner.Suspense>
                         <Console />
@@ -80,8 +80,8 @@ const DashboardContainer = () => {
                 <div className={'grid lg:grid-cols-2 grid-cols-1 gap-4'}>
                     {dashboardWidgets.length === 0 ? (
                         <a
-                            className={'lg:col-span-2 px-8 py-6 bg-gradient-to-br from-arix to-purple-600 rounded-box group'}
-                            href={'/admin/arix/dashboard'}
+                            className={'lg:col-span-2 px-8 py-6 bg-gradient-to-br from-royal to-purple-600 rounded-box group'}
+                            href={'/admin/royal/dashboard'}
                         >
                             <p className={'text-3xl font-medium text-white'}>
                                 Customize dashboard page with drag and drop!

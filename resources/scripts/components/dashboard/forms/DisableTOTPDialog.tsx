@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import FlashMessageRender from '@/components/FlashMessageRender';
 
 const DisableTOTPDialog = () => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const [submitting, setSubmitting] = useState(false);
     const [password, setPassword] = useState('');
     const { clearAndAddHttpError } = useFlashKey('account:two-step');

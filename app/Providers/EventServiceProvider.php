@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Providers;
+namespace RoyalPanel\Providers;
 
-use Pterodactyl\Models\User;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Subuser;
-use Pterodactyl\Models\EggVariable;
-use Pterodactyl\Observers\UserObserver;
-use Pterodactyl\Observers\ServerObserver;
-use Pterodactyl\Observers\SubuserObserver;
-use Pterodactyl\Listeners\TwoFactorListener;
-use Pterodactyl\Listeners\RevocationListener;
-use Pterodactyl\Observers\EggVariableObserver;
-use Pterodactyl\Listeners\AuthenticationListener;
-use Pterodactyl\Events\Server\Installed as ServerInstalledEvent;
-use Pterodactyl\Notifications\ServerInstalled as ServerInstalledNotification;
+use RoyalPanel\Models\User;
+use RoyalPanel\Models\Server;
+use RoyalPanel\Models\Subuser;
+use RoyalPanel\Models\EggVariable;
+use RoyalPanel\Observers\UserObserver;
+use RoyalPanel\Observers\ServerObserver;
+use RoyalPanel\Observers\SubuserObserver;
+use RoyalPanel\Listeners\TwoFactorListener;
+use RoyalPanel\Listeners\RevocationListener;
+use RoyalPanel\Observers\EggVariableObserver;
+use RoyalPanel\Listeners\AuthenticationListener;
+use RoyalPanel\Events\Server\Installed as ServerInstalledEvent;
+use RoyalPanel\Notifications\ServerInstalled as ServerInstalledNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

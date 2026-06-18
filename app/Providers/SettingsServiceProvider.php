@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Providers;
+namespace RoyalPanel\Providers;
 
 use Psr\Log\LoggerInterface as Log;
 use Illuminate\Database\QueryException;
@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use RoyalPanel\Contracts\Repository\SettingsRepositoryInterface;
 
 class SettingsServiceProvider extends ServiceProvider
 {
@@ -25,14 +25,14 @@ class SettingsServiceProvider extends ServiceProvider
         'recaptcha:website_key',
         'turnstile:site_key',
         'turnstile:site_secret',
-        'pterodactyl:guzzle:timeout',
-        'pterodactyl:guzzle:connect_timeout',
-        'pterodactyl:console:count',
-        'pterodactyl:console:frequency',
-        'pterodactyl:auth:2fa_required',
-        'pterodactyl:client_features:allocations:enabled',
-        'pterodactyl:client_features:allocations:range_start',
-        'pterodactyl:client_features:allocations:range_end',
+        'royalpanel:guzzle:timeout',
+        'royalpanel:guzzle:connect_timeout',
+        'royalpanel:console:count',
+        'royalpanel:console:frequency',
+        'royalpanel:auth:2fa_required',
+        'royalpanel:client_features:allocations:enabled',
+        'royalpanel:client_features:allocations:range_start',
+        'royalpanel:client_features:allocations:range_end',
     ];
 
     /**

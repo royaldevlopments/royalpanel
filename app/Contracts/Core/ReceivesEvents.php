@@ -1,8 +1,8 @@
 <?php
 
-namespace Pterodactyl\Contracts\Core;
+namespace RoyalPanel\Contracts\Core;
 
-use Pterodactyl\Events\Event;
+use RoyalPanel\Events\Event;
 
 interface ReceivesEvents
 {

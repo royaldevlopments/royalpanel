@@ -28,7 +28,7 @@ const schema = object().shape({
 const NewDirectoryDialog = asDialog({
     title: 'Create Directory',
 })(({ onRefresh }: { onRefresh?: () => void }) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
 
@@ -83,7 +83,7 @@ const NewDirectoryDialog = asDialog({
 });
 
 export default ({ className, onRefresh }: WithClassname & { onRefresh?: () => void }) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const [open, setOpen] = useState(false);
 
     return (

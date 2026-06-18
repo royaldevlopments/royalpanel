@@ -12,7 +12,7 @@ interface CopyOnClickProps {
 }
 
 const CopyOnClick = ({ text, showInNotification = true, children }: CopyOnClickProps) => {
-    const { t } = useTranslation('arix/utilities');
+    const { t } = useTranslation('royal/utilities');
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const CopyOnClick = ({ text, showInNotification = true, children }: CopyOnClickP
                   copy(String(text));
                   setCopied(true);
                   if (localStorage.getItem('panelSounds') === 'true'){
-                    const copySound = new Audio('/arix/copy.mp3');
+                    const copySound = new Audio('/royal/copy.mp3');
                     copySound.volume = 0.2;
                     copySound.play();
                   }

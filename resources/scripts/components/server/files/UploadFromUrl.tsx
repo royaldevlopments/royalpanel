@@ -22,7 +22,7 @@ const PullFromUrl = asDialog({
     title: 'Upload from URL',
     description: 'Upload a file to the server by providing a direct URL to the file.',
 })(() => { 
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
 
@@ -107,7 +107,7 @@ const PullFromUrl = asDialog({
 });
 
 export default function UploadFromUrl({ className }: { className?: string }) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const [isOpen, setIsOpen] = useState(false);
 
     return (

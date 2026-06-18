@@ -1,20 +1,20 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Servers;
+namespace RoyalPanel\Http\Controllers\Admin\Servers;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
-use Pterodactyl\Enum\JwtScope;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Enum\JwtScope;
+use RoyalPanel\Models\Server;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
-use Pterodactyl\Models\ServerTransfer;
+use RoyalPanel\Models\ServerTransfer;
 use Illuminate\Database\ConnectionInterface;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Services\Nodes\NodeJWTService;
-use Pterodactyl\Repositories\Eloquent\NodeRepository;
-use Pterodactyl\Repositories\Wings\DaemonTransferRepository;
-use Pterodactyl\Contracts\Repository\AllocationRepositoryInterface;
+use RoyalPanel\Http\Controllers\Controller;
+use RoyalPanel\Services\Nodes\NodeJWTService;
+use RoyalPanel\Repositories\Eloquent\NodeRepository;
+use RoyalPanel\Repositories\Wings\DaemonTransferRepository;
+use RoyalPanel\Contracts\Repository\AllocationRepositoryInterface;
 
 class ServerTransferController extends Controller
 {

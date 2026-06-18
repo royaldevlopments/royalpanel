@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Services\Servers;
+namespace RoyalPanel\Services\Servers;
 
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\Server;
 use Illuminate\Database\ConnectionInterface;
-use Pterodactyl\Repositories\Wings\DaemonServerRepository;
+use RoyalPanel\Repositories\Wings\DaemonServerRepository;
 
 class ReinstallServerService
 {

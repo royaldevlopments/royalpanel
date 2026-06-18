@@ -1,21 +1,21 @@
 <?php
 
-namespace Pterodactyl\Providers;
+namespace RoyalPanel\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Psr\Log\LoggerInterface as Log;
-use Pterodactyl\Services\Security\CloudflareService;
-use Pterodactyl\Services\Security\IpBlockService;
-use Pterodactyl\Services\Security\RateLimitService;
-use Pterodactyl\Services\Security\AttackDetector;
-use Pterodactyl\Services\Security\IpRotationService;
-use Pterodactyl\Services\Security\HoneypotService;
-use Pterodactyl\Services\Security\ServerProtectionService;
-use Pterodactyl\Services\Security\AutoAttackResponseService;
-use Pterodactyl\Services\Security\OriginProtectionService;
-use Pterodactyl\Services\Security\BlackholeProtectionService;
+use RoyalPanel\Services\Security\CloudflareService;
+use RoyalPanel\Services\Security\IpBlockService;
+use RoyalPanel\Services\Security\RateLimitService;
+use RoyalPanel\Services\Security\AttackDetector;
+use RoyalPanel\Services\Security\IpRotationService;
+use RoyalPanel\Services\Security\HoneypotService;
+use RoyalPanel\Services\Security\ServerProtectionService;
+use RoyalPanel\Services\Security\AutoAttackResponseService;
+use RoyalPanel\Services\Security\OriginProtectionService;
+use RoyalPanel\Services\Security\BlackholeProtectionService;
         class SecurityServiceProvider extends ServiceProvider
 {
     protected array $keys = [

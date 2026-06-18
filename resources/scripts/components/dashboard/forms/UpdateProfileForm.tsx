@@ -24,7 +24,7 @@ const schema = Yup.object().shape({
 });
 
 export default () => {
-    const { t } = useTranslation('arix/account');
+    const { t } = useTranslation('royal/account');
     const user = useStoreState((state: State<ApplicationStore>) => state.user.data);
     const updateProfile = useStoreActions((state: Actions<ApplicationStore>) => state.user.updateUserProfile);
 

@@ -14,7 +14,7 @@ export interface PageContentBlockProps {
 }
 
 const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey, className, children }) => {
-    const copyright = useStoreState((state: ApplicationStore) => state.settings.data!.arix.copyright);
+    const copyright = useStoreState((state: ApplicationStore) => state.settings.data!.royal.copyright);
     
     useEffect(() => {
         if (title) {

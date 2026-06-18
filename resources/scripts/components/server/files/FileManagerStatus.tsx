@@ -32,7 +32,7 @@ const Spinner = ({ progress, className }: { progress: number; className?: string
 );
 
 const FileUploadList = () => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const { close } = useContext(DialogWrapperContext);
     const cancelFileUpload = ServerContext.useStoreActions((actions) => actions.files.cancelFileUpload);
     const clearFileUploads = ServerContext.useStoreActions((actions) => actions.files.clearFileUploads);
@@ -74,7 +74,7 @@ const FileUploadListDialog = asDialog({
 })(FileUploadList);
 
 export default () => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const open = useSignal(false);
 
     const count = ServerContext.useStoreState((state) => Object.keys(state.files.uploads).length);

@@ -32,7 +32,7 @@ const schema = object().shape({
 const CreateFileDialog = asDialog({
     title: 'Create File',
 })(({ onRefresh }: CreateFileProps) => {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const directory = ServerContext.useStoreState((state) => state.files.directory);
 
@@ -87,7 +87,7 @@ const CreateFileDialog = asDialog({
 });
 
 export default function CreateFile({ onRefresh }: CreateFileProps) {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const [open, setOpen] = useState(false);
 
     return (

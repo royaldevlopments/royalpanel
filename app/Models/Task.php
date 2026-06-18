@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 use Illuminate\Container\Container;
 use Znck\Eloquent\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Pterodactyl\Contracts\Extensions\HashidsInterface;
+use RoyalPanel\Contracts\Extensions\HashidsInterface;
 
 /**
  * @property int $id
@@ -112,7 +112,7 @@ class Task extends Model
     /**
      * Return the schedule that a task belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Schedule, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\RoyalPanel\Models\Schedule, $this>
      */
     public function schedule(): BelongsTo
     {
@@ -122,7 +122,7 @@ class Task extends Model
     /**
      * Return the server a task is assigned to, acts as a belongsToThrough.
      *
-     * @return \Znck\Eloquent\Relations\BelongsToThrough<\Pterodactyl\Models\Server, \Pterodactyl\Models\Schedule>
+     * @return \Znck\Eloquent\Relations\BelongsToThrough<\RoyalPanel\Models\Server, \RoyalPanel\Models\Schedule>
      */
     public function server(): \Znck\Eloquent\Relations\BelongsToThrough
     {

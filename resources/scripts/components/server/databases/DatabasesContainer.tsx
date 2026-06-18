@@ -16,7 +16,7 @@ import { DatabaseIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/databases');
+    const { t } = useTranslation('royal/server/databases');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const databaseLimit = ServerContext.useStoreState((state) => state.server.data!.featureLimits.databases);
 

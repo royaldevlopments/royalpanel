@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace RoyalPanel\Models;
 
 /**
- * Pterodactyl\Models\Setting.
+ * RoyalPanel\Models\Setting.
  *
  * @property int $id
  * @property string $key

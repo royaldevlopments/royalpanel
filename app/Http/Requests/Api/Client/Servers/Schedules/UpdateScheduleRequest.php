@@ -1,8 +1,8 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Api\Client\Servers\Schedules;
+namespace RoyalPanel\Http\Requests\Api\Client\Servers\Schedules;
 
-use Pterodactyl\Models\Permission;
+use RoyalPanel\Models\Permission;
 
 class UpdateScheduleRequest extends StoreScheduleRequest
 {

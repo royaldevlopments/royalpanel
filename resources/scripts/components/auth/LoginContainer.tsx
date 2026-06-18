@@ -21,7 +21,7 @@ interface Values {
 }
 
 const LoginContainer = ({ history }: RouteComponentProps) => {
-    const { t } = useTranslation('arix/auth');
+    const { t } = useTranslation('royal/auth');
     const ref = useRef<Reaptcha>(null);
     const turnstile = useTurnstile();
     const [token, setToken] = useState('');
@@ -29,7 +29,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { recaptcha: recaptchaSettings, turnstile: turnstileSettings } = useStoreState((state) => state.settings.data!);
-    const registration = useStoreState((state: ApplicationStore) => state.settings.data!.arix.registration);
+    const registration = useStoreState((state: ApplicationStore) => state.settings.data!.royal.registration);
 
     useEffect(() => {
         clearFlashes();

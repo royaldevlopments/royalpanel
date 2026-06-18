@@ -59,7 +59,7 @@ const findModeByFilename = (filename: string) => {
 };
 
 export default function CodeEditorContainer() {
-    const { t } = useTranslation('arix/server/files');
+    const { t } = useTranslation('royal/server/files');
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { addError } = useFlash();

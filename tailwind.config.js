@@ -31,7 +31,7 @@ module.exports = {
                 black: '#131a20',
                 // "primary" and "neutral" are deprecated, prefer the use of "blue" and "gray"
                 // in new code.
-                arix: 'var(--primary)',
+                royal: 'var(--primary)',
                 success: {
                     50: 'var(--successText)',
                     100: 'var(--successBorder)',

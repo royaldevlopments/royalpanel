@@ -8,7 +8,7 @@ import { Schedule } from '@/api/server/schedules/getServerSchedules';
 import { useTranslation } from 'react-i18next';
 
 const RunScheduleButton = ({ schedule }: { schedule: Schedule }) => {
-    const { t } = useTranslation('arix/server/schedules');
+    const { t } = useTranslation('royal/server/schedules');
     const [loading, setLoading] = useState(false);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
 

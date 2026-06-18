@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Services\Servers;
+namespace RoyalPanel\Services\Servers;
 
-use Pterodactyl\Models\User;
-use Pterodactyl\Models\Server;
+use RoyalPanel\Models\User;
+use RoyalPanel\Models\Server;
 
 class GetUserPermissionsService
 {
@@ -26,7 +26,7 @@ class GetUserPermissionsService
             return $permissions;
         }
 
-        /** @var \Pterodactyl\Models\Subuser|null $subuserPermissions */
+        /** @var \RoyalPanel\Models\Subuser|null $subuserPermissions */
         $subuserPermissions = $server->subusers()->where('user_id', $user->id)->first();
 
         return $subuserPermissions ? $subuserPermissions->permissions : [];

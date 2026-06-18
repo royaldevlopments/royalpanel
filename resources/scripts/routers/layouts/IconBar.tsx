@@ -53,11 +53,11 @@ interface Props {
 }
 
 const SideBarIcon = ({ children }: Props) => {
-    const { t } = useTranslation('arix/navigation');
+    const { t } = useTranslation('royal/navigation');
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logo);
-    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoLight);
-    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.arix.logoHeight);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logo);
+    const logoLight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoLight);
+    const logoHeight = useStoreState((state: ApplicationStore) => state.settings.data!.royal.logoHeight);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     
     const darkMode = localStorage.getItem('darkMode') === 'true';

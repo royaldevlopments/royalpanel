@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Extensions\Themes;
+namespace RoyalPanel\Extensions\Themes;
 
 class Theme
 {

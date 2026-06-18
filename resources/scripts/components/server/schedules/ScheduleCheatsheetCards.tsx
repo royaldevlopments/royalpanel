@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 import { useTranslation } from 'react-i18next';
 
 export default () => {
-    const { t } = useTranslation('arix/server/schedules');
+    const { t } = useTranslation('royal/server/schedules');
 
     return (
         <>

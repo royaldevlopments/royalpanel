@@ -16,9 +16,9 @@ import NavigationBar from '@/routers/layouts/NavigationBar';
 
 export default () => {
     const location = useLocation();
-    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.arix.layout);
-    const background = useStoreState((state: ApplicationStore) => state.settings.data!.arix.background);
-    const backgroundFaded = useStoreState((state: ApplicationStore) => state.settings.data!.arix.backgroundFaded);
+    const layout = useStoreState((state: ApplicationStore) => state.settings.data!.royal.layout);
+    const background = useStoreState((state: ApplicationStore) => state.settings.data!.royal.background);
+    const backgroundFaded = useStoreState((state: ApplicationStore) => state.settings.data!.royal.backgroundFaded);
 
     return (
         <>

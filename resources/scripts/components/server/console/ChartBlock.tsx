@@ -19,7 +19,7 @@ interface ChartBlockProps {
 
 export default ({ type, title, legend, usage, limit, inbound, outbound, children }: ChartBlockProps) => {
     const status = ServerContext.useStoreState((state) => state.status.value);
-    const { t } = useTranslation('arix/utilities');
+    const { t } = useTranslation('royal/utilities');
 
     return (
     <>
@@ -39,7 +39,7 @@ export default ({ type, title, legend, usage, limit, inbound, outbound, children
                     <span className={'text-gray-300 font-medium'}>{limit && '/ ' + limit}</span>
                 </div>
             </div>
-            <div className={'text-white bg-arix rounded-component w-16 h-16 flex items-center justify-center'}>
+            <div className={'text-white bg-royal rounded-component w-16 h-16 flex items-center justify-center'}>
                 {type == 'cpu'
                 ? <ChipIcon className={'w-10'}/>
                 : type == 'network'
