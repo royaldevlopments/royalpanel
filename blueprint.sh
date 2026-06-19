@@ -1,25 +1,21 @@
 #!/bin/bash
-# © 2023-2026 Emma (prpl.wtf)
+# Royal Blueprint — Arix-compatible fork for Royal Panel
+# Maintained by Shaurya Vashishtha — Royal Devlopments
 
-# Learn more @ blueprint.zip
-# Source code available at github.com/blueprintframework/framework
-# Transparent financials available at hcb.hackclub.com/blueprint
-
-# To make changes to the variables persist between updates, make a .blueprintrc file
-# and override the variables there.
+# Original: github.com/blueprintframework/framework
+# Royal fork: https://github.com/royaldevlopments/blueprint-framework
+# Built for: Royal Panel (Royal Panel)
 
 BLUEPRINT_ENGINE="solstice"
-REPOSITORY="BlueprintFramework/framework"
-REPOSITORY_BRANCH="main"
-VERSION="beta-2026-05" #;
+REPOSITORY="royaldevlopments/blueprint-framework"
+REPOSITORY_BRANCH="royal"
+VERSION="royal-1.0.0" #;
 
 FOLDER=$(realpath "$(dirname "$0" 2> /dev/null)" 2> /dev/null) || FOLDER="$BLUEPRINT__FOLDER"
 OWNERSHIP="www-data:www-data" #;
 WEBUSER="www-data" #;
 USERSHELL="/bin/bash" #;
 SHORTCUT_DIR="/usr/local/bin"
-
-# Check if the script is being sourced - and if so - load bash autocompletion.
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
   _blueprint_completions() {
     local cur cmd opts
@@ -92,7 +88,7 @@ fi
 # Set internal variables.
 __BuildDir=".blueprint/extensions/blueprint/private/build"
 
-# Automatically navigate to the Pterodactyl directory when running the script.
+# Automatically navigate to the Royal Panel directory when running the script.
 cd "$FOLDER" || return
 
 # Import libraries.
@@ -101,6 +97,7 @@ source scripts/libraries/grabenv.sh       || missinglibs+="[grabenv]"
 source scripts/libraries/logFormat.sh     || missinglibs+="[logFormat]"
 source scripts/libraries/misc.sh          || missinglibs+="[misc]"
 source scripts/libraries/lock.sh          || missinglibs+="[lock]"
+source scripts/arix-compat.sh            2> /dev/null
 
 
 cdhalt() { PRINT FATAL "Attempted navigation into nonexistent directory, halting process."; exit 1; }
@@ -248,9 +245,8 @@ if [[ $1 != "-bash" ]]; then
       C3="\x1b[34;45;1m"
       C3="\x1b[0;37;1m"
       echo -e "$C0" \
-        "\n$C4  ██$C1▌$C2▌$C3▌$C0   Blueprint Framework" \
-        "\n$C4██  ██$C1▌$C2▌$C3▌$C0 https://blueprint.zip" \
-        "\n$C4  ████$C1▌$C2▌$C3▌$C0 © 2023-2026 Emma (prpl.wtf)\n";
+        "\n  Royal Blueprint — Royal Panel Edition" \
+        "\n  Maintained by Shaurya Vashishtha (Royal Devlopments)\n";
 
       export PROGRESS_TOTAL=15
       export PROGRESS_NOW=0
@@ -337,6 +333,84 @@ if [[ $1 != "-bash" ]]; then
 
     ((PROGRESS_NOW++))
 
+    # Run Arix compatibility layer (restores Arix files, merges Blueprint directives).
+    arix_full_install 2>&1
+
+    # ---- Royal Panel Blueprint integration ----
+    panel_integrate() {
+      PRINT INFO "Integrating Blueprint into panel files.."
+
+      # 1. AppServiceProvider.php — register Blueprint providers
+      if ! grep -q "ExtensionfsConfigProvider" "$FOLDER/app/Providers/AppServiceProvider.php" 2>/dev/null; then
+        if [ -f "$FOLDER/app/Providers/AppServiceProvider.php" ]; then
+          sed -i "s/^namespace App\\\Providers;$/namespace App\\\Providers;\nuse RoyalPanel\\\Providers\\\Blueprint\\\ExtensionfsConfigProvider;\nuse RoyalPanel\\\Providers\\\Blueprint\\\RouteServiceProvider;\nuse RoyalPanel\\\Providers\\\SettingsServiceProvider;/" "$FOLDER/app/Providers/AppServiceProvider.php"
+          sed -i "/public function register/,/^    }/s/^    {/    {\n        \$this->app->register(ExtensionfsConfigProvider::class);\n        \$this->app->register(RouteServiceProvider::class);\n        if (!config('royalpanel.load_environment_only', false) \&\& \$this->app->environment() !== 'testing') {\n            \$this->app->register(SettingsServiceProvider::class);\n        }\n        \$this->app->singleton('extensions.themes', function () {\n            return new \\\RoyalPanel\\\Extensions\\\Themes\\\Theme();\n        });/" "$FOLDER/app/Providers/AppServiceProvider.php"
+        fi
+      fi
+
+      # 2. Console/Kernel.php — add Blueprint schedule
+      if ! grep -q "bp:telemetry" "$FOLDER/app/Console/Kernel.php" 2>/dev/null; then
+        if [ -f "$FOLDER/app/Console/Kernel.php" ]; then
+          cp "$FOLDER/app/Console/Kernel.php" "$FOLDER/app/Console/Kernel.php.bak"
+          awk '/protected function schedule\(Schedule \$schedule\): void/ { print; print "    {"; print "        \$schedule->command(\"bp:telemetry\")->hourly();"; print ""; print "        \$schedule->command(\"bp:version:cache\")->dailyAt(\"04:00\");"; print ""; print "        \$schedule->command(\"bp:cache\")->everyMinute();"; next } 1' "$FOLDER/app/Console/Kernel.php.bak" > "$FOLDER/app/Console/Kernel.php"
+          rm -f "$FOLDER/app/Console/Kernel.php.bak"
+        fi
+      fi
+
+      # 3. admin.blade.php — add Blueprint directives
+      if ! grep -q "blueprint.admin.admin" "$FOLDER/resources/views/layouts/admin.blade.php" 2>/dev/null; then
+        if [ -f "$FOLDER/resources/views/layouts/admin.blade.php" ]; then
+          sed -i "1s/^/@include(\"blueprint.admin.admin\")\n@yield('blueprint.lib')\n/" "$FOLDER/resources/views/layouts/admin.blade.php"
+          sed -i "/<\/head>/i\\        @yield(\"blueprint.import\")" "$FOLDER/resources/views/layouts/admin.blade.php"
+          sed -i "/<body[ >]/i\\        @yield('blueprint.cache')" "$FOLDER/resources/views/layouts/admin.blade.php"
+          sed -i "/@yield('content-header')/a\\                    @yield('blueprint.introduction')" "$FOLDER/resources/views/layouts/admin.blade.php"
+          sed -i "/<\/body>/i\\        @yield('blueprint.wrappers')" "$FOLDER/resources/views/layouts/admin.blade.php"
+        fi
+      fi
+
+      # 4. wrapper.blade.php — add Blueprint directives
+      if ! grep -q "blueprint.dashboard.dashboard" "$FOLDER/resources/views/templates/wrapper.blade.php" 2>/dev/null; then
+        if [ -f "$FOLDER/resources/views/templates/wrapper.blade.php" ]; then
+          sed -i "1s/^/@include('blueprint.dashboard.dashboard')\n@yield('blueprint.lib')\n/" "$FOLDER/resources/views/templates/wrapper.blade.php"
+          sed -i "/<title>/a\\        @yield('head')" "$FOLDER/resources/views/templates/wrapper.blade.php"
+          sed -i "/@yield('below-container')/a\\            @yield('blueprint.wrappers')" "$FOLDER/resources/views/templates/wrapper.blade.php"
+        fi
+      fi
+
+      # 5. NavigationBar.tsx — add Blueprint hooks
+      if ! grep -q "BeforeNavigation" "$FOLDER/resources/scripts/components/NavigationBar.tsx" 2>/dev/null; then
+        if [ -f "$FOLDER/resources/scripts/components/NavigationBar.tsx" ]; then
+          sed -i "/^import Avatar from/a\\
+import BeforeNavigation from '@blueprint/components/Navigation/NavigationBar/BeforeNavigation';\\n\\
+import AdditionalItems from '@blueprint/components/Navigation/NavigationBar/AdditionalItems';\\n\\
+import AfterNavigation from '@blueprint/components/Navigation/NavigationBar/AfterNavigation';" "$FOLDER/resources/scripts/components/NavigationBar.tsx"
+          sed -i "/SpinnerOverlay/i\\            <BeforeNavigation />" "$FOLDER/resources/scripts/components/NavigationBar.tsx"
+          sed -i "s|<a href={'/admin'} rel={'noreferrer'}>|<a href={'/admin'} rel={'noreferrer'} id={'NavigationAdmin'}>|" "$FOLDER/resources/scripts/components/NavigationBar.tsx"
+          sed -i "/id={'NavigationAdmin'}/a\\                    <AdditionalItems />" "$FOLDER/resources/scripts/components/NavigationBar.tsx"
+          sed -i "/<\/div>$/a\\            <AfterNavigation />" "$FOLDER/resources/scripts/components/NavigationBar.tsx"
+        fi
+      fi
+
+      # 6. webpack.config.js — add @blueprint alias
+      if ! grep -q "@blueprint" "$FOLDER/webpack.config.js" 2>/dev/null; then
+        if [ -f "$FOLDER/webpack.config.js" ]; then
+          sed -i "/'@':/a\\      '@blueprint': path.join(__dirname, '/resources/scripts/blueprint')," "$FOLDER/webpack.config.js"
+        fi
+      fi
+
+      # 7. tsconfig.json — add @blueprint/* path
+      if ! grep -q "@blueprint" "$FOLDER/tsconfig.json" 2>/dev/null; then
+        if [ -f "$FOLDER/tsconfig.json" ]; then
+          sed -i "/\"@\*\/\":/a\\
+      \"@blueprint/*\": [\\n\\
+        \"./resources/scripts/blueprint/*\"\\n\\
+      ]," "$FOLDER/tsconfig.json"
+        fi
+      fi
+    }
+    panel_integrate
+    # ---- End Blueprint integration ----
+
     # Put application into maintenance.
     if [[ $BLUEPRINT_ENVIRONMENT != "ci" ]]; then
       PRINT INPUT "Would you like to put your application into maintenance while Blueprint is installing? (Y/n)"
@@ -397,7 +471,7 @@ if [[ $1 != "-bash" ]]; then
 
     # Make sure all files have correct permissions.
     if [[ $BLUEPRINT_ENVIRONMENT != "ci" ]]; then
-      PRINT INFO "Changing Pterodactyl file ownership to '$OWNERSHIP'.."
+      PRINT INFO "Changing Royal Panel file ownership to '$OWNERSHIP'.."
       find "$FOLDER/" \
         -path "$FOLDER/node_modules" -prune \
         -o -exec chown "$OWNERSHIP" {} + &>> "$BLUEPRINT__DEBUG"
