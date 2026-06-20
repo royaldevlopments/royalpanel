@@ -211,6 +211,8 @@ return [
         RoyalPanel\Providers\RepositoryServiceProvider::class,
         RoyalPanel\Providers\ViewComposerServiceProvider::class,
         RoyalPanel\Providers\SecurityServiceProvider::class,
+        RoyalPanel\Providers\Blueprint\RouteServiceProvider::class,
+        RoyalPanel\Providers\Blueprint\ExtensionfsConfigProvider::class,
 
         /*
          * Additional Dependencies
