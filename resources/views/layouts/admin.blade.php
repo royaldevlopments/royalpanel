@@ -1,12 +1,16 @@
-@include('blueprint.admin.admin')
-@php
-  use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary as BlueprintExtensionLibrary;
-  use RoyalPanel\BlueprintFramework\Services\PlaceholderService\BlueprintPlaceholderService;
+@php $__blueprintLoaded = false; @endphp
+@if(file_exists(base_path('resources/views/blueprint/admin/admin.blade.php')))
+  @include('blueprint.admin.admin')
+  @php
+    use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary as BlueprintExtensionLibrary;
+    use RoyalPanel\BlueprintFramework\Services\PlaceholderService\BlueprintPlaceholderService;
 
-  $settings = app()->make('RoyalPanel\Contracts\Repository\SettingsRepositoryInterface');
-  $blueprint = app()->make(BlueprintExtensionLibrary::class, ['settings' => $settings]);
-  $PlaceholderService = app()->make(BlueprintPlaceholderService::class);
-@endphp
+    $settings = app()->make('RoyalPanel\Contracts\Repository\SettingsRepositoryInterface');
+    $blueprint = app()->make(BlueprintExtensionLibrary::class, ['settings' => $settings]);
+    $PlaceholderService = app()->make(BlueprintPlaceholderService::class);
+    $__blueprintLoaded = true;
+  @endphp
+@endif
 <!DOCTYPE html>
 <html>
     <head>
@@ -176,12 +180,14 @@
                                 <i data-lucide="key"></i> <span>Application API</span>
                             </a>
                         </li>
+                        @if(Route::has('admin.extensions'))
                         <li class="{{ starts_with(Route::currentRouteName(), 'admin.extensions') ? 'active' : '' }}">
                             <a href="{{ route('admin.extensions') }}">
                                 <i data-lucide="puzzle"></i> <span>Extensions</span>
                             </a>
                         </li>
                         @yield('blueprint.sidenav')
+                        @endif
                         <li class="header">SECURITY</li>
                         <li class="{{ request()->routeIs('admin.security.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.security.index') }}">
