@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Blueprint command shortcut
-# Learn more @ blueprint.zip
+# Blueprint Framework command shortcut
 
 [[ "$EUID" == 0 ]] || exec sudo -s "/usr/local/bin/blueprint" "$@"
 
