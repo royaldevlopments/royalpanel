@@ -136,6 +136,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/view/{user:id}', [Admin\UserController::class, 'view'])->name('admin.users.view');
 
     Route::post('/new', [Admin\UserController::class, 'store']);
+    Route::post('/bulk', [Admin\UserController::class, 'bulkActions'])->name('admin.users.bulk');
 
     Route::patch('/view/{user:id}', [Admin\UserController::class, 'update']);
     Route::delete('/view/{user:id}', [Admin\UserController::class, 'delete'])->name('admin.users.delete');
@@ -166,6 +167,7 @@ Route::group(['prefix' => 'servers'], function () {
     Route::get('/view/{server:id}/delete', [Admin\Servers\ServerViewController::class, 'delete'])->name('admin.servers.view.delete');
 
     Route::post('/new', [Admin\Servers\CreateServerController::class, 'store']);
+    Route::post('/bulk', [Admin\ServersController::class, 'bulkActions'])->name('admin.servers.bulk');
     Route::post('/view/{server:id}/build', [Admin\ServersController::class, 'updateBuild']);
     Route::post('/view/{server:id}/startup', [Admin\ServersController::class, 'saveStartup']);
     Route::post('/view/{server:id}/database', [Admin\ServersController::class, 'newDatabase']);

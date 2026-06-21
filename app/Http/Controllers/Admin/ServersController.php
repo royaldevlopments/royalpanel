@@ -33,6 +33,7 @@ use RoyalPanel\Contracts\Repository\DatabaseRepositoryInterface;
 use RoyalPanel\Contracts\Repository\AllocationRepositoryInterface;
 use RoyalPanel\Services\Servers\ServerConfigurationStructureService;
 use RoyalPanel\Http\Requests\Admin\Servers\Databases\StoreServerDatabaseRequest;
+use Illuminate\Http\JsonResponse;
 
 class ServersController extends Controller
 {
@@ -59,6 +60,45 @@ class ServersController extends Controller
         protected StartupModificationService $startupModificationService,
         protected SuspensionService $suspensionService,
     ) {
+    }
+
+    /**
+     * Perform bulk actions on servers.
+     *
+     * @throws \Throwable
+     */
+    public function bulkActions(Request $request): JsonResponse
+    {
+        $request->validate([
+            'action' => 'required|in:delete,suspend,unsuspend,reinstall,toggle-install',
+            'ids' => 'required|array',
+            'ids.*' => 'integer|exists:servers,id',
+        ]);
+
+        $servers = Server::whereIn('id', $request->input('ids'))->get();
+        $errors = [];
+
+        foreach ($servers as $server) {
+            try {
+                match ($request->input('action')) {
+                    'delete' => $this->deletionService->handle($server),
+                    'suspend' => $this->suspensionService->toggle($server, 'suspend'),
+                    'unsuspend' => $this->suspensionService->toggle($server, 'unsuspend'),
+                    'reinstall' => $this->reinstallService->handle($server),
+                    'toggle-install' => $this->repository->update($server->id, [
+                        'status' => $server->isInstalled() ? Server::STATUS_INSTALLING : null,
+                    ], true, true),
+                };
+            } catch (\Exception $e) {
+                $errors[] = ['id' => $server->id, 'error' => $e->getMessage()];
+            }
+        }
+
+        return response()->json([
+            'success' => count($errors) === 0,
+            'processed' => $servers->count() - count($errors),
+            'errors' => $errors,
+        ]);
     }
 
     /**

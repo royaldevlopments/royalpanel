@@ -21,6 +21,7 @@ use RoyalPanel\Services\Users\UserDeletionService;
 use RoyalPanel\Http\Requests\Admin\UserFormRequest;
 use RoyalPanel\Http\Requests\Admin\NewUserFormRequest;
 use RoyalPanel\Contracts\Repository\UserRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
@@ -79,6 +80,43 @@ class UserController extends Controller
         return view('admin.users.view', [
             'user' => $user,
             'languages' => $this->getAvailableLanguages(true),
+        ]);
+    }
+
+    /**
+     * Perform bulk actions on users.
+     *
+     * @throws \Exception
+     */
+    public function bulkActions(Request $request): JsonResponse
+    {
+        $request->validate([
+            'action' => 'required|in:delete',
+            'ids' => 'required|array',
+            'ids.*' => 'integer|exists:users,id',
+        ]);
+
+        $users = User::whereIn('id', $request->input('ids'))->get();
+        $errors = [];
+
+        foreach ($users as $user) {
+            try {
+                if ($request->input('action') === 'delete') {
+                    if ($request->user()->is($user)) {
+                        $errors[] = ['id' => $user->id, 'error' => __('admin/user.exceptions.delete_self')];
+                        continue;
+                    }
+                    $this->deletionService->handle($user);
+                }
+            } catch (\Exception $e) {
+                $errors[] = ['id' => $user->id, 'error' => $e->getMessage()];
+            }
+        }
+
+        return response()->json([
+            'success' => count($errors) === 0,
+            'processed' => $users->count() - count($errors),
+            'errors' => $errors,
         ]);
     }
 

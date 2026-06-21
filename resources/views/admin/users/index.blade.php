@@ -34,6 +34,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th width="30"><input type="checkbox" class="select-all" onchange="toggleSelectAll(this)"></th>
                             <th>ID</th>
                             <th>Email</th>
                             <th>Client Name</th>
@@ -46,7 +47,8 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                            <tr class="align-middle">
+                            <tr class="align-middle" data-id="{{ $user->id }}">
+                                <td><input type="checkbox" class="select-row" value="{{ $user->id }}" onchange="updateBulkActions()"></td>
                                 <td><code>{{ $user->id }}</code></td>
                                 <td><a href="{{ route('admin.users.view', $user->id) }}">{{ $user->email }}</a> @if($user->root_admin)<i class="fa fa-star text-yellow"></i>@endif</td>
                                 <td>{{ $user->name_last }}, {{ $user->name_first }}</td>
@@ -68,12 +70,86 @@
                     </tbody>
                 </table>
             </div>
-            @if($users->hasPages())
-                <div class="box-footer with-border">
-                    <div class="col-md-12 text-center">{!! $users->appends(['query' => Request::input('query')])->render() !!}</div>
+            <div class="box-footer with-border" style="display:flex;align-items:center;justify-content:space-between;">
+                <div>
+                    <div class="btn-group" style="display:none;" id="bulk-actions">
+                        <button class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" disabled id="bulk-toggle">
+                            <i class="fa fa-tasks"></i> Mass Actions <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" onclick="return bulkAction('delete')"><i class="fa fa-trash text-danger"></i> Delete</a></li>
+                        </ul>
+                    </div>
                 </div>
-            @endif
+                <div>
+                    @if($users->hasPages())
+                        {!! $users->appends(['query' => Request::input('query')])->render() !!}
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer-scripts')
+    @parent
+    <script>
+        function toggleSelectAll(master) {
+            document.querySelectorAll('.select-row').forEach(function(cb) {
+                cb.checked = master.checked;
+            });
+            updateBulkActions();
+        }
+
+        function updateBulkActions() {
+            var checked = document.querySelectorAll('.select-row:checked').length;
+            var container = document.getElementById('bulk-actions');
+            var toggle = document.getElementById('bulk-toggle');
+            container.style.display = checked > 0 ? '' : 'none';
+            toggle.disabled = checked === 0;
+        }
+
+        function bulkAction(action) {
+            var checked = document.querySelectorAll('.select-row:checked');
+            if (!checked.length) return false;
+
+            var labels = {
+                'delete': 'Are you sure you want to delete the selected users?',
+            };
+
+            swal({
+                title: '',
+                type: 'warning',
+                text: labels[action] || 'Are you sure?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                confirmButtonColor: '#d9534f',
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            }, function () {
+                var ids = [];
+                checked.forEach(function(cb) { ids.push(parseInt(cb.value)); });
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('admin.users.bulk') }}',
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
+                    data: JSON.stringify({ action: action, ids: ids }),
+                    contentType: 'application/json',
+                    processData: false,
+                }).done(function (res) {
+                    swal.close();
+                    if (res.errors && res.errors.length) {
+                        swal({ type: 'error', title: 'Errors', text: res.errors.length + ' operation(s) failed.' });
+                    } else {
+                        location.reload();
+                    }
+                }).fail(function () {
+                    swal({ type: 'error', title: 'Whoops!', text: 'Something went wrong.' });
+                });
+            });
+            return false;
+        }
+    </script>
 @endsection
