@@ -1,10 +1,13 @@
-@php $__blueprintLoaded = false; @endphp
+@php
+    $__blueprintLoaded = false;
+@endphp
+@php
+    use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary as BlueprintExtensionLibrary;
+    use RoyalPanel\BlueprintFramework\Services\PlaceholderService\BlueprintPlaceholderService;
+@endphp
 @if(file_exists(base_path('resources/views/blueprint/admin/admin.blade.php')))
   @include('blueprint.admin.admin')
   @php
-    use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary as BlueprintExtensionLibrary;
-    use RoyalPanel\BlueprintFramework\Services\PlaceholderService\BlueprintPlaceholderService;
-
     $settings = app()->make('RoyalPanel\Contracts\Repository\SettingsRepositoryInterface');
     $blueprint = app()->make(BlueprintExtensionLibrary::class, ['settings' => $settings]);
     $PlaceholderService = app()->make(BlueprintPlaceholderService::class);
