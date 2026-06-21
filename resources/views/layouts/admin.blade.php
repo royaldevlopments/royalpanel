@@ -60,6 +60,20 @@
                 .step-indicator .step.active { background:#1e1e32; border-color:#4a7c9e; color:#e2e8f0; }
                 .step-indicator .step.done { background:#1a3a2a; border-color:#22c55e; color:#22c55e; }
                 .step-nav { display:flex; align-items:center; justify-content:space-between; margin-top:20px; padding-top:16px; border-top:1px solid #2a2a3e; }
+                .step-error { background:#3a1a1a; border:1px solid #e74c3c; color:#e74c3c; padding:8px 14px; border-radius:8px; font-size:13px; margin-bottom:12px; display:none; }
+                .review-table { width:100%; border-collapse:collapse; }
+                .review-table td { padding:8px 12px; border-bottom:1px solid #2a2a3e; font-size:13px; }
+                .review-table td:first-child { color:#94a3b8; width:200px; }
+                .review-table td:last-child { color:#e2e8f0; }
+                .template-bar { display:flex; gap:8px; margin-bottom:16px; align-items:center; flex-wrap:wrap; }
+                .template-bar input, .template-bar select { background:#2a2a3e; border:1px solid #3a3a4a; color:#e2e8f0; padding:6px 12px; border-radius:6px; font-size:13px; }
+                .template-bar select { min-width:180px; }
+                .draft-notice { background:#1a2a3a; border:1px solid #4a7c9e; color:#94b8d8; padding:10px 16px; border-radius:8px; font-size:13px; margin-bottom:12px; display:none; align-items:center; gap:12px; }
+                .draft-notice .btn { padding:3px 10px; font-size:12px; }
+                .bulk-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+                .bulk-row .btn { white-space:nowrap; }
+                .field-error { border-color:#e74c3c !important; }
+                .review-section-title { font-size:14px; font-weight:600; color:#e2e8f0; padding:8px 0; border-bottom:1px solid #2a2a3e; margin-bottom:8px; }
             </style>
 
             <!--[if lt IE 9]>
@@ -399,9 +413,12 @@
                     body.style.display = collapsed ? '' : 'none';
                     if (chevron) chevron.style.transform = collapsed ? 'rotate(0deg)' : 'rotate(180deg)';
                 }
-                function initStepWizard(totalSteps) {
-                    var current = 1;
+                var wizardCurrent = 1, wizardTotal = 1, wizardValidators = {};
+                function initStepWizard(totalSteps, validators) {
+                    wizardTotal = totalSteps; wizardCurrent = 1; wizardValidators = validators || {};
+                    var stepError = document.getElementById('step-error');
                     function showStep(n) {
+                        if (stepError) stepError.style.display = 'none';
                         for (var i = 1; i <= totalSteps; i++) {
                             var content = document.getElementById('step-content-' + i);
                             var indicator = document.getElementById('step-indicator-' + i);
@@ -418,15 +435,149 @@
                         if (prevBtn) prevBtn.style.display = n === 1 ? 'none' : '';
                         if (nextBtn) nextBtn.style.display = n === totalSteps ? 'none' : '';
                         if (submitBtn) submitBtn.style.display = n === totalSteps ? '' : 'none';
-                        current = n;
+                        wizardCurrent = n; generateReview();
                     }
                     document.getElementById('step-prev').addEventListener('click', function(e) {
-                        e.preventDefault(); if (current > 1) showStep(current - 1);
+                        e.preventDefault(); if (wizardCurrent > 1) showStep(wizardCurrent - 1);
                     });
                     document.getElementById('step-next').addEventListener('click', function(e) {
-                        e.preventDefault(); if (current < totalSteps) showStep(current + 1);
+                        e.preventDefault();
+                        if (wizardCurrent < totalSteps) {
+                            var fn = wizardValidators[wizardCurrent];
+                            if (fn) {
+                                var err = fn();
+                                if (err) {
+                                    if (stepError) { stepError.textContent = err; stepError.style.display = ''; }
+                                    return;
+                                }
+                            }
+                            showStep(wizardCurrent + 1);
+                        }
                     });
                     showStep(1);
+                }
+                function generateReview() {
+                    var container = document.getElementById('review-content');
+                    if (!container) return;
+                    var sections = {};
+                    var currentSection = '';
+                    container.querySelectorAll('[data-review]').forEach(function(el) {
+                        var section = el.getAttribute('data-review-section') || 'General';
+                        if (!sections[section]) sections[section] = [];
+                        var label = el.getAttribute('data-review-label') || el.getAttribute('name') || el.id || '';
+                        var val = '';
+                        if (el.type === 'checkbox') val = el.checked ? 'Yes' : 'No';
+                        else if (el.type === 'radio') { if (el.checked) val = el.nextElementSibling ? el.nextElementSibling.textContent.trim() : el.value; }
+                        else if (el.tagName === 'SELECT' && el.multiple) {
+                            val = Array.from(el.selectedOptions).map(function(o) { return o.text; }).join(', ') || 'None';
+                        }
+                        else val = el.value || '(empty)';
+                        if (label) { if (!sections[section]) sections[section] = []; sections[section].push('<tr><td>' + label + '</td><td>' + val + '</td></tr>'); }
+                    });
+                    var html = '';
+                    for (var s in sections) {
+                        html += '<div class="review-section-title">' + s + '</div>';
+                        html += '<table class="review-table">' + sections[s].join('') + '</table>';
+                    }
+                    container.innerHTML = html || '<p class="text-muted">No data to review.</p>';
+                }
+                function initExitConfirmation(formId) {
+                    var dirty = false;
+                    $('#' + formId + ' input, #' + formId + ' select, #' + formId + ' textarea').on('change input', function() { dirty = true; });
+                    window.addEventListener('beforeunload', function(e) {
+                        if (dirty) { e.preventDefault(); e.returnValue = ''; }
+                    });
+                    $('#' + formId).on('submit', function() { dirty = false; });
+                }
+                function initAutoSave(key, formId) {
+                    var timer;
+                    $('#' + formId + ' input, #' + formId + ' select, #' + formId + ' textarea').on('change input', function() {
+                        clearTimeout(timer);
+                        timer = setTimeout(function() {
+                            var data = $('#' + formId).serialize();
+                            localStorage.setItem(key, data);
+                        }, 500);
+                    });
+                    var saved = localStorage.getItem(key);
+                    if (saved) {
+                        var notice = document.getElementById('draft-notice');
+                        if (notice) {
+                            notice.style.display = 'flex';
+                            notice.querySelector('[data-action="restore"]').onclick = function(e) {
+                                e.preventDefault();
+                                var pairs = saved.split('&');
+                                pairs.forEach(function(pair) {
+                                    var parts = pair.split('=');
+                                    if (parts.length === 2) {
+                                        var name = decodeURIComponent(parts[0].replace(/\+/g, ' '));
+                                        var val = decodeURIComponent(parts[1].replace(/\+/g, ' '));
+                                        var el = $('#' + formId + ' [name="' + name + '"]');
+                                        if (el.length) el.val(val);
+                                    }
+                                });
+                                notice.style.display = 'none';
+                            };
+                            notice.querySelector('[data-action="discard"]').onclick = function(e) {
+                                e.preventDefault();
+                                localStorage.removeItem(key);
+                                notice.style.display = 'none';
+                            };
+                        }
+                    }
+                    $('#' + formId).on('submit', function() { localStorage.removeItem(key); });
+                }
+                function saveTemplate(key, name) {
+                    if (!name) { alert('Enter a template name.'); return; }
+                    var form = document.querySelector('[data-template-form]');
+                    if (!form) return;
+                    var data = $(form).serialize();
+                    var templates = JSON.parse(localStorage.getItem(key + '-templates') || '{}');
+                    templates[name] = data;
+                    localStorage.setItem(key + '-templates', JSON.stringify(templates));
+                    var sel = document.getElementById('template-select');
+                    if (sel) {
+                        var opt = document.createElement('option');
+                        opt.value = name; opt.textContent = name;
+                        sel.appendChild(opt);
+                        sel.value = name;
+                    }
+                    document.getElementById('template-name').value = '';
+                }
+                function loadTemplate(key) {
+                    var sel = document.getElementById('template-select');
+                    if (!sel || !sel.value) return;
+                    var templates = JSON.parse(localStorage.getItem(key + '-templates') || '{}');
+                    var data = templates[sel.value];
+                    if (!data) return;
+                    var form = document.querySelector('[data-template-form]');
+                    if (!form) return;
+                    var pairs = data.split('&');
+                    pairs.forEach(function(pair) {
+                        var parts = pair.split('=');
+                        if (parts.length === 2) {
+                            var name = decodeURIComponent(parts[0].replace(/\+/g, ' '));
+                            var val = decodeURIComponent(parts[1].replace(/\+/g, ' '));
+                            var el = $(form).find('[name="' + name + '"]');
+                            if (el.length) el.val(val);
+                        }
+                    });
+                }
+                function deleteTemplate(key) {
+                    var sel = document.getElementById('template-select');
+                    if (!sel || !sel.value) return;
+                    var templates = JSON.parse(localStorage.getItem(key + '-templates') || '{}');
+                    delete templates[sel.value];
+                    localStorage.setItem(key + '-templates', JSON.stringify(templates));
+                    sel.remove(sel.selectedIndex);
+                }
+                function addBulkRow(containerId, template) {
+                    var container = document.getElementById(containerId);
+                    if (!container) return;
+                    var row = document.createElement('div');
+                    row.className = 'bulk-row';
+                    row.style.marginBottom = '10px';
+                    row.innerHTML = template;
+                    container.appendChild(row);
                 }
             </script>
         @show
