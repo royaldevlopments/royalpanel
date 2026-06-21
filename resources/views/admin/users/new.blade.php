@@ -16,12 +16,17 @@
 @section('content')
 <div class="row">
     <form method="post">
+        {!! csrf_field() !!}
         <div class="col-md-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Identity</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-id-card"></i></span>
+                        <span>Identity</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-                <div class="box-body">
+                <div class="panel-card-body">
                     <div class="form-group">
                         <label for="email" class="control-label">Email</label>
                         <div>
@@ -58,18 +63,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    {!! csrf_field() !!}
-                    <input type="submit" value="Create User" class="btn btn-success btn-sm">
-                </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Permissions</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-shield"></i></span>
+                        <span>Permissions</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-                <div class="box-body">
+                <div class="panel-card-body">
                     <div class="form-group col-md-12">
                         <label for="root_admin" class="control-label">Administrator</label>
                         <div>
@@ -82,13 +87,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Password</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-lock"></i></span>
+                        <span>Password</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-                <div class="box-body">
+                <div class="panel-card-body">
                     <div class="alert alert-info">
                         <p>Providing a user password is optional. New user emails prompt users to create a password the first time they login. If a password is provided here you will need to find a different method of providing it to the user.</p>
                     </div>
@@ -100,6 +107,10 @@
                         </div>
                     </div>
                 </div>
+                <div style="padding:12px 20px;border-top:1px solid #2a2a3e;display:flex;align-items:center;justify-content:space-between;">
+                    <div></div>
+                    <input type="submit" value="Create User" class="btn btn-success btn-sm">
+                </div>
             </div>
         </div>
     </form>
@@ -108,7 +119,8 @@
 
 @section('footer-scripts')
     @parent
-    <script>$("#gen_pass_bttn").click(function (event) {
+    <script>
+        $("#gen_pass_bttn").click(function (event) {
             event.preventDefault();
             $.ajax({
                 type: "GET",

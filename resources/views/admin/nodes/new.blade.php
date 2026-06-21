@@ -15,13 +15,18 @@
 
 @section('content')
 <form action="{{ route('admin.nodes.new') }}" method="POST">
+    {!! csrf_field() !!}
     <div class="row">
         <div class="col-sm-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Basic Details</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-info-circle"></i></span>
+                        <span>Basic Details</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-                <div class="box-body">
+                <div class="panel-card-body">
                     <div class="form-group">
                         <label for="pName" class="form-label">Name</label>
                         <input type="text" name="name" id="pName" class="form-control" value="{{ old('name') }}"/>
@@ -109,11 +114,15 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Configuration</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-wrench"></i></span>
+                        <span>Configuration</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-                <div class="box-body">
+                <div class="panel-card-body">
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="pDaemonBase" class="form-label">Daemon Server File Directory</label>
@@ -171,8 +180,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-footer">
-                    {!! csrf_field() !!}
+                <div style="padding:12px 20px;border-top:1px solid #2a2a3e;display:flex;align-items:center;justify-content:flex-end;">
                     <button type="submit" class="btn btn-success pull-right">Create Node</button>
                 </div>
             </div>

@@ -15,14 +15,18 @@
 
 @section('content')
 <form action="{{ route('admin.servers.new') }}" method="POST">
+    {!! csrf_field() !!}
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Core Details</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-server"></i></span>
+                        <span>Core Details</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pName">Server Name</label>
@@ -58,13 +62,15 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="overlay" id="allocationLoader" style="display:none;"><i class="fa fa-refresh fa-spin"></i></div>
-                <div class="box-header with-border">
-                    <h3 class="box-title">Allocation Management</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-plug"></i></span>
+                        <span>Allocation Management</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-sm-4">
                         <label for="pNodeId">Node</label>
                         <select name="node_id" id="pNodeId" class="form-control">
@@ -102,13 +108,15 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="overlay" id="allocationLoader" style="display:none;"><i class="fa fa-refresh fa-spin"></i></div>
-                <div class="box-header with-border">
-                    <h3 class="box-title">Application Feature Limits</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-tachometer"></i></span>
+                        <span>Application Feature Limits</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-6">
                         <label for="pDatabaseLimit" class="control-label">Database Limit</label>
                         <div>
@@ -136,12 +144,15 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Resource Management</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-cube"></i></span>
+                        <span>Resource Management</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-6">
                         <label for="pCPU">CPU Limit</label>
 
@@ -164,7 +175,7 @@
                     </div>
                 </div>
 
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-6">
                         <label for="pMemory">Memory</label>
 
@@ -188,7 +199,7 @@
                     </div>
                 </div>
 
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-6">
                         <label for="pDisk">Disk Space</label>
 
@@ -224,12 +235,15 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Nest Configuration</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-sitemap"></i></span>
+                        <span>Nest Configuration</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-12">
                         <label for="pNestId">Nest</label>
 
@@ -264,12 +278,15 @@
         </div>
 
         <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Docker Configuration</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-docker"></i></span>
+                        <span>Docker Configuration</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-12">
                         <label for="pDefaultContainer">Docker Image</label>
                         <select id="pDefaultContainer" name="image" class="form-control"></select>
@@ -283,12 +300,15 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Startup Configuration</h3>
+            <div class="panel-card">
+                <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
+                    <h3 class="panel-card-title">
+                        <span><i class="fa fa-play"></i></span>
+                        <span>Startup Configuration</span>
+                    </h3>
+                    <i class="fa fa-chevron-down" style="transition:transform 0.2s;color:#94a3b8;"></i>
                 </div>
-
-                <div class="box-body row">
+                <div class="panel-card-body row">
                     <div class="form-group col-xs-12">
                         <label for="pStartup">Startup Command</label>
                         <input type="text" id="pStartup" name="startup" value="{{ old('startup') }}" class="form-control" />
@@ -296,15 +316,17 @@
                     </div>
                 </div>
 
-                <div class="box-header with-border" style="margin-top:-10px;">
-                    <h3 class="box-title">Service Variables</h3>
+                <div style="padding:12px 20px;border-top:1px solid #2a2a3e;display:flex;align-items:center;">
+                    <h3 class="panel-card-title" style="margin:0;">
+                        <span><i class="fa fa-cog"></i></span>
+                        <span>Service Variables</span>
+                    </h3>
                 </div>
 
-                <div class="box-body row" id="appendVariablesTo"></div>
+                <div class="panel-card-body row" id="appendVariablesTo"></div>
 
-                <div class="box-footer">
-                    {!! csrf_field() !!}
-                    <input type="submit" class="btn btn-success pull-right" value="Create Server" />
+                <div style="padding:12px 20px;border-top:1px solid #2a2a3e;display:flex;align-items:center;justify-content:flex-end;">
+                    <input type="submit" class="btn btn-success" value="Create Server" />
                 </div>
             </div>
         </div>

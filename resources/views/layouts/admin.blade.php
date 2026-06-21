@@ -385,6 +385,16 @@
                     $('[data-toggle="tooltip"]').tooltip();
                 })
             </script>
+
+            <script>
+                function revToggle(header) {
+                    var body = header.nextElementSibling;
+                    var chevron = header.querySelector('.fa-chevron-down');
+                    var collapsed = body.style.display === 'none';
+                    body.style.display = collapsed ? '' : 'none';
+                    if (chevron) chevron.style.transform = collapsed ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+            </script>
         @show
     </body>
 </html>
