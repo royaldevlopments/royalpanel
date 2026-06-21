@@ -55,6 +55,11 @@
                 .badge-warning { background:#f59e0b; color:#fff; }
                 .page-header { margin:0 0 20px 0; border-bottom:1px solid #2a2a3e; padding-bottom:12px; }
                 .page-header h1 { margin:0; font-size:22px; font-weight:600; color:#e2e8f0; display:flex; align-items:center; gap:10px; }
+                .step-indicator { display:flex; gap:8px; margin-bottom:24px; }
+                .step-indicator .step { flex:1; padding:10px 16px; border-radius:8px; background:#2a2a3e; color:#94a3b8; font-size:13px; font-weight:600; text-align:center; border:1px solid transparent; transition:all 0.2s; }
+                .step-indicator .step.active { background:#1e1e32; border-color:#4a7c9e; color:#e2e8f0; }
+                .step-indicator .step.done { background:#1a3a2a; border-color:#22c55e; color:#22c55e; }
+                .step-nav { display:flex; align-items:center; justify-content:space-between; margin-top:20px; padding-top:16px; border-top:1px solid #2a2a3e; }
             </style>
 
             <!--[if lt IE 9]>
@@ -393,6 +398,35 @@
                     var collapsed = body.style.display === 'none';
                     body.style.display = collapsed ? '' : 'none';
                     if (chevron) chevron.style.transform = collapsed ? 'rotate(0deg)' : 'rotate(180deg)';
+                }
+                function initStepWizard(totalSteps) {
+                    var current = 1;
+                    function showStep(n) {
+                        for (var i = 1; i <= totalSteps; i++) {
+                            var content = document.getElementById('step-content-' + i);
+                            var indicator = document.getElementById('step-indicator-' + i);
+                            if (content) content.style.display = i === n ? '' : 'none';
+                            if (indicator) {
+                                indicator.classList.remove('active', 'done');
+                                if (i < n) indicator.classList.add('done');
+                                if (i === n) indicator.classList.add('active');
+                            }
+                        }
+                        var prevBtn = document.getElementById('step-prev');
+                        var nextBtn = document.getElementById('step-next');
+                        var submitBtn = document.getElementById('step-submit');
+                        if (prevBtn) prevBtn.style.display = n === 1 ? 'none' : '';
+                        if (nextBtn) nextBtn.style.display = n === totalSteps ? 'none' : '';
+                        if (submitBtn) submitBtn.style.display = n === totalSteps ? '' : 'none';
+                        current = n;
+                    }
+                    document.getElementById('step-prev').addEventListener('click', function(e) {
+                        e.preventDefault(); if (current > 1) showStep(current - 1);
+                    });
+                    document.getElementById('step-next').addEventListener('click', function(e) {
+                        e.preventDefault(); if (current < totalSteps) showStep(current + 1);
+                    });
+                    showStep(1);
                 }
             </script>
         @show

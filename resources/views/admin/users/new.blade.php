@@ -17,7 +17,13 @@
 <div class="row">
     <form method="post">
         {!! csrf_field() !!}
-        <div class="col-md-6">
+
+        <div class="step-indicator">
+            <div class="step" id="step-indicator-1">Step 1 — Identity</div>
+            <div class="step" id="step-indicator-2">Step 2 — Permissions &amp; Password</div>
+        </div>
+
+        <div id="step-content-1">
             <div class="panel-card">
                 <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
                     <h3 class="panel-card-title">
@@ -65,7 +71,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+
+        <div id="step-content-2" style="display:none;">
             <div class="panel-card">
                 <div class="panel-card-header" onclick="revToggle(this)" style="cursor:pointer;">
                     <h3 class="panel-card-title">
@@ -107,10 +114,16 @@
                         </div>
                     </div>
                 </div>
-                <div style="padding:12px 20px;border-top:1px solid #2a2a3e;display:flex;align-items:center;justify-content:space-between;">
-                    <div></div>
-                    <input type="submit" value="Create User" class="btn btn-success btn-sm">
-                </div>
+            </div>
+        </div>
+
+        <div class="step-nav">
+            <div>
+                <button id="step-prev" class="btn btn-default" style="display:none;"><i class="fa fa-arrow-left"></i> Previous</button>
+            </div>
+            <div>
+                <button id="step-next" class="btn btn-primary">Next <i class="fa fa-arrow-right"></i></button>
+                <button id="step-submit" type="submit" class="btn btn-success" style="display:none;"><i class="fa fa-check"></i> Create User</button>
             </div>
         </div>
     </form>
@@ -120,6 +133,7 @@
 @section('footer-scripts')
     @parent
     <script>
+        initStepWizard(2);
         $("#gen_pass_bttn").click(function (event) {
             event.preventDefault();
             $.ajax({
