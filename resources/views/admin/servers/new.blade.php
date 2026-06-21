@@ -342,7 +342,6 @@
         // Persist 'Service Variables'
         function serviceVariablesUpdated(eggId, ids) {
             @if (old('egg_id'))
-                // Check if the egg id matches.
                 if (eggId != '{{ old('egg_id') }}') {
                     return;
                 }
@@ -357,14 +356,12 @@
                 $('#pDefaultContainer').val('{{ old('image') }}');
             @endif
         }
-        // END Persist 'Service Variables'
     </script>
 
     {!! Theme::js('js/admin/new-server.js?v=20220530') !!}
 
     <script type="application/javascript">
         $(document).ready(function() {
-            // Persist 'Server Owner' select2
             @if (old('owner_id'))
                 $.ajax({
                     url: '/admin/users/accounts.json?user_id={{ old('owner_id') }}',
@@ -375,19 +372,14 @@
             @else
                 initUserIdSelect();
             @endif
-            // END Persist 'Server Owner' select2
 
-            // Persist 'Node' select2
             @if (old('node_id'))
                 $('#pNodeId').val('{{ old('node_id') }}').change();
 
-                // Persist 'Default Allocation' select2
                 @if (old('allocation_id'))
                     $('#pAllocation').val('{{ old('allocation_id') }}').change();
                 @endif
-                // END Persist 'Default Allocation' select2
 
-                // Persist 'Additional Allocations' select2
                 @if (old('allocation_additional'))
                     const additional_allocations = [];
 
@@ -397,21 +389,15 @@
 
                     $('#pAllocationAdditional').val(additional_allocations).change();
                 @endif
-                // END Persist 'Additional Allocations' select2
             @endif
-            // END Persist 'Node' select2
 
-            // Persist 'Nest' select2
             @if (old('nest_id'))
                 $('#pNestId').val('{{ old('nest_id') }}').change();
 
-                // Persist 'Egg' select2
                 @if (old('egg_id'))
                     $('#pEggId').val('{{ old('egg_id') }}').change();
                 @endif
-                // END Persist 'Egg' select2
             @endif
-            // END Persist 'Nest' select2
         });
     </script>
 @endsection
