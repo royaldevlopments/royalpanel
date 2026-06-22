@@ -33,7 +33,7 @@ class VersionCacheCommand extends Command
       $cleaned_response = preg_replace('/[[:^print:]]/', '', $body);
       $data = json_decode($cleaned_response, true);
       if (isset($data['name'])) {
-        $latest_version = $data['name'];
+        $latest_version = $this->PlaceholderService->version();
         $this->blueprint->dbSet('blueprint', 'internal:version:latest', $latest_version);
         return true;
       } else {
