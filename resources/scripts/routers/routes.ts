@@ -15,13 +15,13 @@ import AccountOverviewContainer from '@/components/dashboard/AccountOverviewCont
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
 import { 
-    HiOutlineUser, HiOutlineEye, HiOutlineViewGrid, HiOutlineTerminal, HiOutlineFolderOpen, HiOutlineDatabase, HiOutlineCalendar, HiOutlineUserGroup, HiOutlineArchive, HiOutlineGlobe, HiOutlineAdjustments, HiOutlineCog,
-    HiUser, HiEye, HiViewGrid, HiTerminal, HiFolderOpen, HiDatabase, HiCalendar, HiUserGroup, HiArchive, HiGlobe, HiAdjustments, HiCog
+    HiOutlineUser, HiOutlineDocumentReport, HiOutlineViewGrid, HiOutlineTerminal, HiOutlineFolderOpen, HiOutlineDatabase, HiOutlineClock, HiOutlineUserGroup, HiOutlineReply, HiOutlineGlobe, HiOutlineAdjustments, HiOutlineCog,
+    HiUser, HiDocumentReport, HiViewGrid, HiTerminal, HiFolderOpen, HiDatabase, HiClock, HiUserGroup, HiReply, HiGlobe, HiAdjustments, HiCog
  } from "react-icons/hi";
-import { LuUser, LuEye, LuLayoutGrid, LuTerminal, LuFolder, LuDatabase, LuCalendar, LuUsers, LuArchive, LuGlobe, LuSlidersVertical, LuCog } from "react-icons/lu";
+import { LuUser, LuScrollText, LuLayoutGrid, LuTerminal, LuFolder, LuDatabase, LuClock, LuUsers, LuHistory, LuGlobe, LuSlidersVertical, LuCog } from "react-icons/lu";
 import { 
-    RiUserLine, RiEyeLine, RiLayoutGridLine, RiTerminalBoxLine, RiFolderOpenLine, RiDatabaseLine, RiCalendarLine, RiGroupLine, RiArchiveLine, RiGlobalLine, RiSoundModuleLine, RiSettings2Line,
-    RiUserFill, RiEyeFill, RiLayoutGridFill, RiTerminalBoxFill, RiFolderOpenFill, RiDatabaseFill, RiCalendarFill, RiGroupFill, RiArchiveFill, RiGlobalFill, RiSoundModuleFill, RiSettings2Fill
+    RiUserLine, RiFileList2Line, RiLayoutGridLine, RiTerminalBoxLine, RiFolderOpenLine, RiDatabaseLine, RiTimeLine, RiGroupLine, RiHistoryLine, RiGlobalLine, RiSoundModuleLine, RiSettings2Line,
+    RiUserFill, RiFileList2Fill, RiLayoutGridFill, RiTerminalBoxFill, RiFolderOpenFill, RiDatabaseFill, RiTimeFill, RiGroupFill, RiHistoryFill, RiGlobalFill, RiSoundModuleFill, RiSettings2Fill
  } from "react-icons/ri";
 import CodeEditorContainer from '@/components/server/files/codeEditor/CodeEditorContainer';
 
@@ -163,7 +163,7 @@ export default {
                 path: '/activity',
                 permission: 'activity.*',
                 name: 'activity',
-                icon: [HiOutlineEye, HiEye, LuEye, RiEyeLine, RiEyeFill],
+                icon: [HiOutlineDocumentReport, HiDocumentReport, LuScrollText, RiFileList2Line, RiFileList2Fill],
                 component: ServerActivityLogContainer,
             },
         ],
@@ -198,7 +198,7 @@ export default {
                 path: '/backups',
                 permission: 'backup.*',
                 name: 'backups',
-                icon: [HiOutlineArchive, HiArchive, LuArchive, RiArchiveLine, RiArchiveFill],
+                icon: [HiOutlineReply, HiReply, LuHistory, RiHistoryLine, RiHistoryFill],
                 component: BackupContainer,
             },
             {
@@ -214,7 +214,7 @@ export default {
                 path: '/schedules',
                 permission: 'schedule.*',
                 name: 'schedules',
-                icon: [HiOutlineCalendar, HiCalendar, LuCalendar, RiCalendarLine, RiCalendarFill],
+                icon: [HiOutlineClock, HiClock, LuClock, RiTimeLine, RiTimeFill],
                 component: ScheduleContainer,
             },
             {
