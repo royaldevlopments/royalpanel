@@ -1,7 +1,10 @@
+@include('blueprint.dashboard.dashboard')
+@yield('blueprint.lib')
 <!DOCTYPE html>
 <html>
     <head>
         <title>{{ config('app.name', 'Royal Panel') }}</title>
+        @yield('head')
 
         @section('meta')
             <meta charset="utf-8">
@@ -192,6 +195,8 @@
             }
         </style>
 
+        <link rel="stylesheet" href="/themes/neon-gaming.css">
+
         @yield('assets')
 
         @include('layouts.scripts')
@@ -201,6 +206,7 @@
             @yield('above-container')
             @yield('container')
             @yield('below-container')
+            @yield('blueprint.wrappers')
         @show
         @section('scripts')
             {!! $asset->js('main.js') !!}

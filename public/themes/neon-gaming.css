@@ -1,0 +1,142 @@
+/* === Neon Gaming Theme === */
+:root, .lightmode {
+  --primary: #a855f7;
+  --successText: #4ade80;
+  --successBorder: #22c55e;
+  --successBackground: #052e16;
+  --dangerText: #fb7185;
+  --dangerBorder: #e11d48;
+  --dangerBackground: #2d0a12;
+  --secondaryText: #e2e8f0;
+  --secondaryBorder: #7c3aed;
+  --secondaryBackground: #1e0a3a;
+  --gray50: #faf5ff;
+  --gray100: #f3e8ff;
+  --gray200: #e9d5ff;
+  --gray300: #d8b4fe;
+  --gray400: #c084fc;
+  --gray500: #a855f7;
+  --gray600: #7c3aed;
+  --gray700: #2d1b4e;
+  --gray800: #1a0a2e;
+  --gray900: #0d0218;
+  --radiusBox: 12px;
+  --radiusInput: 8px;
+  --fontFamily: 'Space Grotesk';
+  --image: none;
+}
+
+/* Animated gradient background */
+body {
+  background: #0d0218 !important;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glass cards with neon border */
+.backdrop, .card, [class*="card"], div[class*="server"] {
+  background: color-mix(in srgb, var(--gray800) 80%, transparent) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent) !important;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 10%, transparent), inset 0 0 20px color-mix(in srgb, var(--primary) 3%, transparent) !important;
+  border-radius: var(--radiusBox) !important;
+}
+.backdrop:hover, .card:hover, div[class*="server"]:hover {
+  border-color: color-mix(in srgb, var(--primary) 50%, transparent) !important;
+  box-shadow: 0 0 30px color-mix(in srgb, var(--primary) 20%, transparent), inset 0 0 30px color-mix(in srgb, var(--primary) 5%, transparent) !important;
+}
+
+/* Glowing buttons */
+button[class*="primary"], .btn-primary {
+  background: linear-gradient(135deg, var(--primary), #d946ef) !important;
+  border: none !important;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent) !important;
+  transition: all 0.3s ease !important;
+}
+button[class*="primary"]:hover {
+  box-shadow: 0 0 35px color-mix(in srgb, var(--primary) 60%, transparent) !important;
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Neon inputs */
+input, textarea, select {
+  background: color-mix(in srgb, var(--gray900) 90%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--gray600) 30%, transparent) !important;
+  color: var(--gray200) !important;
+  border-radius: var(--radiusInput) !important;
+  transition: all 0.3s ease !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--primary) 30%, transparent), inset 0 0 15px color-mix(in srgb, var(--primary) 5%, transparent) !important;
+}
+
+/* Sidebar with glass + glow */
+#sidebar, .sidebar, [class*="sidebar"] {
+  background: color-mix(in srgb, var(--gray900) 90%, transparent) !important;
+  border-right: 1px solid color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+#sidebar a, .sidebar a {
+  transition: all 0.2s ease !important;
+}
+#sidebar a:hover, .sidebar a:hover {
+  color: var(--primary) !important;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+/* Status text glow */
+.text-green-400, .text-cyan-400 {
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--gray900); }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--primary) 40%, transparent); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--primary) 60%, transparent); }
+
+/* Navigation bar */
+nav, [class*="nav"], [class*="navbar"] {
+  background: color-mix(in srgb, var(--gray900) 95%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--primary) 15%, transparent) !important;
+}
+
+/* Animated pulse on server status */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.status-running, .text-green-400 {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Tables */
+table th {
+  background: color-mix(in srgb, var(--gray900) 60%, transparent) !important;
+  color: var(--gray400) !important;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+table tr {
+  border-bottom: 1px solid color-mix(in srgb, var(--gray700) 30%, transparent) !important;
+}
+
+/* Page transitions */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+[class*="content"], [class*="container"] > div {
+  animation: slideUp 0.3s ease forwards;
+}
