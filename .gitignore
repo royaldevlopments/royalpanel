@@ -23,3 +23,8 @@
 !/storage/app/private/.gitkeep
 /bootstrap/cache/config.php
 .DS_Store
+/.blueprint
+/blueprint_install.sh
+/public/extensions/blueprint
+/royal-blueprint-banner.svg
+/scripts/arix-compat.sh
