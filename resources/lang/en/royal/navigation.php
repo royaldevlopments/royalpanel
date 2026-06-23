@@ -10,7 +10,7 @@ return [
     'supportcenter' => 'Support center',
 
     'servers' => 'Servers',
-    'account' => 'Account',
+    'account' => 'Profile',
     'dashboard' => 'Overview',
     'console' => 'Terminal',
     'settings' => 'Config',
@@ -29,7 +29,7 @@ return [
     'configuration' => 'Advanced',
 
     'account-overview' => 'Account Overview',
-    'admin-area' => 'Admin Area',
+    'admin-area' => 'Administrator',
     'account-activity' => 'Account Activity',
     'dark-light-mode' => 'Dark/Light mode',
     'logout' => 'Logout',
