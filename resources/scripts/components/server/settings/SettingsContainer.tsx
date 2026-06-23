@@ -16,8 +16,9 @@ import isEqual from 'react-fast-compare';
 import CopyOnClick from '@/components/elements/CopyOnClick';
 import { ip } from '@/lib/formatters';
 import { Button } from '@/components/elements/button/index';
-import { CogIcon } from '@heroicons/react/outline';
+import { CogIcon, FolderOpenIcon, TerminalIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
 
 export default () => {
     const { t } = useTranslation('royal/server/settings');
@@ -27,6 +28,7 @@ export default () => {
     const node = ServerContext.useStoreState((state) => state.server.data!.node);
     const nodeIcon = ServerContext.useStoreState((state) => state.server.data!.nodeIcon);
     const sftp = ServerContext.useStoreState((state) => state.server.data!.sftpDetails, isEqual);
+    const history = useHistory();
 
     return (
         <ServerContentBlock title={t('settings')} icon={CogIcon}>
@@ -55,10 +57,15 @@ export default () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div css={tw`ml-4`}>
-                                    <a href={`sftp://${username}.${id}@${ip(sftp.ip)}:${sftp.port}`}>
-                                        <Button.Text variant={Button.Variants.Secondary}>{t('sftp.launch-sftp')}</Button.Text>
-                                    </a>
+                                <div css={tw`ml-4 flex gap-2`}>
+                                    <Button.Text variant={Button.Variants.Secondary} onClick={() => history.push(`/server/${id}/sftp`)}>
+                                        <TerminalIcon className={'w-4 h-4 mr-1'} />
+                                        {t('sftp.launch-sftp')}
+                                    </Button.Text>
+                                    <Button.Text variant={Button.Variants.Primary} onClick={() => history.push(`/server/${id}/files`)}>
+                                        <FolderOpenIcon className={'w-4 h-4 mr-1'} />
+                                        {t('sftp.file-manager')}
+                                    </Button.Text>
                                 </div>
                             </div>
                         </TitledGreyBox>

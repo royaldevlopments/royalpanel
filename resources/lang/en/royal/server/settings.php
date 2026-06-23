@@ -9,6 +9,7 @@ return [
         'username' => 'Username',
         'description' => 'Your SFTP password is the same as the password you use to access this panel.',
         'launch-sftp' => 'Launch SFTP',
+        'file-manager' => 'File Manager',
     ],
 
     'rename' => [

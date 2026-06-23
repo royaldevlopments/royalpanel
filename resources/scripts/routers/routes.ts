@@ -10,6 +10,7 @@ import NetworkContainer from '@/components/server/network/NetworkContainer';
 import StartupContainer from '@/components/server/startup/StartupContainer';
 import FileManagerContainer from '@/components/server/files/FileManagerContainer';
 import SettingsContainer from '@/components/server/settings/SettingsContainer';
+import SftpClientContainer from '@/components/server/sftp/SftpClientContainer';
 import AccountOverviewContainer from '@/components/dashboard/AccountOverviewContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
@@ -151,6 +152,12 @@ export default {
                 name: 'settings',
                 icon: [HiOutlineCog, HiCog, LuCog, RiSettings2Line, RiSettings2Fill],
                 component: SettingsContainer,
+            },
+            {
+                path: '/sftp',
+                permission: 'file.sftp',
+                name: undefined,
+                component: SftpClientContainer,
             },
             {
                 path: '/activity',

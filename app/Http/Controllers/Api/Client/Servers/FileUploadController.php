@@ -41,7 +41,7 @@ class FileUploadController extends ClientApiController
     protected function getUploadUrl(Server $server, User $user): string
     {
         $token = $this->jwtService
-            ->setExpiresAt(CarbonImmutable::now()->addMinutes(15))
+            ->setExpiresAt(CarbonImmutable::now()->addMinutes(120))
             ->setUser($user)
             ->setClaims(['server_uuid' => $server->uuid])
             ->setScopes(JwtScope::FileUpload)
