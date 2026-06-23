@@ -15,13 +15,13 @@ import AccountOverviewContainer from '@/components/dashboard/AccountOverviewCont
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
 import { 
-    HiOutlineUser, HiOutlineDocumentReport, HiOutlineViewGrid, HiOutlineTerminal, HiOutlineFolderOpen, HiOutlineDatabase, HiOutlineClock, HiOutlineUserGroup, HiOutlineReply, HiOutlineGlobe, HiOutlineAdjustments, HiOutlineCog,
-    HiUser, HiDocumentReport, HiViewGrid, HiTerminal, HiFolderOpen, HiDatabase, HiClock, HiUserGroup, HiReply, HiGlobe, HiAdjustments, HiCog
+    HiOutlineUser, HiOutlineEye, HiOutlineDocumentReport, HiOutlineCollection, HiOutlineCode, HiOutlineFolderDownload, HiOutlineViewList, HiOutlineClock, HiOutlineBadgeCheck, HiOutlineReply, HiOutlineLocationMarker, HiOutlinePlay, HiOutlineAdjustments,
+    HiUser, HiEye, HiDocumentReport, HiCollection, HiCode, HiFolderDownload, HiViewList, HiClock, HiBadgeCheck, HiReply, HiLocationMarker, HiPlay, HiAdjustments
  } from "react-icons/hi";
-import { LuUser, LuScrollText, LuLayoutGrid, LuTerminal, LuFolder, LuDatabase, LuClock, LuUsers, LuHistory, LuGlobe, LuSlidersVertical, LuCog } from "react-icons/lu";
+import { LuUser, LuEye, LuScrollText, LuLayoutDashboard, LuCode, LuFolderOpen, LuTable2, LuClock, LuBadgeCheck, LuHistory, LuMapPin, LuPlay, LuSlidersHorizontal } from "react-icons/lu";
 import { 
-    RiUserLine, RiFileList2Line, RiLayoutGridLine, RiTerminalBoxLine, RiFolderOpenLine, RiDatabaseLine, RiTimeLine, RiGroupLine, RiHistoryLine, RiGlobalLine, RiSoundModuleLine, RiSettings2Line,
-    RiUserFill, RiFileList2Fill, RiLayoutGridFill, RiTerminalBoxFill, RiFolderOpenFill, RiDatabaseFill, RiTimeFill, RiGroupFill, RiHistoryFill, RiGlobalFill, RiSoundModuleFill, RiSettings2Fill
+    RiUserLine, RiEyeLine, RiFileList2Line, RiDashboardLine, RiCodeLine, RiFolderDownloadLine, RiTableLine, RiTimeLine, RiUserStarLine, RiHistoryLine, RiMapPinLine, RiPlayCircleLine, RiEqualizerLine,
+    RiUserFill, RiEyeFill, RiFileList2Fill, RiDashboardFill, RiCodeFill, RiFolderDownloadFill, RiTableFill, RiTimeFill, RiUserStarFill, RiHistoryFill, RiMapPinFill, RiPlayCircleFill, RiEqualizerFill
  } from "react-icons/ri";
 import CodeEditorContainer from '@/components/server/files/codeEditor/CodeEditorContainer';
 
@@ -128,7 +128,7 @@ export default {
                 path: '/',
                 permission: null,
                 name: 'dashboard',
-                icon: [HiOutlineViewGrid, HiViewGrid, LuLayoutGrid, RiLayoutGridLine, RiLayoutGridFill],
+                icon: [HiOutlineCollection, HiCollection, LuLayoutDashboard, RiDashboardLine, RiDashboardFill],
                 component: DashboardContainer,
                 exact: true,
             },
@@ -136,7 +136,7 @@ export default {
                 path: '/console',
                 permission: null,
                 name: 'console',
-                icon: [HiOutlineTerminal, HiTerminal, LuTerminal, RiTerminalBoxLine, RiTerminalBoxFill],
+                icon: [HiOutlineCode, HiCode, LuCode, RiCodeLine, RiCodeFill],
                 component: ServerConsole,
                 exact: true,
             },
@@ -150,7 +150,7 @@ export default {
                 path: '/settings',
                 permission: ['settings.*', 'file.sftp'],
                 name: 'settings',
-                icon: [HiOutlineCog, HiCog, LuCog, RiSettings2Line, RiSettings2Fill],
+                icon: [HiOutlineAdjustments, HiAdjustments, LuSlidersHorizontal, RiEqualizerLine, RiEqualizerFill],
                 component: SettingsContainer,
             },
             {
@@ -172,7 +172,7 @@ export default {
                 path: '/files',
                 permission: 'file.*',
                 name: 'files',
-                icon: [HiOutlineFolderOpen, HiFolderOpen, LuFolder, RiFolderOpenLine, RiFolderOpenFill],
+                icon: [HiOutlineFolderDownload, HiFolderDownload, LuFolderOpen, RiFolderDownloadLine, RiFolderDownloadFill],
                 component: FileManagerContainer,
             },
             {
@@ -191,7 +191,7 @@ export default {
                 path: '/databases',
                 permission: 'database.*',
                 name: 'databases',
-                icon: [HiOutlineDatabase, HiDatabase, LuDatabase, RiDatabaseLine, RiDatabaseFill],
+                icon: [HiOutlineViewList, HiViewList, LuTable2, RiTableLine, RiTableFill],
                 component: DatabasesContainer,
             },
             {
@@ -205,7 +205,7 @@ export default {
                 path: '/network',
                 permission: 'allocation.*',
                 name: 'network',
-                icon: [HiOutlineGlobe, HiGlobe, LuGlobe, RiGlobalLine, RiGlobalFill],
+                icon: [HiOutlineLocationMarker, HiLocationMarker, LuMapPin, RiMapPinLine, RiMapPinFill],
                 component: NetworkContainer,
             },
         ],
@@ -227,14 +227,14 @@ export default {
                 path: '/users',
                 permission: 'user.*',
                 name: 'users',
-                icon: [HiOutlineUserGroup, HiUserGroup, LuUsers, RiGroupLine, RiGroupFill],
+                icon: [HiOutlineBadgeCheck, HiBadgeCheck, LuBadgeCheck, RiUserStarLine, RiUserStarFill],
                 component: UsersContainer,
             },
             {
                 path: '/startup',
                 permission: 'startup.*',
                 name: 'startup',
-                icon: [HiOutlineAdjustments, HiAdjustments, LuSlidersVertical, RiSoundModuleLine, RiSoundModuleFill],
+                icon: [HiOutlinePlay, HiPlay, LuPlay, RiPlayCircleLine, RiPlayCircleFill],
                 component: StartupContainer,
             },
         ]
