@@ -6,6 +6,7 @@ RemoveExtension() {
     hide_progress
     read -r YN
     if [[ ( ( ${YN} != "y"* ) && ( ${YN} != "Y"* ) ) || ( ( ${YN} == "" ) ) ]]; then
+      lock_remove
       PRINT INFO "Extension removal cancelled."
       hide_progress
       exit 1
@@ -21,6 +22,7 @@ RemoveExtension() {
   set -- "${@:1:2}" "$EXTENSION" "${@:4}"
 
   if [[ $(cat ".blueprint/extensions/blueprint/private/db/installed_extensions") != *"|$EXTENSION,"* ]]; then
+    lock_remove
     PRINT FATAL "'$EXTENSION' is not installed or detected."
     return 2
   fi
@@ -69,6 +71,7 @@ RemoveExtension() {
       PRINT WARNING "Config value 'requests.controllers' is deprecated, use 'requests.app' instead."
     fi
   else
+    lock_remove
     PRINT FATAL "Extension configuration file not found or detected."
     return 1
   fi
@@ -441,7 +444,7 @@ Command() {
     ((PROGRESS_NOW++))
 
     # Make sure all files have correct permissions.
-    PRINT INFO "Changing Pterodactyl file ownership to '$OWNERSHIP'.."
+    PRINT INFO "Changing RoyalPanel file ownership to '$OWNERSHIP'.."
     find "$FOLDER/" \
     -path "$FOLDER/node_modules" -prune \
     -o -exec chown "$OWNERSHIP" {} + &>> "$BLUEPRINT__DEBUG"
