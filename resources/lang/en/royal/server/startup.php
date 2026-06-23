@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'startup-settings' => 'Startup Settings',
+    'startup-settings' => 'Launch Settings',
     'startup-command' => 'Startup Command',
     'docker-image' => 'Docker Image',
     'read-only' => 'Read Only',

@@ -2,7 +2,7 @@
 
 return [
     'account-activity-log' => 'Account Activity Log',
-    'activity-log' => 'Activity Log',
+    'activity-log' => 'Logs',
     'clear-filters' => 'Clear Filters',
     'metadata' => 'Metadata',
     'close' => 'Close',

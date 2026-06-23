@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Users',
+    'title' => 'Team',
     'manage-subusers' => 'Manage subusers',
     'new-user' => 'New user',
 

@@ -1,7 +1,7 @@
 <?php
 
 return[
-    'network' => 'Network',
+    'network' => 'Allocations',
     'manage-allocation' => 'Manage allocation',
     'create-allocation' => 'Create Allocation',
     'currently-using' => 'You are currently using {{current}} of {{max}} allowed allocations for this server.',

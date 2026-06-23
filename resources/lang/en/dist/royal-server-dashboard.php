@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Overview',
 
     'sftp' => [
         'title' => 'SFTP Details',

@@ -1,7 +1,7 @@
 <?php
 
 return[
-    'backups' => 'Backups',
+    'backups' => 'Restore',
     'manage-backups' => 'Manage backups',
     'create-backup' => 'Create backup',
     'have-been-allocated' => '{{current}} of {{max}} backups have been created for this server.',

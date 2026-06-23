@@ -1,7 +1,7 @@
 <?php 
 
 return [
-    'schedules' => 'Schedules',
+    'schedules' => 'Tasks',
     'manage-schedules' => 'Manage schedules',
     'create-schedule' => 'Create schedule',
     'name' => 'Name',

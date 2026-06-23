@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'settings' => 'Settings',
+    'settings' => 'Config',
 
     'sftp' => [
         'title' => 'SFTP Details',
