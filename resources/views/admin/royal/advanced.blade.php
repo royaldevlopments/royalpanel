@@ -31,6 +31,17 @@
                 </select>
             </div>
             <div class="input-field">
+                <label for="royal:searchComponent">Search bar</label>
+                <select
+                    id="royal:searchComponent"
+                    name="royal:searchComponent"
+                >
+                    <option value="1" @if(old('royal:searchComponent', $searchComponent) == 1) selected @endif>Server select bar</option>
+                    <option value="2" @if(old('royal:searchComponent', $searchComponent) == 2) selected @endif>Searchbar</option>
+                </select>
+                <small>Choose between server select bar or search bar in the sidebar.</small>
+            </div>
+            <div class="input-field">
                 <label for="royal:profileType">Profile Style</label>
                 <select
                     id="royal:profileType"
@@ -123,6 +134,40 @@
                 name="royal:registration"
                 :value="$registration"
                 label="User Registration"
+            />
+            <hr />
+            <hr />
+            <p class="subtitle">Discord Bot</p>
+            <x-royal.input-field
+                id="royal:discordBotToken"
+                :value="$discordBotToken"
+                label="Discord Bot Token"
+                helpText="From Discord Developer Portal → Bot → Token."
+            />
+            <x-royal.input-field
+                id="royal:discordGuildId"
+                :value="$discordGuildId"
+                label="Discord Guild ID"
+                helpText="Right-click your server → Copy ID."
+            />
+            <x-royal.input-field
+                id="royal:discordAdminRoleId"
+                :value="$discordAdminRoleId"
+                label="Admin Role ID"
+                helpText="Users with this role can use admin commands. Leave empty for server admins only."
+            />
+            <x-royal.input-field
+                id="royal:botToken"
+                :value="$botToken"
+                label="Panel Bot API Token"
+                helpText="Auto-generated. Keep secret."
+            />
+            <x-royal.switch
+                id="royal:enforceDiscordLink"
+                name="royal:enforceDiscordLink"
+                :value="$enforceDiscordLink"
+                label="Enforce Discord Link"
+                helpText="Show banner to unlinked users."
             />
         </x-royal.form-wrapper>
 

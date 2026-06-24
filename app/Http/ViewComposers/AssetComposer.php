@@ -70,6 +70,7 @@ class AssetComposer
                 'logoPosition' => $this->settings->get('settings::royal:logoPosition', 1),
                 'socialPosition' => $this->settings->get('settings::royal:socialPosition', 1),
                 'loginLayout' => $this->settings->get('settings::royal:loginLayout', 1),
+                'loginGradient' => $this->settings->get('settings::royal:loginGradient', 'true'),
 
                 /* COMPONENTS */
                 'serverRow' => $this->settings->get('settings::royal:serverRow', 1),
@@ -170,6 +171,10 @@ class AssetComposer
                 'registration'     => $this->settings->get('settings::royal:registration', false),
                 'defaultMode' => $this->settings->get('settings::royal:defaultMode', 'darkmode'),
                 'copyright' => $this->settings->get('settings::royal:copyright', 'Designed by Weijers.one'),
+                'heroBadge' => $this->settings->get('settings::royal:heroBadge', 'Neon Gaming Network'),
+                'heroTitle' => $this->settings->get('settings::royal:heroTitle', 'Power Your Game. Instantly.'),
+                'heroTagline' => $this->settings->get('settings::royal:heroTagline', 'Blazing-fast servers with one-click deploy, real-time monitoring, and zero lag — built for competitive gaming.'),
+                'enforceDiscordLink' => $this->settings->get('settings::royal:enforceDiscordLink', false),
 
                 /* SOCIALS */
                 'socials' => json_decode($this->settings->get('settings::royal:socials', '[]'), true),

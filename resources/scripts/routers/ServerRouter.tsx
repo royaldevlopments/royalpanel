@@ -4,6 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 import WebsocketHandler from '@/components/server/WebsocketHandler';
 import { ApplicationStore } from '@/state';
 import Announcement from '@/components/elements/Announcement';
+import DiscordBanner from '@/components/elements/DiscordBanner';
 import { ServerContext } from '@/state/server';
 import Spinner from '@/components/elements/Spinner';
 import { ServerError } from '@/components/elements/ScreenBlock';
@@ -214,6 +215,7 @@ export default () => {
                                         <LowResourcesAlert />
                                         <NodeAlert />
                                         <Announcement />
+                                        <DiscordBanner />
                                         <ComponentLoader />
                                     </ErrorBoundary>
                                 )}

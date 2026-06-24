@@ -59,6 +59,11 @@ class RouteServiceProvider extends ServiceProvider
                     ->group(base_path('routes/api-client.php'));
             });
 
+            Route::middleware(['bot-api', 'throttle:api.client'])
+                ->prefix('/api/client/bot')
+                ->scopeBindings()
+                ->group(base_path('routes/api-bot.php'));
+
             Route::middleware('daemon')
                 ->prefix('/api/remote')
                 ->scopeBindings()

@@ -112,7 +112,6 @@
                     message="We recommend ~60% for the best effect"
                 />
             </div>
-            {{ $backdrop === 'true' ? 'hey' : 'hey 2' }}
             <x-royal.option-picture
                 id="royal:backdrop" 
                 :value="$backdrop"

@@ -21,10 +21,13 @@ class RoyalLayoutController extends Controller
     {
         return $this->view->make('admin.royal.layout', [
             'layout' => $this->settings->get('settings::royal:layout', 1),
-            'searchComponent' => $this->settings->get('settings::royal:searchComponent', 1),
             'logoPosition' => $this->settings->get('settings::royal:logoPosition', 1),
             'socialPosition' => $this->settings->get('settings::royal:socialPosition', 1),
             'loginLayout' => $this->settings->get('settings::royal:loginLayout', 1),
+            'loginGradient' => $this->settings->get('settings::royal:loginGradient', 'true'),
+            'heroBadge' => $this->settings->get('settings::royal:heroBadge', 'Neon Gaming Network'),
+            'heroTitle' => $this->settings->get('settings::royal:heroTitle', 'Power Your Game. Instantly.'),
+            'heroTagline' => $this->settings->get('settings::royal:heroTagline', 'Blazing-fast servers with one-click deploy, real-time monitoring, and zero lag — built for competitive gaming.'),
         ]);
     }
 

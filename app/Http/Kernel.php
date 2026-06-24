@@ -27,6 +27,7 @@ use RoyalPanel\Http\Middleware\Api\AuthenticateIPAccess;
 use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use RoyalPanel\Http\Middleware\Api\Daemon\DaemonAuthenticate;
+use RoyalPanel\Http\Middleware\Api\BotAuthenticate;
 use RoyalPanel\Http\Middleware\Api\Client\RequireClientApiKey;
 use RoyalPanel\Http\Middleware\RequireTwoFactorAuthentication;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
@@ -91,6 +92,13 @@ class Kernel extends HttpKernel
         'daemon' => [
             SubstituteBindings::class,
             DaemonAuthenticate::class,
+        ],
+        'bot-api' => [
+            EnsureStatefulRequests::class,
+            IsValidJson::class,
+            TrackAPIKey::class,
+            BotAuthenticate::class,
+            SubstituteBindings::class,
         ],
     ];
 

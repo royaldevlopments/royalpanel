@@ -15,11 +15,13 @@ class RoyalLayoutRequest extends AdminFormRequest
     {
         return [
             'royal:layout' => 'required|numeric',
-            'royal:searchComponent' => 'required|numeric',
-
             'royal:logoPosition' => 'required|numeric',
             'royal:socialPosition' => 'required|numeric',
             'royal:loginLayout' => 'required|numeric',
+            'royal:loginGradient' => 'required|in:true,false',
+            'royal:heroBadge' => 'string|max:255',
+            'royal:heroTitle' => 'string|max:255',
+            'royal:heroTagline' => 'string|max:500',
         ];
     }
 }

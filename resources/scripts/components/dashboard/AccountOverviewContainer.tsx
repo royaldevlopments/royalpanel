@@ -6,6 +6,7 @@ import UpdateProfileForm from '@/components/dashboard/forms/UpdateProfileForm';
 import UpdateEmailAddressForm from '@/components/dashboard/forms/UpdateEmailAddressForm';
 import ConfigureTwoFactorForm from '@/components/dashboard/forms/ConfigureTwoFactorForm';
 import AppearanceWrapper from '@/components/dashboard/forms/AppearanceWrapper';
+import DiscordLinkContainer from '@/components/dashboard/DiscordLinkContainer';
 import PageContentBlock from '@/components/elements/PageContentBlock';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import UserAvatar from '@/components/UserAvatar'
@@ -49,6 +50,7 @@ export default () => {
                             <FlashMessageRender byKey={'account:password'} />
                             <UpdatePasswordForm />
                             <ConfigureTwoFactorForm />
+                            <DiscordLinkContainer />
                         </div>
                     </div>
                     <div className={'bg-gray-700 backdrop rounded-box px-6 py-5'}>

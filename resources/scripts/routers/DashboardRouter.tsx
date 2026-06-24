@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import Announcement from '@/components/elements/Announcement';
+import DiscordBanner from '@/components/elements/DiscordBanner';
 import TransitionRouter from '@/TransitionRouter';
 import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
@@ -36,6 +37,7 @@ export default () => {
             <div className="w-full">
                 <NavigationBar />
                 <Announcement />
+                <DiscordBanner />
                 <TransitionRouter>
                     <React.Suspense fallback={<Spinner centered />}>
                         <Switch location={location}>

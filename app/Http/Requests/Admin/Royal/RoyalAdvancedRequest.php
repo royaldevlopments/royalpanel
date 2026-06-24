@@ -27,7 +27,13 @@ class RoyalAdvancedRequest extends AdminFormRequest
             'royal:dashboardPage' => 'required|in:true,false',
             'royal:registration' => 'required|in:true,false',
             'royal:defaultMode' => 'required|in:darkmode,lightmode',
+            'royal:searchComponent' => 'required|numeric',
             'royal:copyright' => 'required|string|max:255',
+            'royal:botToken' => 'nullable|string|max:255',
+            'royal:discordBotToken' => 'nullable|string|max:255',
+            'royal:discordGuildId' => 'nullable|string|max:255',
+            'royal:discordAdminRoleId' => 'nullable|string|max:255',
+            'royal:enforceDiscordLink' => 'nullable|in:true,false',
         ];
     }
 }

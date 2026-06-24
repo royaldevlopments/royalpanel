@@ -45,7 +45,13 @@ class RoyalAdvancedController extends Controller
             'dashboardPage' => $this->settings->get('settings::royal:dashboardPage', true),
             'registration' => $this->settings->get('settings::royal:registration', false),
             'defaultMode' => $this->settings->get('settings::royal:defaultMode', 'darkmode'),
+            'searchComponent' => $this->settings->get('settings::royal:searchComponent', 1),
             'copyright' => $this->settings->get('settings::royal:copyright', 'Designed by Weijers.one'),
+            'botToken' => $this->settings->get('settings::royal:botToken', ''),
+            'discordBotToken' => $this->settings->get('settings::royal:discordBotToken', ''),
+            'discordGuildId' => $this->settings->get('settings::royal:discordGuildId', ''),
+            'discordAdminRoleId' => $this->settings->get('settings::royal:discordAdminRoleId', ''),
+            'enforceDiscordLink' => $this->settings->get('settings::royal:enforceDiscordLink', false),
             'royalSettings' => $royalSettings,
             'languages' => $this->getAvailableLanguages(false),
         ]);

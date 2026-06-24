@@ -57,17 +57,6 @@
             </div>
         </div>
 
-        <div class="input-field">
-            <label for="royal:logoPosition">Search or select bar</label>
-            <select name="royal:searchComponent" value="{{ old('royal:searchComponent', $searchComponent) }}">
-                <option value="1">Server select bar</option>
-                <option value="2" @if(old('royal:searchComponent', $searchComponent) == '2') selected @endif>Searchbar</option>
-            </select>
-            <small>Where do you want the logo on the login screen.</small>
-        </div>
-
-        <hr />
-        
         <div class="header">
             <p>Login layout settings</p>
             <span class="description-text">Change the layout settings of the auth pages of Royal Theme.</span>
@@ -110,19 +99,42 @@
             </div>
         </div>
 
+        <x-royal.switch
+            id="royal:loginGradient"
+            name="royal:loginGradient"
+            :value="$loginGradient"
+            label="Background gradient overlay"
+        />
+        <hr />
+        <p class="subtitle">Hero Content</p>
+        <x-royal.input-field
+            id="royal:heroBadge"
+            :value="$heroBadge"
+            label="Hero badge text"
+        />
+        <x-royal.input-field
+            id="royal:heroTitle"
+            :value="$heroTitle"
+            label="Hero title"
+        />
+        <x-royal.input-field
+            id="royal:heroTagline"
+            :value="$heroTagline"
+            label="Hero tagline"
+        />
         <div class="input-field">
-            <label for="royal:socialPosition">Social position</label>
-            <select name="royal:socialPosition" value="{{ old('royal:socialPosition', $socialPosition) }}">
-                <option value="1">Above form</option>
-                <option value="2" @if(old('royal:socialPosition', $socialPosition) == '2') selected @endif>Under form</option>
+            <label>Social position</label>
+            <select name="royal:socialPosition">
+                <option value="1" @if(old('royal:socialPosition', $socialPosition) == 1) selected @endif>Above form</option>
+                <option value="2" @if(old('royal:socialPosition', $socialPosition) == 2) selected @endif>Under form</option>
             </select>
             <small>Where do you want the social buttons on the login screen.</small>
         </div>
         <div class="input-field">
-            <label for="royal:logoPosition">Logo Position</label>
-            <select name="royal:logoPosition" value="{{ old('royal:logoPosition', $logoPosition) }}">
-                <option value="1">Above form</option>
-                <option value="2" @if(old('royal:logoPosition', $logoPosition) == '2') selected @endif>Top corner</option>
+            <label>Logo Position</label>
+            <select name="royal:logoPosition">
+                <option value="1" @if(old('royal:logoPosition', $logoPosition) == 1) selected @endif>Above form</option>
+                <option value="2" @if(old('royal:logoPosition', $logoPosition) == 2) selected @endif>Top corner</option>
             </select>
             <small>Where do you want the logo on the login screen.</small>
         </div>
