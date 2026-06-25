@@ -11,17 +11,18 @@ import StartupContainer from '@/components/server/startup/StartupContainer';
 import FileManagerContainer from '@/components/server/files/FileManagerContainer';
 import SettingsContainer from '@/components/server/settings/SettingsContainer';
 import SftpClientContainer from '@/components/server/sftp/SftpClientContainer';
+import PluginsManagerContainer from '@/blueprint/extensions/mcplugins/PluginsManagerContainer';
 import AccountOverviewContainer from '@/components/dashboard/AccountOverviewContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
 import { 
     HiOutlineUser, HiOutlineEye, HiOutlineDocumentReport, HiOutlineCollection, HiOutlineCode, HiOutlineFolderDownload, HiOutlineViewList, HiOutlineClock, HiOutlineBadgeCheck, HiOutlineReply, HiOutlineLocationMarker, HiOutlinePlay, HiOutlineAdjustments,
-    HiUser, HiEye, HiDocumentReport, HiCollection, HiCode, HiFolderDownload, HiViewList, HiClock, HiBadgeCheck, HiReply, HiLocationMarker, HiPlay, HiAdjustments
+    HiUser, HiEye, HiDocumentReport, HiCollection, HiCode, HiFolderDownload, HiViewList, HiClock, HiBadgeCheck, HiReply, HiLocationMarker, HiPlay, HiAdjustments, HiOutlineCube, HiCube
  } from "react-icons/hi";
-import { LuUser, LuEye, LuScrollText, LuLayoutDashboard, LuCode, LuFolderOpen, LuTable2, LuClock, LuBadgeCheck, LuHistory, LuMapPin, LuPlay, LuSlidersHorizontal } from "react-icons/lu";
+import { LuUser, LuEye, LuScrollText, LuLayoutDashboard, LuCode, LuFolderOpen, LuTable2, LuClock, LuBadgeCheck, LuHistory, LuMapPin, LuPlay, LuSlidersHorizontal, LuBox } from "react-icons/lu";
 import { 
-    RiUserLine, RiEyeLine, RiFileList2Line, RiDashboardLine, RiCodeLine, RiFolderDownloadLine, RiTableLine, RiTimeLine, RiUserStarLine, RiHistoryLine, RiMapPinLine, RiPlayCircleLine, RiEqualizerLine,
-    RiUserFill, RiEyeFill, RiFileList2Fill, RiDashboardFill, RiCodeFill, RiFolderDownloadFill, RiTableFill, RiTimeFill, RiUserStarFill, RiHistoryFill, RiMapPinFill, RiPlayCircleFill, RiEqualizerFill
+    RiUserLine, RiEyeLine, RiFileList2Line, RiDashboardLine, RiCodeLine, RiFolderDownloadLine, RiTableLine, RiTimeLine, RiUserStarLine, RiHistoryLine, RiMapPinLine, RiPlayCircleLine, RiEqualizerLine, RiPuzzleLine,
+    RiUserFill, RiEyeFill, RiFileList2Fill, RiDashboardFill, RiCodeFill, RiFolderDownloadFill, RiTableFill, RiTimeFill, RiUserStarFill, RiHistoryFill, RiMapPinFill, RiPlayCircleFill, RiEqualizerFill, RiPuzzleFill
  } from "react-icons/ri";
 import CodeEditorContainer from '@/components/server/files/codeEditor/CodeEditorContainer';
 
@@ -207,6 +208,14 @@ export default {
                 name: 'network',
                 icon: [HiOutlineLocationMarker, HiLocationMarker, LuMapPin, RiMapPinLine, RiMapPinFill],
                 component: NetworkContainer,
+            },
+            {
+                path: '/mcplugins',
+                permission: null,
+                name: 'Plugins',
+                icon: [HiOutlineCube, HiCube, LuBox, RiPuzzleLine, RiPuzzleFill],
+                component: PluginsManagerContainer,
+                exact: true,
             },
         ],
         configuration: [

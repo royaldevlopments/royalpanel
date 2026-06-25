@@ -22,6 +22,7 @@ return [
     'schedules' => 'Tasks',
     'users' => 'Team',
     'startup' => 'Launch',
+    'Plugins' => 'Plugins',
     'admin-view' => 'Administrator',
 
     'general' => 'Primary',
