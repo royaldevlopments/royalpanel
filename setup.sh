@@ -113,12 +113,41 @@ php artisan tinker --execute="\Illuminate\Support\Facades\DB::table('settings')-
 );" 2>/dev/null
 ok "Bot API token: $BOT_TOKEN"
 
-# ─── 11. Crontab ─────────────────────────────────────────
+# ─── 11. Discord Bot ──────────────────────────────────────
+info "Installing Discord bot..."
+cd "$FOLDER/discord-bot"
+npm install --production --no-interaction 2>&1 | tail -1
+ok "Bot dependencies installed"
+
+cat > /etc/systemd/system/royalpanel-bot.service <<UNIT
+[Unit]
+Description=Royal Panel Discord Bot
+After=network.target nginx.service
+Wants=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=$FOLDER/discord-bot
+ExecStart=/usr/bin/node $FOLDER/discord-bot/index.js
+Environment=PANEL_URL=https://$DOMAIN
+Environment=BOT_TOKEN=$BOT_TOKEN
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+systemctl daemon-reload
+systemctl enable --now royalpanel-bot
+ok "Discord bot service running"
+
+# ─── 12. Crontab ─────────────────────────────────────────
 info "Setting up cron..."
 crontab -l 2>/dev/null | { cat; echo "* * * * * php $FOLDER/artisan schedule:run >> /dev/null 2>&1"; } | crontab -
 ok "Cron installed"
 
-# ─── 12. Queue worker systemd ────────────────────────────
+# ─── 13. Queue worker systemd ────────────────────────────
 info "Setting up queue worker..."
 cat > /etc/systemd/system/royalpanel-queue.service <<UNIT
 [Unit]
@@ -139,7 +168,7 @@ systemctl daemon-reload
 systemctl enable --now royalpanel-queue
 ok "Queue worker running"
 
-# ─── 13. Nginx config ────────────────────────────────────
+# ─── 14. Nginx config ────────────────────────────────────
 info "Creating nginx config..."
 cat > /etc/nginx/sites-available/royalpanel <<NGINX
 server {
@@ -184,7 +213,7 @@ rm -f /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 ok "Nginx configured"
 
-# ─── 14. SSL via Certbot ─────────────────────────────────
+# ─── 15. SSL via Certbot ─────────────────────────────────
 info "Obtaining SSL certificate..."
 certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect 2>/dev/null || \
   echo -e "${YELLOW}SSL skipped — run later: certbot --nginx -d $DOMAIN${NC}"
@@ -205,6 +234,6 @@ echo ""
 echo -e "  ${YELLOW}Next steps:${NC}"
 echo -e "  1. Go to Admin → Royal → Advanced"
 echo -e "  2. Set Discord Bot Token, Guild ID, Admin Role ID"
-echo -e "  3. Install Wings: https://pterodactyl.io/wings/1.0/installing.html"
-echo -e "  4. Start bot: BOT_TOKEN=$BOT_TOKEN node /root/discord-bot/index.js"
+echo -e "  3. Bot will auto-connect — or run: systemctl restart royalpanel-bot"
+echo -e "  4. Install Wings: https://pterodactyl.io/wings/1.0/installing.html"
 echo ""
