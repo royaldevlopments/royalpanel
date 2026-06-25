@@ -1,5 +1,6 @@
 import React from 'react';
-import PluginsManagerContainer from '@/blueprint/extensions/mcplugins/components/PluginsManagerContainer';
+
+/* blueprint/import */
 
 interface RouteDefinition {
   path: string;
@@ -19,16 +20,9 @@ interface Routes {
 
 export default {
   account: [
+    /* routes/account */
   ],
   server: [
-    {
-      path: '/mcplugins',
-      permission: null,
-      name: 'Plugins',
-      component: PluginsManagerContainer,
-      exact: true,
-      adminOnly: false,
-      identifier: 'mcplugins',
-    },
+    /* routes/server */
   ],
 } as Routes;
