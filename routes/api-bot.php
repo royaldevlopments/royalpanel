@@ -30,3 +30,8 @@ Route::get('/database-hosts', [BotController::class, 'listDatabaseHosts']);
 
 Route::get('/stats', [BotController::class, 'stats']);
 Route::get('/config', [BotController::class, 'config']);
+
+Route::get('/2fa/pending', [BotController::class, 'getPending2FACodes']);
+Route::post('/2fa/mark-sent', [BotController::class, 'mark2FACodeSent']);
+Route::post('/2fa/toggle', [BotController::class, 'toggle2FA']);
+Route::get('/2fa/status', [BotController::class, 'get2FAStatus']);

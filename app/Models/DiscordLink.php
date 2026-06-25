@@ -15,11 +15,13 @@ class DiscordLink extends Model
         'code',
         'expires_at',
         'linked_at',
+        'discord_2fa_enabled',
     ];
 
     protected $casts = [
         'expires_at' => 'datetime',
         'linked_at' => 'datetime',
+        'discord_2fa_enabled' => 'boolean',
     ];
 
     public function user(): BelongsTo

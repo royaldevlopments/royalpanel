@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use RoyalPanel\Models\User;
+use RoyalPanel\Models\Discord2FACode;
 use Illuminate\Http\JsonResponse;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Event;
@@ -62,6 +63,19 @@ class LoginCheckpointController extends AbstractLoginController
             $this->sendFailedLoginResponse($request, null, self::TOKEN_EXPIRED_MESSAGE);
         }
 
+        // Discord 2FA code path
+        if (!is_null($discordCode = $request->input('discord_2fa_code'))) {
+            if ($this->isValidDiscord2FACode($user, $discordCode)) {
+                $user->update(['totp_authenticated_at' => Carbon::now()]);
+
+                Event::dispatch(new ProvidedAuthenticationToken($user));
+
+                return $this->sendLoginResponse($user, $request);
+            }
+
+            $this->sendFailedLoginResponse($request, $user, 'The Discord 2FA code provided is not valid.');
+        }
+
         // Recovery tokens go through a slightly different pathway for usage.
         if (!is_null($recoveryToken = $request->input('recovery_token'))) {
             if ($this->isValidRecoveryToken($user, $recoveryToken)) {
@@ -92,6 +106,26 @@ class LoginCheckpointController extends AbstractLoginController
         }
 
         $this->sendFailedLoginResponse($request, $user, !empty($recoveryToken) ? 'The recovery token provided is not valid.' : null);
+    }
+
+    /**
+     * Determines if a given Discord 2FA code is valid.
+     */
+    protected function isValidDiscord2FACode(User $user, string $code): bool
+    {
+        $record = Discord2FACode::where('user_id', $user->id)
+            ->where('code', $code)
+            ->where('used', false)
+            ->where('expires_at', '>', CarbonImmutable::now())
+            ->first();
+
+        if (!$record) {
+            return false;
+        }
+
+        $record->update(['used' => true]);
+
+        return true;
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'pterodactyl/panel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'name' => 'royalpanel/panel',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'a193dba94638a7d41815a680fa6309b28792598b',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -821,15 +821,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'pterodactyl/panel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'ralouphie/getallheaders' => array(
             'pretty_version' => '3.0.3',
             'version' => '3.0.3.0',
@@ -862,6 +853,15 @@
             'replaced' => array(
                 0 => '4.9.1',
             ),
+        ),
+        'royalpanel/panel' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'a193dba94638a7d41815a680fa6309b28792598b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         's1lentium/iptools' => array(
             'pretty_version' => 'v1.2.0',

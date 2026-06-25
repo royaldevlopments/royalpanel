@@ -6,6 +6,8 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use RoyalPanel\Models\User;
+use RoyalPanel\Models\DiscordLink;
+use RoyalPanel\Models\Discord2FACode;
 use Illuminate\Http\JsonResponse;
 use RoyalPanel\Facades\Activity;
 use Illuminate\Contracts\View\View;
@@ -57,6 +59,9 @@ class LoginController extends AbstractLoginController
             return $this->sendLoginResponse($user, $request);
         }
 
+        $discordLink = DiscordLink::where('user_id', $user->id)->whereNotNull('discord_id')->first();
+        $hasDiscord2FA = $discordLink && $discordLink->discord_2fa_enabled;
+
         Activity::event('auth:checkpoint')->withRequestMetadata()->subject($user)->log();
 
         $request->session()->put('auth_confirmation_token', [
@@ -69,7 +74,40 @@ class LoginController extends AbstractLoginController
             'data' => [
                 'complete' => false,
                 'confirmation_token' => $token,
+                'has_discord_2fa' => $hasDiscord2FA,
             ],
         ]);
+    }
+
+    public function sendDiscord2FA(Request $request): JsonResponse
+    {
+        $details = $request->session()->get('auth_confirmation_token');
+        if (!$details || !isset($details['user_id'])) {
+            return new JsonResponse(['error' => 'No active login session.'], 400);
+        }
+
+        $user = User::find($details['user_id']);
+        if (!$user) {
+            return new JsonResponse(['error' => 'User not found.'], 404);
+        }
+
+        $link = DiscordLink::where('user_id', $user->id)->whereNotNull('discord_id')->first();
+        if (!$link || !$link->discord_2fa_enabled) {
+            return new JsonResponse(['error' => 'Discord 2FA is not enabled on this account.'], 400);
+        }
+
+        Discord2FACode::where('user_id', $user->id)->where('used', false)->where('sent', false)->delete();
+
+        $code = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        $expiresAt = CarbonImmutable::now()->addMinutes(3);
+
+        Discord2FACode::create([
+            'user_id' => $user->id,
+            'discord_id' => $link->discord_id,
+            'code' => $code,
+            'expires_at' => $expiresAt,
+        ]);
+
+        return new JsonResponse(['success' => true, 'expires_at' => $expiresAt->toIso8601String()]);
     }
 }

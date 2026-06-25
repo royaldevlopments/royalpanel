@@ -11,6 +11,8 @@ export default () => {
     const [code, setCode] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [twoFAEnabled, setTwoFAEnabled] = useState(false);
+    const [toggling2FA, setToggling2FA] = useState(false);
 
     useEffect(() => {
         fetch('/api/client/bot/link/status')
@@ -21,6 +23,13 @@ export default () => {
             })
             .catch(() => setError('Failed to load link status'))
             .finally(() => setLoading(false));
+
+        fetch('/api/client/bot/2fa/status')
+            .then(r => r.json())
+            .then(d => {
+                if (d.linked) setTwoFAEnabled(d.enabled);
+            })
+            .catch(() => {});
     }, []);
 
     const generateCode = async () => {
@@ -64,6 +73,27 @@ export default () => {
         }
     };
 
+    const toggle2FA = async () => {
+        setToggling2FA(true);
+        setError(null);
+        try {
+            const res = await fetch('/api/client/bot/2fa/toggle', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ enabled: !twoFAEnabled }),
+            });
+            const d = await res.json();
+            if (d.success) {
+                setTwoFAEnabled(!twoFAEnabled);
+            } else {
+                setError(d.error || 'Failed to toggle 2FA');
+            }
+        } catch {
+            setError('Failed to toggle 2FA');
+        }
+        setToggling2FA(false);
+    };
+
     if (loading) {
         return <div className={'bg-gray-700 backdrop rounded-box p-6'}><SpinnerOverlay visible={true} /></div>;
     }
@@ -86,12 +116,30 @@ export default () => {
                     <p className={'text-gray-400 text-sm mb-3'}>
                         Linked as <span className={'text-gray-200 font-mono'}>{discordId}</span>
                     </p>
-                    <button
-                        onClick={unlink}
-                        className={'px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg text-sm hover:bg-red-500/20 transition-all'}
-                    >
-                        Unlink Account
-                    </button>
+                    <div className={'flex gap-2 mb-3'}>
+                        <button
+                            onClick={toggle2FA}
+                            disabled={toggling2FA}
+                            className={`px-4 py-2 border rounded-lg text-sm transition-all ${
+                                twoFAEnabled
+                                    ? 'bg-green-500/10 text-green-400 border-green-500/20 hover:bg-green-500/20'
+                                    : 'bg-gray-600/50 text-gray-300 border-gray-500/30 hover:bg-gray-500/30'
+                            }`}
+                        >
+                            {toggling2FA ? '...' : twoFAEnabled ? 'Discord 2FA: ON' : 'Enable Discord 2FA'}
+                        </button>
+                        <button
+                            onClick={unlink}
+                            className={'px-4 py-2 bg-red-500/10 text-red-400 border border-red-500/20 rounded-lg text-sm hover:bg-red-500/20 transition-all'}
+                        >
+                            Unlink
+                        </button>
+                    </div>
+                    {twoFAEnabled && (
+                        <p className={'text-gray-500 text-xs'}>
+                            Login with Discord DM codes as 2FA. Send code from login page.
+                        </p>
+                    )}
                 </div>
             ) : (
                 <div>

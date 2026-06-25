@@ -1,13 +1,23 @@
 import http from '@/api/http';
 import { LoginResponse } from '@/api/auth/login';
 
-export default (token: string, code: string, recoveryToken?: string): Promise<LoginResponse> => {
+interface CheckpointData {
+    token: string;
+    code?: string;
+    recoveryToken?: string;
+    discordCode?: string;
+}
+
+export default (data: CheckpointData): Promise<LoginResponse> => {
     return new Promise((resolve, reject) => {
-        http.post('/auth/login/checkpoint', {
-            confirmation_token: token,
-            authentication_code: code,
-            recovery_token: recoveryToken && recoveryToken.length > 0 ? recoveryToken : undefined,
-        })
+        const payload: Record<string, string | undefined> = {
+            confirmation_token: data.token,
+            authentication_code: data.code,
+            recovery_token: data.recoveryToken && data.recoveryToken.length > 0 ? data.recoveryToken : undefined,
+            discord_2fa_code: data.discordCode,
+        };
+
+        http.post('/auth/login/checkpoint', payload)
             .then((response) =>
                 resolve({
                     complete: response.data.data.complete,

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use RoyalPanel\Models\DiscordLink;
+use RoyalPanel\Models\Discord2FACode;
 use RoyalPanel\Models\User;
 use RoyalPanel\Models\Server;
 use RoyalPanel\Models\Node;
@@ -470,6 +471,75 @@ class BotController extends Controller
             'discord_bot_token' => $this->settings->get('settings::royal:discordBotToken', ''),
             'discord_guild_id' => $this->settings->get('settings::royal:discordGuildId', ''),
             'discord_admin_role_id' => $this->settings->get('settings::royal:discordAdminRoleId', ''),
+        ]);
+    }
+
+    // ─── Discord 2FA ────────────────────────────────────────────
+
+    public function getPending2FACodes(Request $request): JsonResponse
+    {
+        if (!$this->isBotAuthorized($request)) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $codes = Discord2FACode::where('sent', false)
+            ->where('used', false)
+            ->where('expires_at', '>', Carbon::now())
+            ->get(['id', 'discord_id', 'code']);
+
+        return response()->json($codes);
+    }
+
+    public function mark2FACodeSent(Request $request): JsonResponse
+    {
+        if (!$this->isBotAuthorized($request)) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+
+        $data = $request->validate(['id' => 'required|integer']);
+        Discord2FACode::where('id', $data['id'])->update(['sent' => true]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function toggle2FA(Request $request): JsonResponse
+    {
+        if ($this->isBotAuthorized($request)) {
+            $data = $request->validate([
+                'discord_id' => 'required|string',
+                'enabled' => 'required|boolean',
+            ]);
+            $link = DiscordLink::where('discord_id', $data['discord_id'])->first();
+        } else {
+            $user = $request->user();
+            if (!$user) return response()->json(['error' => 'Unauthenticated'], 401);
+            $data = $request->validate(['enabled' => 'required|boolean']);
+            $link = DiscordLink::where('user_id', $user->id)->first();
+        }
+
+        if (!$link || !$link->discord_id) {
+            return response()->json(['error' => 'Discord account not linked'], 400);
+        }
+
+        $link->update(['discord_2fa_enabled' => $data['enabled']]);
+
+        if ($data['enabled']) {
+            User::where('id', $link->user_id)->update(['use_totp' => true]);
+        }
+
+        return response()->json(['success' => true, 'enabled' => $data['enabled']]);
+    }
+
+    public function get2FAStatus(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        if (!$user) return response()->json(['error' => 'Unauthenticated'], 401);
+
+        $link = DiscordLink::where('user_id', $user->id)->first();
+
+        return response()->json([
+            'linked' => $link && $link->discord_id !== null,
+            'enabled' => $link ? $link->discord_2fa_enabled : false,
         ]);
     }
 }

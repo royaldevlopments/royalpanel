@@ -4,22 +4,30 @@ export interface LoginResponse {
     complete: boolean;
     intended?: string;
     confirmationToken?: string;
+    hasDiscord2FA?: boolean;
 }
 
 export interface LoginData {
     username: string;
     password: string;
-    recaptchaData?: string | null;
+    captchaToken?: string | null;
+    captchaProvider?: string;
 }
 
-export default ({ username, password, recaptchaData }: LoginData): Promise<LoginResponse> => {
+export default ({ username, password, captchaToken, captchaProvider }: LoginData): Promise<LoginResponse> => {
     return new Promise((resolve, reject) => {
+        // Build captcha response field based on provider
+        const captchaField =
+            captchaProvider === 'turnstile'
+                ? { 'cf-turnstile-response': captchaToken }
+                : { 'g-recaptcha-response': captchaToken };
+
         http.get('/sanctum/csrf-cookie')
             .then(() =>
                 http.post('/auth/login', {
                     user: username,
                     password,
-                    'g-recaptcha-response': recaptchaData,
+                    ...captchaField,
                 })
             )
             .then((response) => {
@@ -31,6 +39,7 @@ export default ({ username, password, recaptchaData }: LoginData): Promise<Login
                     complete: response.data.data.complete,
                     intended: response.data.data.intended || undefined,
                     confirmationToken: response.data.data.confirmation_token || undefined,
+                    hasDiscord2FA: response.data.data.has_discord_2fa || undefined,
                 });
             })
             .catch(reject);

@@ -27,6 +27,7 @@ Route::middleware(['throttle:authentication'])->group(function () {
     // Login endpoints.
     Route::post('/login', [Auth\LoginController::class, 'login'])->middleware(['security', 'recaptcha']);
     Route::post('/login/checkpoint', Auth\LoginCheckpointController::class)->name('auth.login-checkpoint');
+    Route::post('/login/checkpoint/discord-send', [Auth\LoginController::class, 'sendDiscord2FA']);
 
     // Register endpoints.
     Route::post('/register', [Auth\RegisterController::class, 'register'])->middleware('recaptcha');

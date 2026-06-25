@@ -40,5 +40,5 @@ return array(
     '17d016dc52a631c1e74d2eb8fdd57342' => $vendorDir . '/laravel/helpers/src/helpers.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     'ab9b68c5b1def6f80e89be13eb0a4be3' => $vendorDir . '/spatie/laravel-fractal/src/helpers.php',
-    '30714b87ced74413de952e487d66d30e' => $baseDir . '/app/helpers.php',
+    'c50fd56520a26ba27f5fc98c162bc455' => $baseDir . '/app/helpers.php',
 );
