@@ -9,6 +9,7 @@ import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
 import { ApplicationStore } from '@/state';
 import { UserCircleIcon, KeyIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import { FaDiscord, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
@@ -30,6 +31,9 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { recaptcha: recaptchaSettings, turnstile: turnstileSettings } = useStoreState((state) => state.settings.data!);
     const registration = useStoreState((state: ApplicationStore) => state.settings.data!.royal.registration);
+    const oauthDiscord = useStoreState((state: ApplicationStore) => state.settings.data!.royal.oauthDiscordEnabled);
+    const oauthGithub = useStoreState((state: ApplicationStore) => state.settings.data!.royal.oauthGithubEnabled);
+    const oauthGoogle = useStoreState((state: ApplicationStore) => state.settings.data!.royal.oauthGoogleEnabled);
 
     useEffect(() => {
         clearFlashes();
@@ -154,6 +158,32 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             {t('login.login')}
                         </Button>
                     </div>
+                    {(String(oauthDiscord) === 'true' || String(oauthGithub) === 'true' || String(oauthGoogle) === 'true') && (
+                        <div css={tw`mt-4 flex flex-col gap-2`}>
+                            <div css={tw`flex items-center gap-3`}>
+                                <div css={tw`flex-1 h-px bg-neutral-700`} />
+                                <span css={tw`text-xs text-neutral-500 uppercase tracking-wide`}>Or continue with</span>
+                                <div css={tw`flex-1 h-px bg-neutral-700`} />
+                            </div>
+                            <div css={tw`flex gap-2`}>
+                                {String(oauthDiscord) === 'true' && (
+                                    <a href="/auth/oauth/discord" css={tw`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#5865F2] hover:bg-[#4752C4] text-white text-sm font-medium transition-colors no-underline`}>
+                                        <FaDiscord size={18} /> Discord
+                                    </a>
+                                )}
+                                {String(oauthGithub) === 'true' && (
+                                    <a href="/auth/oauth/github" css={tw`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#24292F] hover:bg-[#1B1F24] text-white text-sm font-medium transition-colors no-underline`}>
+                                        <FaGithub size={18} /> GitHub
+                                    </a>
+                                )}
+                                {String(oauthGoogle) === 'true' && (
+                                    <a href="/auth/oauth/google" css={tw`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#EA4335] hover:bg-[#D33426] text-white text-sm font-medium transition-colors no-underline`}>
+                                        <FaGoogle size={18} /> Google
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    )}
                     {String(registration) === 'true' && (
                         <div css={tw`mt-6 text-center`}>
                             <Link

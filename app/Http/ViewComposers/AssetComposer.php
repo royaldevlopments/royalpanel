@@ -180,6 +180,11 @@ class AssetComposer
                 'socials' => json_decode($this->settings->get('settings::royal:socials', '[]'), true),
                 'socialButtons' => $this->settings->get('settings::royal:socialButtons', false),
                 'discordBox' => $this->settings->get('settings::royal:discordBox', true),
+
+                /* OAUTH */
+                'oauthDiscordEnabled' => $this->settings->get('settings::royal:oauth_discord_enabled', false),
+                'oauthGithubEnabled' => $this->settings->get('settings::royal:oauth_github_enabled', false),
+                'oauthGoogleEnabled' => $this->settings->get('settings::royal:oauth_google_enabled', false),
             ],
             'locale' => config('app.locale') ?? 'en',
             'recaptcha' => [

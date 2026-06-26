@@ -51,5 +51,11 @@ Route::post('/logout', [Auth\LoginController::class, 'logout'])
     ->middleware('auth')
     ->name('auth.logout');
 
+// OAuth routes (no throttle — external redirects)
+Route::prefix('/oauth')->group(function () {
+    Route::get('/{provider}', [Auth\SocialAuthController::class, 'redirect'])->name('auth.oauth.redirect');
+    Route::get('/{provider}/callback', [Auth\SocialAuthController::class, 'callback'])->name('auth.oauth.callback');
+});
+
 // Catch any other combinations of routes and pass them off to the React component.
 Route::fallback([Auth\LoginController::class, 'index']);

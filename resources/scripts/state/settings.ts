@@ -80,6 +80,10 @@ export interface SiteSettings {
         dashboardPage: boolean;
         registration: boolean;
 
+        oauthDiscordEnabled: boolean,
+        oauthGithubEnabled: boolean,
+        oauthGoogleEnabled: boolean,
+
         /* COLORS */
         primary: string,
     };

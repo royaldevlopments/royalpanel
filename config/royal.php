@@ -123,4 +123,15 @@ return array (
   ),
   'socialButtons' => false,
   'discordBox' => true,
+
+  /* OAUTH */
+  'oauth_discord_enabled' => false,
+  'oauth_discord_client_id' => '',
+  'oauth_discord_client_secret' => '',
+  'oauth_github_enabled' => false,
+  'oauth_github_client_id' => '',
+  'oauth_github_client_secret' => '',
+  'oauth_google_enabled' => false,
+  'oauth_google_client_id' => '',
+  'oauth_google_client_secret' => '',
 );

@@ -34,6 +34,15 @@ class RoyalAdvancedRequest extends AdminFormRequest
             'royal:discordGuildId' => 'nullable|string|max:255',
             'royal:discordAdminRoleId' => 'nullable|string|max:255',
             'royal:enforceDiscordLink' => 'nullable|in:true,false',
+            'royal:oauth_discord_enabled' => 'nullable|in:true,false',
+            'royal:oauth_discord_client_id' => 'nullable|string|max:255',
+            'royal:oauth_discord_client_secret' => 'nullable|string|max:255',
+            'royal:oauth_github_enabled' => 'nullable|in:true,false',
+            'royal:oauth_github_client_id' => 'nullable|string|max:255',
+            'royal:oauth_github_client_secret' => 'nullable|string|max:255',
+            'royal:oauth_google_enabled' => 'nullable|in:true,false',
+            'royal:oauth_google_client_id' => 'nullable|string|max:255',
+            'royal:oauth_google_client_secret' => 'nullable|string|max:255',
         ];
     }
 }

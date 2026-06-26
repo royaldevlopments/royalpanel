@@ -169,6 +169,65 @@
                 label="Enforce Discord Link"
                 helpText="Show banner to unlinked users."
             />
+            <hr />
+            <hr />
+            <p class="subtitle">OAuth / Social Login</p>
+            <p style="margin-bottom:16px;font-size:13px;color:#94a3b8;">Enable login &amp; registration via third-party providers. Users will be able to sign in with these accounts. First-time login auto-creates an account.</p>
+
+            <x-royal.switch
+                id="royal:oauth_discord_enabled"
+                name="royal:oauth_discord_enabled"
+                :value="$oauthDiscordEnabled"
+                label="Discord Login"
+            />
+            <x-royal.input-field
+                id="royal:oauth_discord_client_id"
+                :value="$oauthDiscordClientId"
+                label="Discord Client ID"
+                helpText="From Discord Developer Portal → OAuth2 → Client ID."
+            />
+            <x-royal.input-field
+                id="royal:oauth_discord_client_secret"
+                :value="$oauthDiscordClientSecret"
+                label="Discord Client Secret"
+                helpText="From Discord Developer Portal → OAuth2 → Client Secret."
+            />
+            <hr />
+            <x-royal.switch
+                id="royal:oauth_github_enabled"
+                name="royal:oauth_github_enabled"
+                :value="$oauthGithubEnabled"
+                label="GitHub Login"
+            />
+            <x-royal.input-field
+                id="royal:oauth_github_client_id"
+                :value="$oauthGithubClientId"
+                label="GitHub Client ID"
+                helpText="From GitHub Settings → Developer Settings → OAuth Apps."
+            />
+            <x-royal.input-field
+                id="royal:oauth_github_client_secret"
+                :value="$oauthGithubClientSecret"
+                label="GitHub Client Secret"
+            />
+            <hr />
+            <x-royal.switch
+                id="royal:oauth_google_enabled"
+                name="royal:oauth_google_enabled"
+                :value="$oauthGoogleEnabled"
+                label="Google Login"
+            />
+            <x-royal.input-field
+                id="royal:oauth_google_client_id"
+                :value="$oauthGoogleClientId"
+                label="Google Client ID"
+                helpText="From Google Cloud Console → APIs & Services → Credentials."
+            />
+            <x-royal.input-field
+                id="royal:oauth_google_client_secret"
+                :value="$oauthGoogleClientSecret"
+                label="Google Client Secret"
+            />
         </x-royal.form-wrapper>
 
         <div class="floating-button">

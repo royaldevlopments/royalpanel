@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Extensions\mcplugins;
+namespace RoyalPanel\Http\Controllers\Admin\Extensions\mcplugins;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Pterodactyl\Http\Controllers\Controller;
+use RoyalPanel\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Pterodactyl\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary;
+use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary;
 
 class mcpluginsExtensionController extends Controller
 {
