@@ -3,6 +3,7 @@
 namespace RoyalPanel\Notifications;
 
 use RoyalPanel\Models\User;
+use RoyalPanel\Services\EmailTemplateService;
 use Illuminate\Bus\Queueable;
 use RoyalPanel\Events\Event;
 use RoyalPanel\Models\Server;
@@ -22,12 +23,6 @@ class ServerInstalled extends Notification implements ShouldQueue, ReceivesEvent
 
     public User $user;
 
-    /**
-     * Handle a direct call to this notification from the server installed event. This is configured
-     * in the event service provider.
-     *
-     * @phpstan-param Installed $event
-     */
     public function handle(Event|Installed $event): void
     {
         $event->server->loadMissing('user');
@@ -35,10 +30,31 @@ class ServerInstalled extends Notification implements ShouldQueue, ReceivesEvent
         $this->server = $event->server;
         $this->user = $event->server->user;
 
-        // Since we are calling this notification directly from an event listener we need to fire off the dispatcher
-        // to send the email now. Don't use send() or you'll end up firing off two different events.
         Container::getInstance()->make(Dispatcher::class)->sendNow($this->user, $this);
     }
+
+    public function via(): array
+    {
+        return ['mail'];
+    }
+
+    public function toMail(): MailMessage
+    {
+        $message = (new MailMessage())
+            ->greeting('Hello ' . $this->user->username . '.')
+            ->line('Your server has finished installing and is now ready for you to use.')
+            ->line('Server Name: ' . $this->server->name)
+            ->action('Login and Begin Using', route('index'));
+
+        return app(EmailTemplateService::class)->applyToMail($message, 'server_installed', [
+            'name' => $this->user->username,
+            'username' => $this->user->username,
+            'server_name' => $this->server->name,
+            'server_url' => route('index'),
+            'app_name' => config('app.name'),
+        ]);
+    }
+}
 
     /**
      * Get the notification's delivery channels.

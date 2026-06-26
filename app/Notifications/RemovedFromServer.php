@@ -2,6 +2,7 @@
 
 namespace RoyalPanel\Notifications;
 
+use RoyalPanel\Services\EmailTemplateService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,13 +14,32 @@ class RemovedFromServer extends Notification implements ShouldQueue
 
     public object $server;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(array $server)
     {
         $this->server = (object) $server;
     }
+
+    public function via(): array
+    {
+        return ['mail'];
+    }
+
+    public function toMail(): MailMessage
+    {
+        $message = (new MailMessage())
+            ->error()
+            ->greeting('Hello ' . $this->server->user . '.')
+            ->line('You have been removed as a subuser for the following server.')
+            ->line('Server Name: ' . $this->server->name)
+            ->action('Visit Panel', route('index'));
+
+        return app(EmailTemplateService::class)->applyToMail($message, 'removed_from_server', [
+            'name' => $this->server->user,
+            'server_name' => $this->server->name,
+            'app_name' => config('app.name'),
+        ]);
+    }
+}
 
     /**
      * Get the notification's delivery channels.

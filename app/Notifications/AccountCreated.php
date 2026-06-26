@@ -3,6 +3,7 @@
 namespace RoyalPanel\Notifications;
 
 use RoyalPanel\Models\User;
+use RoyalPanel\Services\EmailTemplateService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -12,12 +13,36 @@ class AccountCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(public User $user, public ?string $token = null)
     {
     }
+
+    public function via(): array
+    {
+        return ['mail'];
+    }
+
+    public function toMail(): MailMessage
+    {
+        $message = (new MailMessage())
+            ->greeting('Hello ' . $this->user->name . '!')
+            ->line('You are receiving this email because an account has been created for you on ' . config('app.name') . '.')
+            ->line('Username: ' . $this->user->username)
+            ->line('Email: ' . $this->user->email);
+
+        if (!is_null($this->token)) {
+            $message->action('Setup Your Account', url('/auth/password/reset/' . $this->token . '?email=' . urlencode($this->user->email)));
+        }
+
+        return app(EmailTemplateService::class)->applyToMail($message, 'account_created', [
+            'name' => $this->user->name,
+            'username' => $this->user->username,
+            'email' => $this->user->email,
+            'app_name' => config('app.name'),
+            'setup_url' => $this->token ? url('/auth/password/reset/' . $this->token . '?email=' . urlencode($this->user->email)) : '',
+        ]);
+    }
+}
 
     /**
      * Get the notification's delivery channels.

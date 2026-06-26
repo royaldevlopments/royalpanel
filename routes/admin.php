@@ -49,6 +49,10 @@ Route::group(['prefix' => 'royal'], function () {
     Route::post('/advanced', [Admin\Royal\RoyalAdvancedController::class, 'store']);
     
     Route::post('/advanced/preset', [Admin\Royal\RoyalAdvancedController::class, 'preset'])->name('admin.royal.advanced.preset');
+
+    Route::get('/email-templates', [Admin\Royal\RoyalEmailTemplateController::class, 'index'])->name('admin.royal.email-templates');
+    Route::get('/email-templates/{template}/edit', [Admin\Royal\RoyalEmailTemplateController::class, 'edit'])->name('admin.royal.email-templates.edit');
+    Route::patch('/email-templates/{template}', [Admin\Royal\RoyalEmailTemplateController::class, 'update'])->name('admin.royal.email-templates.update');
 });
 
 /*

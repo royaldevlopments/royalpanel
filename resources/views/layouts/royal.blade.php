@@ -108,6 +108,12 @@
                         </a>
                         <span class="link-tooltip">Mail settings</span>
                     </li>
+                    <li @if($navbar === 'email-templates')class="active"@endif>
+                        <a href="{{ route('admin.royal.email-templates') }}">
+                            <i data-lucide="pen-line"></i>
+                        </a>
+                        <span class="link-tooltip">Email templates</span>
+                    </li>
                     <li @if($navbar === 'social')class="active"@endif>
                         <a href="{{ route('admin.royal.social') }}">
                             <i data-lucide="share2"></i>
