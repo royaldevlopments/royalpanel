@@ -118,46 +118,22 @@ const RegisterContainer = () => {
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
-                <RegisterFormContainer title={t('register.title')} css={tw`w-full flex`}>
-                    <div className="grid lg:grid-cols-2 gap-4 w-full">
-                        <Field
-                            type={'text'}
-                            label={t('register.firstname')}
-                            name={'firstname'}
-                            placeholder={t('register.firstname')}
-                            disabled={isSubmitting}
-                            icon={UserCircleIcon}
-                        />
-                        <Field
-                            type={'text'}
-                            label={t('register.lastname')}
-                            name={'lastname'}
-                            placeholder={t('register.lastname')}
-                            disabled={isSubmitting}
-                            icon={UserCircleIcon}
-                        />
+                <RegisterFormContainer title={t('register.title')} css={tw`w-full flex flex-col`}>
+                    <div css={tw`grid lg:grid-cols-2 gap-4 w-full`}>
+                        <div>
+                            <p css={tw`text-xs font-bold text-gray-300 mb-1`}>First Name</p>
+                            <Field type={'text'} name={'firstname'} placeholder={t('register.firstname')} disabled={isSubmitting} icon={UserCircleIcon} />
+                        </div>
+                        <div>
+                            <p css={tw`text-xs font-bold text-gray-300 mb-1`}>Last Name</p>
+                            <Field type={'text'} name={'lastname'} placeholder={t('register.lastname')} disabled={isSubmitting} icon={UserCircleIcon} />
+                        </div>
                     </div>
-                    <div css={tw`mt-6`}>
-                        <Field
-                            type={'text'}
-                            label={t('register.username')}
-                            name={'username'}
-                            placeholder={t('register.username')}
-                            disabled={isSubmitting}
-                            icon={UserCircleIcon}
-                        />
-                    </div>
-                    <div css={tw`mt-6 mb-3`}>
-                        <Field
-                            type={'email'}
-                            label={t('register.email')}
-                            name={'email'}
-                            placeholder={t('register.email')}
-                            disabled={isSubmitting}
-                            icon={AtSymbolIcon}
-                        />
-                    </div>
-                    <div className={'z-50 relative'}>
+                    <p css={tw`text-xs font-bold text-gray-300 mb-1 mt-4`}>Username</p>
+                    <Field type={'text'} name={'username'} placeholder={t('register.username')} disabled={isSubmitting} icon={UserCircleIcon} />
+                    <p css={tw`text-xs font-bold text-gray-300 mb-1 mt-4`}>Email</p>
+                    <Field type={'email'} name={'email'} placeholder={t('register.email')} disabled={isSubmitting} icon={AtSymbolIcon} />
+                    <div css={tw`mt-4 z-50 relative`}>
                         {recaptchaSettings.enabled && recaptchaSettings.method && (
                             recaptchaSettings.method === 'recaptcha' ? (
                             <Reaptcha
