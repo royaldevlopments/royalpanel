@@ -1,68 +1,98 @@
-[![](https://github.com/user-attachments/assets/a1a6df48-7925-43c9-81d6-e2351e6c6bb8)](https://blueprint.zip/guides/admin/install)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a1a6df48-7925-43c9-81d6-e2351e6c6bb8" alt="Royal Panel" width="120"/>
 
-## Introduction
-**Blueprint** is an open-source extension framework/manager for Pterodactyl. Developers can create versatile, easy-to-install extensions that system administrators can install within minutes *(usually even seconds!)* without having to custom-code compatibility across multiple panel modifications.
+  # Royal Panel
 
-We aim to introduce new developers to Blueprint with easy to understand guides, documentation, developer commands, community support and more.
+  <p><strong>A modern, feature-rich game server management panel — built on Pterodactyl.</strong></p>
 
-[Learn more about **Blueprint**](https://blueprint.zip) or [find your **next extension**](https://blueprint.zip/browse).
+  <p>
+    <a href="https://papa.codenestsolution.in">🔗 Live Demo</a>
+  </p>
 
-### Install Blueprint
-Refer to the [installation guide](https://blueprint.zip/guides/admin/install).
+  <br>
 
-<br>
+  <img src="https://img.shields.io/badge/PHP-8.3-777BB4?style=flat&logo=php&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node-20-339933?style=flat&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow" />
+</div>
 
-## Donate and contribute
-Blueprint is free and open-source software. We play a vital role in the Pterodactyl modding community and empower developers with tools to bring their ideas to life. To keep everything up and running, we rely heavily on [donations](https://hcb.hackclub.com/blueprint/donations). We're also nonprofit!
+---
 
-If you are an organization, [consider becoming a corporate sponsor](https://hcb.hackclub.com/donations/start/blueprint/tiers/5qKhd3). Blueprint hosts guides and documentation that bring new developers to the hosting industry, giving a new chance for companies to aquire new talent and bring their operations further.
+## ✨ Features
 
-[**Donate to our nonprofit organization**](https://hcb.hackclub.com/donations/start/blueprint) or [view our open finances](https://hcb.hackclub.com/blueprint).
+- **Custom Login Page** — Two-panel layout with particle effects, editable hero text, and social OAuth (Discord/GitHub/Google)
+- **Neon Gaming Theme** — Unique dark theme with custom CSS
+- **Step Wizard Admin Pages** — Create Users/Servers/Nodes with a clean step-by-step wizard
+- **In-Browser SFTP Client** — File manager right in the panel, no separate SFTP client needed
+- **Direct Upload** — Upload files up to 20GB directly through the panel
+- **Discord Bot Integration** — 22+ slash commands, server management, user lookup, and 2FA via Discord
+- **Discord 2FA** — Two-factor authentication through Discord DMs alongside TOTP
+- **OAuth Login** — Sign in with Discord, GitHub, or Google
+- **Admin-Editable Email Templates** — Customize every email sent by the panel from the admin UI
+- **Registration Toggle** — Enable/disable public registration
+- **Discord Link System** — Link Discord accounts to panel accounts with enforced linking option
+- **Blueprint Extension Support** — Run Pterodactyl extensions via Blueprint
+- **mcplugins** — Minecraft plugin browser with 14K+ plugins from Modrinth
 
-### Contributors
-Contributors help shape the future of the Blueprint modding framework. To start contributing you have to [fork this repository](https://github.com/BlueprintFramework/framework/fork) and [open a pull request](https://github.com/BlueprintFramework/framework/compare).
+## 🚀 Tech Stack
 
-<a href="https://github.com/BlueprintFramework/framework/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=BlueprintFramework/framework" />
-</a>
+| Component | Technology |
+|-----------|-----------|
+| Backend | PHP 8.3, Laravel |
+| Frontend | React, TypeScript, Webpack |
+| Database | MariaDB / MySQL |
+| Game Daemon | Wings (Docker) |
+| Bot | Discord.js v14 |
+| Proxy | Nginx |
 
-### Related repositories
-The Blueprint modding platform is spread over multiple repositories, each with it's own purpose. If you'd like to contribute, check out the following repositories:
+## 🛠️ Quick Start
 
-- [**BlueprintFramework/docker**](https://github.com/BlueprintFramework/docker) is the image for running Blueprint and Pterodactyl with Docker.
-- [**BlueprintFramework/templates**](https://github.com/BlueprintFramework/templates) is a repository with initialization templates for extension development.
-- [**BlueprintFramework/web**](https://github.com/BlueprintFramework/web) is our open-source source of documentation, landing website, and API.
+```bash
+# Clone the repository
+git clone https://github.com/royaldevlopments/royalpanel.git
+cd royalpanel
 
-<br>
+# Install dependencies
+composer install --no-dev
+npm install --production
 
-## What's in here?
-The framework repository hosts the "Blueprint patch" that you apply onto your Pterodactyl panel. This overwrites files like installing a "standalone addon" would, but instead of being just that, Blueprint allows your panel to be extended through "extensions".
+# Configure environment
+cp .env.example .env
+php artisan key:generate
 
-- Blueprint's CLI is written in Bash.
-- The backend adds onto Pterodactyl's, and is written in PHP/Laravel.
-- The user-side frontend adds onto Pterodactyl's, and is written in React/TypeScript.
-- The admin-side frontend adds onto Pterodactyl's, and is written in PHP/Laravel/Blade.
+# Run migrations
+php artisan migrate --force
 
-### CLI
-Our main CLI script is [`blueprint.sh`](./blueprint.sh). This script gets called by `/usr/local/bin/blueprint` whenever a user runs the `blueprint` command, or queries bash autocomplete.
+# Build frontend
+npm run build
 
-[`blueprint.sh`](./blueprint.sh) is in charge of the following duties;
-- Finishing initial installation steps and updates (flushing cache, artisan commands, etc)
-- Sourcing CLI dependencies ([`scripts/libraries`](./scripts/libraries))
-- Running the right sub-scripts for each command ([`scripts/commands`](./scripts/commands))
-- Placing the Blueprint command shortcut to `/usr/local/bin/blueprint`
+# Set permissions
+chown -R www-data:www-data .
+```
 
-We used to do *everything* in the main CLI script, which overcomplicated everything *a lot*. Everything is now (mostly) designated to it's own area.
+## 🤖 Discord Bot
 
-<br>
+Royal Panel includes a fully integrated Discord bot:
 
-## Showcase
-We've got a growing ecosystem of extensions, from ones cover game features such as Minecraft and Hytale, to useful quality-of-life admin tools.
+```bash
+# Set Discord Bot Token in Admin → Royal → Advanced
+systemctl restart royalpanel-bot
+```
 
-![](https://github.com/user-attachments/assets/1cea099b-9af8-4ccc-ac1a-0a896a30f817)
+Features: `/link`, `/unlink`, `/status`, `/my-servers`, `/server-info`, `/server-power`, `/server-command`, `/admin-stats`, and full admin CRUD commands for users & servers.
 
-<br/><br/>
-<p align="center">
-  © 2023-2026 Emma (prpl.wtf)
-  <br/><br/><img src="https://github.com/user-attachments/assets/e6ff62c3-6d99-4e43-850d-62150706e5dd"/>
-</p>
+## 📧 Email Templates
+
+Customize all email notifications from the admin panel at **Admin → Royal → Email Templates** — no Blade file editing required.
+
+## 👨‍💻 About
+
+**Royal Panel** is developed and maintained by **Shaurya** at **Royal Devlopments**.
+
+> Built with ❤️ for the game hosting community.
+
+---
+
+<div align="center">
+  <sub>© 2026 Royal Devlopments. All rights reserved.</sub>
+</div>
