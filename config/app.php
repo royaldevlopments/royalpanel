@@ -20,7 +20,7 @@ return [
     | change this value if you are not maintaining your own internal versions.
     */
 
-    'royal' => '2.0.7',
+    'royal' => '1.12.2',
 
     /*
     |--------------------------------------------------------------------------
