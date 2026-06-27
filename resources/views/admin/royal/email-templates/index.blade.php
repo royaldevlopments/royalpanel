@@ -8,7 +8,7 @@
     <div class="content-box">
         <div class="header">
             <p>Email Templates</p>
-            <span class="description-text">Customize the subject line, greeting, body text, and action button for each email sent by the panel. Leave blank to use the default. Placeholders: <code>{{"{{"}}name{{"}}"}}</code>, <code>{{"{{"}}username{{"}}"}}</code>, <code>{{"{{"}}email{{"}}"}}</code>, <code>{{"{{"}}app_name{{"}}"}}</code>, <code>{{"{{"}}server_name{{"}}"}}</code>, <code>{{"{{"}}setup_url{{"}}"}}</code>, <code>{{"{{"}}reset_url{{"}}"}}</code>, <code>{{"{{"}}server_url{{"}}"}}</code>.</span>
+            <span class="description-text">Customize the subject line, greeting, body text, and action button for each email sent by the panel. Leave blank to use the default. Placeholders: <code>@{{name}}</code>, <code>@{{username}}</code>, <code>@{{email}}</code>, <code>@{{app_name}}</code>, <code>@{{server_name}}</code>, <code>@{{setup_url}}</code>, <code>@{{reset_url}}</code>, <code>@{{server_url}}</code>.</span>
         </div>
 
         @if(session('success'))

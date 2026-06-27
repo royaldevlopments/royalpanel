@@ -4,20 +4,24 @@
     Edit Template: {{ str_replace('_', ' ', ucfirst($template->template_key)) }}
 @endsection
 
+@php
+    $ph = ['{{name}}', '{{username}}', '{{email}}', '{{app_name}}', '{{server_name}}', '{{setup_url}}', '{{reset_url}}', '{{server_url}}'];
+    list($ph_name, $ph_uname, $ph_email, $ph_app, $ph_srv, $ph_setup, $ph_reset, $ph_srvurl) = $ph;
+@endphp
 @section('content')
     <form action="{{ route('admin.royal.email-templates.update', $template) }}" method="POST" class="content-box">
         <div class="header">
             <p>Edit: {{ str_replace('_', ' ', ucfirst($template->template_key)) }}</p>
             <span class="description-text">
                 Available placeholders:
-                <code>{{'{{'}}name{{'}}'}}</code>
-                <code>{{'{{'}}username{{'}}'}}</code>
-                <code>{{'{{'}}email{{'}}'}}</code>
-                <code>{{'{{'}}app_name{{'}}'}}</code>
-                <code>{{'{{'}}server_name{{'}}'}}</code>
-                <code>{{'{{'}}setup_url{{'}}'}}</code>
-                <code>{{'{{'}}reset_url{{'}}'}}</code>
-                <code>{{'{{'}}server_url{{'}}'}}</code>
+                <code>{!! $ph_name !!}</code>
+                <code>{!! $ph_uname !!}</code>
+                <code>{!! $ph_email !!}</code>
+                <code>{!! $ph_app !!}</code>
+                <code>{!! $ph_srv !!}</code>
+                <code>{!! $ph_setup !!}</code>
+                <code>{!! $ph_reset !!}</code>
+                <code>{!! $ph_srvurl !!}</code>
             </span>
         </div>
 
@@ -39,7 +43,7 @@
                 id="greeting"
                 :value="old('greeting', $template->greeting)"
                 label="Greeting"
-                helpText="e.g. Hello {{'{{'}}name{{'}}'}}!"
+                :helpText="'e.g. Hello ' . $ph_name . '!'"
             />
             <div class="input-field">
                 <label for="body">Body</label>
@@ -49,7 +53,7 @@
                     rows="6"
                     style="width:100%;padding:10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.3);color:#e2e8f0;font-size:13px;font-family:inherit;resize:vertical;"
                 >{{ old('body', $template->body) }}</textarea>
-                <span style="font-size:0.8rem">One line per paragraph. Use <code>{{'{{'}}username{{'}}'}}</code>, <code>{{'{{'}}email{{'}}'}}</code>, etc.</span>
+                <span style="font-size:0.8rem">One line per paragraph. Use <code>{!! $ph_uname !!}</code>, <code>{!! $ph_email !!}</code>, etc.</span>
             </div>
             <x-royal.input-field
                 id="action_text"
@@ -61,7 +65,7 @@
                 id="action_url"
                 :value="old('action_url', $template->action_url)"
                 label="Action Button URL"
-                helpText="e.g. {{'{{'}}server_url{{'}}'}} or {{'{{'}}setup_url{{'}}'}}"
+                :helpText="'e.g. ' . $ph_srvurl . ' or ' . $ph_setup"
             />
             <div class="input-field">
                 <label for="level">Button Style</label>
