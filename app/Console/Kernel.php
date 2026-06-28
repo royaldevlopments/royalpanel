@@ -13,11 +13,6 @@ use RoyalPanel\Console\Commands\Schedule\ProcessRunnableCommand;
 use RoyalPanel\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
 use RoyalPanel\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
 
-// Import Blueprint schedules, telemetry and library
-use RoyalPanel\Services\Telemetry\RegisterBlueprintTelemetry;
-use RoyalPanel\BlueprintFramework\GetExtensionSchedules;
-use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Console\BlueprintConsoleLibrary as BlueprintExtensionLibrary;
-
 class Kernel extends ConsoleKernel
 {
     /**
@@ -33,11 +28,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('bp:telemetry')->hourly();
-
-        $schedule->command('bp:version:cache')->dailyAt('04:00');
-
-        $schedule->command('bp:cache')->everyMinute();
         // https://laravel.com/docs/10.x/upgrade#redis-cache-tags
         $schedule->command('cache:prune-stale-tags')->hourly();
 
@@ -59,24 +49,6 @@ class Kernel extends ConsoleKernel
             $this->registerTelemetry($schedule);
         }
 
-        // ============================
-        //    BLUEPRINT SCHEDULES
-        // ============================
-
-        // Blueprint telemetry
-        $blueprint = app()->make(BlueprintExtensionLibrary::class);
-        if ($blueprint->dbGet('blueprint', 'flags:telemetry_enabled', 0)) {
-            $registerBlueprintTelemetry = app()->make(RegisterBlueprintTelemetry::class);
-            $registerBlueprintTelemetry->register($schedule);
-        }
-
-        // Blueprint-related utilities
-        $randTime = str_pad(rand(0, 23), 2, '0', STR_PAD_LEFT) . ':' . str_pad(rand(0, 59), 2, '0', STR_PAD_LEFT);
-        $schedule->command('bp:version:cache')->dailyAt($randTime);
-        $schedule->command('bp:meta')->dailyAt($randTime);
-
-        // Blueprint extension schedules
-        GetExtensionSchedules::schedules($schedule);
     }
 
     /**

@@ -9,15 +9,9 @@ import SearchContainer from '@/components/dashboard/search/SearchContainer';
 import tw, { theme } from 'twin.macro';
 import styled from 'styled-components/macro';
 import http from '@/api/http';
-            <BeforeNavigation />
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Avatar from '@/components/Avatar';
-import BeforeNavigation from '@blueprint/components/Navigation/NavigationBar/BeforeNavigation';
-
-import AdditionalItems from '@blueprint/components/Navigation/NavigationBar/AdditionalItems';
-
-import AfterNavigation from '@blueprint/components/Navigation/NavigationBar/AfterNavigation';
 
 const RightNavigation = styled.div`
     & > a,
@@ -53,7 +47,6 @@ export default () => {
 
     return (
         <div className={'w-full bg-neutral-900 shadow-md overflow-x-auto'}>
-            <BeforeNavigation />
             <SpinnerOverlay visible={isLoggingOut} />
             <div className={'mx-auto w-full flex items-center h-[3.5rem] max-w-[1200px]'}>
                 <div id={'logo'} className={'flex-1'}>
@@ -66,7 +59,6 @@ export default () => {
                         {name}
                     </Link>
                 </div>
-            <AfterNavigation />
                 <RightNavigation className={'flex h-full items-center justify-center'}>
                     <SearchContainer />
                     <Tooltip placement={'bottom'} content={'Dashboard'}>
@@ -77,7 +69,6 @@ export default () => {
                     {rootAdmin && (
                         <Tooltip placement={'bottom'} content={'Admin'}>
                             <a href={'/admin'} rel={'noreferrer'} id={'NavigationAdmin'}>
-                    <AdditionalItems />
                                 <FontAwesomeIcon icon={faCogs} />
                             </a>
                         </Tooltip>
@@ -96,8 +87,6 @@ export default () => {
                     </Tooltip>
                 </RightNavigation>
             </div>
-            <AfterNavigation />
         </div>
-            <AfterNavigation />
     );
 };

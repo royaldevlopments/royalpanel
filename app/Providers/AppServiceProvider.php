@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use RoyalPanel\Extensions\Themes\Theme;
-use RoyalPanel\Providers\Blueprint\ExtensionfsConfigProvider;
-use RoyalPanel\Providers\Blueprint\RouteServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 
@@ -59,8 +57,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->register(ExtensionfsConfigProvider::class);
-        $this->app->register(RouteServiceProvider::class);
         if (!config('royalpanel.load_environment_only', false) && $this->app->environment() !== 'testing') {
             $this->app->register(SettingsServiceProvider::class);
         }

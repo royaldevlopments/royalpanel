@@ -1,5 +1,3 @@
-@include('blueprint.dashboard.dashboard')
-@yield('blueprint.lib')
 <!DOCTYPE html>
 <html>
     <head>
@@ -206,7 +204,6 @@
             @yield('above-container')
             @yield('container')
             @yield('below-container')
-            @yield('blueprint.wrappers')
         @show
         @section('scripts')
             {!! $asset->js('main.js') !!}

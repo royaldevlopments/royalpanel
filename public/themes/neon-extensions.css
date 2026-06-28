@@ -1,0 +1,27 @@
+/* === Neon Gaming Variables for Extension Framework === */
+:root, .lightmode {
+  --primary: #a855f7;
+  --successText: #4ade80;
+  --successBorder: #22c55e;
+  --successBackground: #052e16;
+  --dangerText: #fb7185;
+  --dangerBorder: #e11d48;
+  --dangerBackground: #2d0a12;
+  --secondaryText: #e2e8f0;
+  --secondaryBorder: #7c3aed;
+  --secondaryBackground: #1e0a3a;
+  --gray50: #faf5ff;
+  --gray100: #f3e8ff;
+  --gray200: #e9d5ff;
+  --gray300: #d8b4fe;
+  --gray400: #c084fc;
+  --gray500: #a855f7;
+  --gray600: #7c3aed;
+  --gray700: #2d1b4e;
+  --gray800: #1a0a2e;
+  --gray900: #0d0218;
+  --radiusBox: 12px;
+  --radiusInput: 8px;
+  --fontFamily: 'Space Grotesk';
+  --image: none;
+}

@@ -1,19 +1,3 @@
-@php
-    $__blueprintLoaded = false;
-@endphp
-@php
-    use RoyalPanel\BlueprintFramework\Libraries\ExtensionLibrary\Admin\BlueprintAdminLibrary as BlueprintExtensionLibrary;
-    use RoyalPanel\BlueprintFramework\Services\PlaceholderService\BlueprintPlaceholderService;
-@endphp
-@if(file_exists(base_path('resources/views/blueprint/admin/admin.blade.php')))
-  @include('blueprint.admin.admin')
-  @php
-    $settings = app()->make('RoyalPanel\Contracts\Repository\SettingsRepositoryInterface');
-    $blueprint = app()->make(BlueprintExtensionLibrary::class, ['settings' => $settings]);
-    $PlaceholderService = app()->make(BlueprintPlaceholderService::class);
-    $__blueprintLoaded = true;
-  @endphp
-@endif
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,9 +26,9 @@
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
             {!! Theme::css('css/royalpanel.css?t={cache-version}') !!}
+            <link rel="stylesheet" href="/themes/neon-extensions.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-            @yield('blueprint.import')
             <style>
                 .panel-card { background:#1e1e32; border:1px solid #2a2a3e; border-radius:12px; margin-bottom:20px; overflow:hidden; }
                 .panel-card-header { display:flex; align-items:center; justify-content:space-between; padding:14px 20px; background:#2a2a3e; border-bottom:1px solid #333; }
@@ -167,7 +151,6 @@
                                     <span class="hidden-xs">{{ Auth::user()->name_first }} {{ Auth::user()->name_last }}</span>
                                 </a>
                             </li>
-                            @yield('blueprint.navigation')
                             <li>
                                 <li><a href="{{ route('index') }}" data-toggle="tooltip" data-placement="bottom" title="Exit Admin Control"><i class="fa fa-server"></i></a></li>
                             </li>
@@ -202,13 +185,12 @@
                                 <i data-lucide="key"></i> <span>Application API</span>
                             </a>
                         </li>
-                        @if(Route::has('admin.extensions'))
-                        <li class="{{ starts_with(Route::currentRouteName(), 'admin.extensions') ? 'active' : '' }}">
-                            <a href="{{ route('admin.extensions') }}">
-                                <i data-lucide="puzzle"></i> <span>Extensions</span>
+                        @if(Route::has('rxadmin.extensions.index'))
+                        <li class="{{ starts_with(Route::currentRouteName(), 'rxadmin.extensions') ? 'active' : '' }}">
+                            <a href="{{ route('rxadmin.extensions.index') }}">
+                                <i class="fa fa-puzzle-piece"></i> <span>Extensions</span>
                             </a>
                         </li>
-                        @yield('blueprint.sidenav')
                         @endif
                         <li class="header">SECURITY</li>
                         <li class="{{ request()->routeIs('admin.security.index') ? 'active' : '' }}">
@@ -340,7 +322,6 @@
                             @endforeach
                         </div>
                     </div>
-                    @yield('blueprint.wrappers')
                     @yield('content')
                 </section>
             </div>

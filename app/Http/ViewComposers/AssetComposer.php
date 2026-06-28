@@ -11,8 +11,10 @@ class AssetComposer
     /**
      * AssetComposer constructor.
      */
-    public function __construct(private AssetHashService $assetHashService, private SettingsRepositoryInterface $settings)
-    {
+    public function __construct(
+        private AssetHashService $assetHashService,
+        private SettingsRepositoryInterface $settings,
+    ) {
     }
 
     /**

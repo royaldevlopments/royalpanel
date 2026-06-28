@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "189564886830014fb88089ae2c34b11c",
+    "content-hash": "3965f3de60a6acbe3e78353129a8ce30",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -4790,6 +4790,40 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
             "time": "2025-09-04T20:59:21+00:00"
+        },
+        {
+            "name": "royalpanel/royal-atelier",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "/home/ubuntu/royal-atelier",
+                "reference": "cb215ceeaead721d27d5e744ce27547d2b922c55"
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zip": "*",
+                "illuminate/database": "*",
+                "illuminate/support": "*",
+                "php": ">=8.1",
+                "symfony/yaml": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "RoyalPanel\\RoyalAtelier\\AtelierServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "RoyalPanel\\RoyalAtelier\\": "src/"
+                }
+            },
+            "description": "Royal Panel Extension Framework - Custom extension system for Royal Panel",
+            "transport-options": {
+                "relative": false
+            }
         },
         {
             "name": "s1lentium/iptools",
@@ -12483,7 +12517,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "royalpanel/royal-atelier": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
